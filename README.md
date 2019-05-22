@@ -1,2 +1,0 @@
-# Door
-MiniGame competition

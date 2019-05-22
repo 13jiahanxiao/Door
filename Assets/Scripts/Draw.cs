@@ -12,11 +12,11 @@ public class Draw : MonoBehaviour {
     private float sDistance;
     public Transform doorParent;
     public GameObject door;
-    private GameObjectManager g;
+    private GameManager g;
     //public GameObject test;
 	void Start ()
     {
-        g = GameObject.FindObjectOfType<GameObjectManager>();
+        g = GameObject.FindObjectOfType<GameManager>();
         screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
     }
 	
@@ -55,11 +55,12 @@ public class Draw : MonoBehaviour {
         bool doorOnGround = Vector3.Angle(g.player.transform.up, hit.transform.up) < 30;
         if (doorOnGround)
         {
-            door.transform.eulerAngles = new Vector3(0, g.camera.transform.eulerAngles.y, 0);
+            door.transform.eulerAngles = new Vector3(180, g.camera.transform.eulerAngles.y, 0); //保证transform.up方向统一
         }
         else
         {
             door.transform.rotation = hit.transform.rotation;
         }
+        Debug.Log(door.transform.up);
     }
 }

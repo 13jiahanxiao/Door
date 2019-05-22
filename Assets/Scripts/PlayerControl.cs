@@ -27,7 +27,7 @@ public class PlayerControl : MonoBehaviour {
         playerRB = this.gameObject.GetComponent<Rigidbody>();
 	}
 
-    private void FixedUpdate()
+    private void Update()
     {
         playerRB.AddForce(0, -playerRB.mass*gravity, 0);
         h = Input.GetAxis("Horizontal");
