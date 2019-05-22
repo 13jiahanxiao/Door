@@ -3395,8 +3395,8 @@ MonoBehaviour:
   camera: {fileID: 0}
   room1: {fileID: 1685694227}
   room2: {fileID: 99162256}
-  cr: 0
-  moveDistace: {x: 0, y: 0, z: 0}
+  cr: 1
+  moveDistace: {x: 28.5, y: 28.5, z: 28.5}
 --- !u!4 &2072719720
 Transform:
   m_ObjectHideFlags: 0
