@@ -3748,9 +3748,10 @@ MonoBehaviour:
   room2: {fileID: 0}
   previousParent: {fileID: 0}
   currentParent: {fileID: 51652853}
-  brush:
-  - {fileID: 0}
-  currentBrush: {fileID: 0}
+  brush: []
+  brushColor: 0200000000000000
+  brushNum: 0500000004000000
+  currentBrush: 0
   draw: {fileID: 0}
   cr: 1
   moveDistace: {x: 28.5, y: 28.5, z: 28.5}

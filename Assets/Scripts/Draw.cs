@@ -39,7 +39,7 @@ public class Draw : MonoBehaviour {
                     Debug.Log("生成门");
                     //Debug.Log(hit.transform.up);
                     //Debug.Log(hit.transform.forward);
-                    g.currentBrush.paint(hit);
+                    g.brush[g.currentBrush].paint(hit);
                 }
                 else
                 {
