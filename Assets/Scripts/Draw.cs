@@ -39,7 +39,7 @@ public class Draw : MonoBehaviour {
                     Debug.Log("生成门");
                     //Debug.Log(hit.transform.up);
                     //Debug.Log(hit.transform.forward);
-                    newDoor();
+                    g.currentBrush.paint(hit);
                 }
                 else
                 {
@@ -47,20 +47,5 @@ public class Draw : MonoBehaviour {
                 }
             }
         }
-    }
-    void newDoor()
-    {
-        door = Instantiate(door, doorParent);
-        door.transform.position = hit.point;
-        bool doorOnGround = Vector3.Angle(g.player.transform.up, hit.transform.up) < 30;
-        if (doorOnGround)
-        {
-            door.transform.eulerAngles = new Vector3(180, g.camera.transform.eulerAngles.y, 0); //保证transform.up方向统一
-        }
-        else
-        {
-            door.transform.rotation = hit.transform.rotation;
-        }
-        Debug.Log(door.transform.up);
     }
 }

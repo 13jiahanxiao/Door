@@ -57,7 +57,6 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Brush.cs" />
     <Compile Include="Assets\Scripts\Door.cs" />
-    <Compile Include="Assets\Scripts\DoorOpen.cs" />
     <Compile Include="Assets\Scripts\Draw.cs" />
     <Compile Include="Assets\Scripts\FirstPerspective.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
@@ -66,6 +65,7 @@
     <Compile Include="Assets\Scripts\Room.cs" />
     <Compile Include="Assets\Scripts\SensivitySilider.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
+    <None Include="Assets\MediterraneanFurniture\Glassreflect2D.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>F:/unityprojects/Door/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
