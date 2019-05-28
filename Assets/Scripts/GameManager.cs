@@ -1,75 +1,103 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-//包含各脚本中的变量 存储画笔 画笔切换模块
+//问题：1.先创建门，过门时刷新房间信息，导致们的位置与房间位置不一致
+//2.旋转问题未解决
+//3.创建门时使墙壁消失，房间重复利用时墙壁回复的功能未写
 public class GameManager : MonoBehaviour
 {
-    public enum DoorColor
+    #region Instance
+    private static GameManager _Instance;
+    public static GameManager Instance
     {
-        red, green, purple,yellow
+        get { return _Instance; }
     }
-    public GameObject player;
-    public GameObject camera;
-    public GameObject room1, room2;
-    //public GameObject previousParent;//玩家去过的上一个房间parent,可能要用来判断是否来回于同两个房间
-    public DoorColor previousDoorColor;//走过的上一道门的颜色，即之前房间的颜色，用来调用该颜色undo进行转换至此房间状态，以便基于此房间进行一次变化转变成下一房间
-    public GameObject currentParent; //当前房间的parent
-
-    [HideInInspector]public List<Brush> brush;//所有画笔
-    public List<DoorColor> brushColor;//画笔颜色
-    public List<int> brushNum;//画笔数量
-
-    public int currentBrush;//当前画笔在list中的下标
-    public Draw draw;
-    public enum currentRoom
-    { room0, room1, room2 }
-    public currentRoom cr;
-    public Vector3 moveDistace; //房间长宽高 确定移动的距离
     void Awake()
     {
-        player = GameObject.FindObjectOfType<PlayerControl>().gameObject;
-        camera = Camera.main.gameObject;
+        isStart = true;
+        _Instance = this;
     }
+    #endregion
+
+    public bool isStart = true;//是否为初始房间
+    public GameObject player;
+    public GameObject playerCamera;
+
+    public enum DoorColor
+    {
+        RED=0, GREEN, PURPLE, YELLOW
+    }
+    [HideInInspector] public Crayon [] crayonArray=new Crayon[4];//蜡笔雷用来存储蜡笔数量，颜色
+    public int currentCrayon=0;//当前蜡笔
+
     void Start()
     {
-        Debug.Log(brushColor.Count);
-        if (brushColor.Count == brushNum.Count)
+        for(int i = 0; i < 4; i++)
         {
-            for (int i = 0; i < brushColor.Count; i++)
-            {
-                brush.Add(new Brush { num = brushNum[i], color=brushColor[i] });
-                Debug.Log(brushColor[i]);
-            }
+            Crayon cra = new Crayon(2, (DoorColor)i);
+            crayonArray[i] = cra;//每种颜色两根
+        }
 
-        }
-        else
-        {
-            Debug.LogWarning("wtf数量不一样");
-        }
-        currentBrush = 0;
+        player = GameObject.FindObjectOfType<PlayerControl>().gameObject;
+        playerCamera = Camera.main.gameObject;
     }
     void Update()
     {
-        // Debug.Log(Input.GetAxis("Mouse ScrollWheel"));
+        #region MouseScroll
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            if (currentBrush < brush.Count-1)
-            {
-                currentBrush++;
-            }
-            else
-            {
-                currentBrush = 0;
-            }
+            if (currentCrayon <=2)
+                currentCrayon++;
+            else if(currentCrayon>=3)
+                currentCrayon = 0;
         }
         if(Input.GetAxis("Mouse ScrollWheel")<0)
         {
-            if (currentBrush > 0)
-                currentBrush--;
-            else
-                currentBrush = brush.Count - 1;
+            if (currentCrayon >= 1)
+                currentCrayon--;
+            else if (currentCrayon < 1)
+                currentCrayon = 3;
         }
+        #endregion
     }
 
+    public string CrayonColorName()
+    {
+         return Enum.GetName(crayonArray[currentCrayon].color.GetType(), crayonArray[currentCrayon].color);
+    }
+
+    public Room currentRoom;//现在的房间
+
+    public GameObject CreateRoom(Vector3 pos ,Quaternion rot)
+    {
+        GameObject room = new GameObject("RoomManager");
+        room.AddComponent<Room>();
+        room.GetComponent<Room>().room = room;
+        room.GetComponent<Room>().roomPosition = pos;
+        room.GetComponent<Room>().roomRotation = rot;
+        currentRoom = room.GetComponent<Room>();
+        return room;
+    }//创建房间时使Room类挂在room（doorparent）物体上，Room包括room物体，房间位置，旋转，门个数，房间编号
+
+    public Transform[] roomObject = new Transform[2];//场景中房间位置
+    public enum houseNumber{
+        House1,House2
+    }//将房间编为1，2，当前用1时，更新2号房
+    public void RefreshRoom(Room room)
+    {
+        if (room.house == houseNumber.House1)
+        {
+            roomObject[1].position = room.roomPosition;
+            roomObject[1].rotation = room.roomRotation;
+        }
+        else
+        {
+            roomObject[0].position = room.roomPosition;
+            roomObject[0].rotation = room.roomRotation;
+        }
+        room.room.SetActive(true);
+    }//刷新房间
+    
 }

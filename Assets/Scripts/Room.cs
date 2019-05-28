@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Room:MonoBehaviour
 {
-    private List<GameObject> doors;
-    void Start()
-    {
+    public GameManager.houseNumber house;
+    public GameObject room;
+    public Vector3 roomPosition;
+    public Quaternion roomRotation;
+    public List<GameObject> doorList = new List<GameObject>();
 
-    }
-
-    // Update is called once per frame
-    void Update()
+    public void AddRoom(GameObject door)
     {
-        
+        doorList.Add(door);
     }
 }

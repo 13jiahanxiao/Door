@@ -51,4 +51,27 @@ public class PlayerControl : MonoBehaviour {
         }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Door")
+        {
+            Room room = other.GetComponent<Door>().targetDoor.GetComponentInParent<Room>();
+            if (other.GetComponentInParent<Room>().house== GameManager.houseNumber.House1)
+            {
+                room.house = GameManager.houseNumber.House2;
+            }
+            else
+            {
+                room.house = GameManager.houseNumber.House1;
+            }
+            GameManager.Instance.RefreshRoom(room);
+
+            Vector3 position= other.GetComponent<Door>().targetDoor.position;
+            position.x = position.x + 1;
+            this.transform.position = position;
+
+            other.transform.parent.gameObject.SetActive(false);
+        }
+    }
 }
