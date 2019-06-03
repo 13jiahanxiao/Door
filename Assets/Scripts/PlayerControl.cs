@@ -56,28 +56,21 @@ public class PlayerControl : MonoBehaviour {
     {
         if (other.tag == "Door")
         {
-            GameManager.Instance.currentRoom = other.transform.parent.GetComponent<Room>();
+            if(GameManager.Instance.currentRoom.transform!=other.GetComponentInParent<Room>().transform)//两者若相等 则意味着更新前的currentRoom就是门所在的room，即角色没有去另一个房间
+            {
+                GameManager.Instance.lastRoom = GameManager.Instance.currentRoom;       //将上一个currentRoom更新为lastRoom
+                GameManager.Instance.currentRoom = other.transform.parent.GetComponent<Room>();  //更新currentRoom
+            }
             other.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
             Room targetRoom = other.GetComponent<Door>().targetDoor.GetComponentInParent<Room>();
             GameManager.Instance.RefreshRoom(targetRoom);
-
-            /*
-            if (other.GetComponentInParent<Room>().house== GameManager.houseNumber.House1)
-            {
-                room.house = GameManager.houseNumber.House2;
-            }
-            else
-            {
-                room.house = GameManager.houseNumber.House1;
-            }
-            */
-            
+            // other.transform.parent.gameObject.SetActive(true);
             //GameManager.Instance.RefreshRoom(room);
 
             //Vector3 position= other.GetComponent<Door>().targetDoor.position;
             //position.x = position.x + 1;
             //this.transform.position = position;
-            
+
         }
     }
 }

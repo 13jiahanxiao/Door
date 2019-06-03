@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     public Room currentRoom;//现在的房间 其中的house则为currentHouse
-    public DoorColor lastBuff;
+    public Room lastRoom;
     public GameObject player;
     [HideInInspector]public GameObject playerCamera;
     public enum DoorColor
@@ -96,7 +96,20 @@ public class GameManager : MonoBehaviour
     public void RefreshRoom(Room room)//参数为需要更新的目标房间
     {
         //Debug.Log((int)room.house);
-       // Debug.Log((int)currentRoom.house);
+        // Debug.Log((int)currentRoom.house);
+        //room.gameObject.SetActive(true);//开启对面房间的roomManager
+        if (lastRoom != null)
+        {
+            lastRoom.gameObject.SetActive(false); //关闭lastRoom的roomManager
+            for (int i = 0; i < lastRoom.hideIndex.Count; i++)
+            {
+                Instance.houseObject[(int)lastRoom.house].transform.GetChild(lastRoom.hideIndex[i][0]).GetChild(lastRoom.hideIndex[i][1]).gameObject.SetActive(true);
+            }
+        }
+        for (int i = 0; i < room.hideIndex.Count; i++)
+        {
+            Instance.houseObject[(int)room.house].transform.GetChild(room.hideIndex[i][0]).GetChild(room.hideIndex[i][1]).gameObject.SetActive(false);
+        }
         houseObject[(int)room.house].transform.position = room.housePosition;
         houseObject[(int)room.house].transform.eulerAngles = room.houseRotationEular;
        
