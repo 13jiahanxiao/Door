@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    /*
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "DoorPosition")
@@ -11,7 +12,9 @@ public class Door : MonoBehaviour
             other.gameObject.SetActive(false);
         }
     }
-
+    */
     public Vector3 position;
+    public bool toStartHouse;
     public Door targetDoor;
+    public GameManager.DoorColor color;
 }

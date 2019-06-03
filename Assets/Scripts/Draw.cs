@@ -11,7 +11,7 @@ public class Draw : MonoBehaviour {
     
     public Transform doorParent;
     public GameObject door;
-    Vector3 newDoorPosition;
+   // Vector3 newDoorPosition;
 
     void Start ()
     { 
@@ -44,52 +44,57 @@ public class Draw : MonoBehaviour {
 
     public void paint(RaycastHit hit)
     {
-        if (GameManager.Instance.crayonArray[GameManager.Instance.currentCrayon].number <= GameManager.Instance.crayonArray[GameManager.Instance.currentCrayon].count)
+        if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].number <= GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].count)
         {//当前蜡笔数量<=当颜色蜡笔的总数量
-            GameManager.Instance.crayonArray[GameManager.Instance.currentCrayon].number++;
-            CreateDoor(hit, GameManager.Instance.roomObject[0], GameManager.Instance.roomObject[1]);
+            GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].number++;
+            CreateDoor(hit);
         }
         else
         {
             Debug.Log("画笔耗尽");
         }
     }
-    void CreateDoor(RaycastHit hit, Transform room, Transform room1)
+    void CreateDoor(RaycastHit hit)
     {
-        newDoorPosition = hit.transform.position - room.transform.position + room1.transform.position;//新门位置
+        //newDoorPosition = hit.transform.position - room.transform.position + room1.transform.position;//新门位置
 
         Material color = Resources.Load<Material>("DoorColor/"+GameManager.Instance.CrayonColorName());//门颜色
 
-        GameObject go;
-
-        if (GameManager.Instance.isStart)//判断如果是第一个房间，新建room（doorparent），不是则用之前的
-        {
-            go = GameManager.Instance.CreateRoom(room.position,room.rotation);
-            GameManager.Instance.currentRoom.house = GameManager.houseNumber.House1;
-        }
-        else
-        {
-            go = GameManager.Instance.currentRoom.room;
-        }
-
+        GameObject go = GameManager.Instance.currentRoom.gameObject;
+        go.GetComponent<Room>().hideIndex.Add(new int[2] {hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() });
         hit.transform.gameObject.SetActive(false);
         GameObject door = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), hit.transform.position, hit.transform.rotation, go.transform);
+        door.GetComponent<Door>().toStartHouse = (GameManager.Instance.currentCrayon == (int)GameManager.DoorColor.WHITE);
         door.GetComponent<Renderer>().material = color;
-
-        CreateOtherDoor(door,color,room1);
+        Debug.Log("1cross" + Vector3.Cross(door.transform.forward,door.transform.up));
+        CreateOtherDoor(door,color);
     }
-    void CreateOtherDoor(GameObject door,Material color,Transform room1)
+    void CreateOtherDoor(GameObject door, Material color)
     {
-        GameObject go = GameManager.Instance.CreateRoom(room1.position, room1.rotation);
-        if (GameManager.Instance.isStart)
+        GameObject newroom = new GameObject("RoomManager");
+        newroom.transform.position = new Vector3(0,0,0);
+        newroom.AddComponent<Room>();
+        switch (GameManager.Instance.currentRoom.house)
         {
-            GameManager.Instance.currentRoom.house = GameManager.houseNumber.House2;
-            GameManager.Instance.isStart=false;
+            case GameManager.houseNumber.House0:
+                newroom.GetComponent<Room>().house = GameManager.houseNumber.House1;
+                break;
+            case GameManager.houseNumber.House1:
+                newroom.GetComponent<Room>().house = GameManager.houseNumber.House2;
+                break;
+            case GameManager.houseNumber.House2:
+                newroom.GetComponent<Room>().house = GameManager.houseNumber.House1;
+                break;
         }
-        GameObject otherDoor = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), newDoorPosition, door.transform.rotation, go.transform);
+        Vector3 newDoorPos = door.transform.position + Vector3.Cross(door.transform.forward, door.transform.up) *0.5f;
+        GameObject otherDoor = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), newDoorPos, door.transform.rotation,newroom.transform);
+        ConnectDoor(door, otherDoor);//两门的door类中互相保存对方地址
+        otherDoor.GetComponent<Door>().toStartHouse = (GameManager.Instance.currentRoom.house == GameManager.houseNumber.House0); //标记是否通向初始房
         otherDoor.transform.Rotate(new Vector3(0, 0, 180), Space.Self);
         otherDoor.GetComponent<Renderer>().material = color;
-        ConnectDoor(door, otherDoor);//两门的door类中互相保存对方地址
+        houseChange(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color,newroom.GetComponent<Room>(),otherDoor.GetComponent<Door>());
+        Debug.Log("2cross" + Vector3.Cross(otherDoor.transform.forward,otherDoor.transform.up));
+        newroom.SetActive(false);//创建时隐藏
     }
     void ConnectDoor(GameObject door1,GameObject door2)
     {
@@ -97,5 +102,24 @@ public class Draw : MonoBehaviour {
         door2.GetComponent<Door>().position = door2.transform.position;
         door1.GetComponent<Door>().targetDoor = door2.GetComponent<Door>();
         door2.GetComponent<Door>().targetDoor = door1.GetComponent<Door>();
+    }
+
+    void houseChange(GameManager.DoorColor color,Room room,Door door)
+    {
+        Debug.Log("利用door的位置计算房间位置和旋转,然后将position等属性赋给room");
+        switch (color)
+        {
+            case GameManager.DoorColor.PURPLE:
+                room.houseRotationEular = GameManager.Instance.currentRoom.houseRotationEular + new Vector3(180,0,0);
+                Vector3 diff = GameManager.Instance.houseObject[(int)GameManager.Instance.currentRoom.house].transform.position - door.targetDoor.gameObject.transform.position;
+                Vector3 cross = Vector3.Cross(door.transform.forward, door.transform.up);
+                Vector3 newdiff = diff + new Vector3(cross.x * diff.x, cross.y * diff.y, cross.z * diff.z) * 2;
+                room.housePosition = newdiff + door.gameObject.transform.position;
+                //otherDoor.transform.position
+                //room.houseposition..
+                break;
+            default:
+                break;
+        }
     }
 }

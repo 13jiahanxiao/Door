@@ -16,7 +16,7 @@ public class FirstPerspective : MonoBehaviour
     private float _rotationX = 0;//为垂直角度声明一个私有变量
     private GameObject player;
     private UIManager ui;
-    private float camY;
+    //private float camY;
     void Start()
     { //将光标锁定到游戏窗口的中心。
         Cursor.lockState = CursorLockMode.Locked;
@@ -25,11 +25,11 @@ public class FirstPerspective : MonoBehaviour
         ui = GameObject.FindObjectOfType<UIManager>();
         sensitivityHor = ui.slider.GetComponent<Slider>().value;
         sensitivityVert = ui.slider.GetComponent<Slider>().value;
-        camY = this.transform.position.y - player.transform.position.y;
+        //camY = this.transform.position.y - player.transform.position.y;
     }
     void Update()
     {
-        this.transform.position = new Vector3(0, camY, 0) + player.transform.position;
+        //this.transform.position = new Vector3(0, camY, 0) + player.transform.position;
         if (axes == RotationAxes.MouseX)
         { //水平旋转代码
             transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityHor, 0);

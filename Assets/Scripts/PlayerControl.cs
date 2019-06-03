@@ -56,7 +56,12 @@ public class PlayerControl : MonoBehaviour {
     {
         if (other.tag == "Door")
         {
-            Room room = other.GetComponent<Door>().targetDoor.GetComponentInParent<Room>();
+            GameManager.Instance.currentRoom = other.transform.parent.GetComponent<Room>();
+            other.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
+            Room targetRoom = other.GetComponent<Door>().targetDoor.GetComponentInParent<Room>();
+            GameManager.Instance.RefreshRoom(targetRoom);
+
+            /*
             if (other.GetComponentInParent<Room>().house== GameManager.houseNumber.House1)
             {
                 room.house = GameManager.houseNumber.House2;
@@ -65,13 +70,14 @@ public class PlayerControl : MonoBehaviour {
             {
                 room.house = GameManager.houseNumber.House1;
             }
-            GameManager.Instance.RefreshRoom(room);
+            */
+            
+            //GameManager.Instance.RefreshRoom(room);
 
-            Vector3 position= other.GetComponent<Door>().targetDoor.position;
-            position.x = position.x + 1;
-            this.transform.position = position;
-
-            other.transform.parent.gameObject.SetActive(false);
+            //Vector3 position= other.GetComponent<Door>().targetDoor.position;
+            //position.x = position.x + 1;
+            //this.transform.position = position;
+            
         }
     }
 }
