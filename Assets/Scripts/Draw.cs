@@ -51,7 +51,7 @@ public class Draw : MonoBehaviour {
         }
         else
         {
-            Debug.Log("画笔耗尽");
+            GameManager.Instance.setText("蜡笔耗尽");
         }
     }
     void CreateDoor(RaycastHit hit)

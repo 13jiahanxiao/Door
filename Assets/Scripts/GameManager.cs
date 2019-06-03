@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 //问题：1.先创建门，过门时刷新房间信息，导致们的位置与房间位置不一致
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
         get { return _Instance; }
     }
     #endregion
+    public Text text;
     public Room currentRoom;//现在的房间 其中的house则为currentHouse
     public Room lastRoom;
     public GameObject player;
@@ -115,5 +117,8 @@ public class GameManager : MonoBehaviour
        
        // houseObject[3 - (int)room.house - (int)currentRoom.house].transform.position = room.housePosition + new Vector3(0, 100, 0);
     }//刷新房间
-    
+    public void setText(String s)
+    {
+        text.text = s;
+    }
 }
