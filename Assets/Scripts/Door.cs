@@ -14,7 +14,7 @@ public class Door : MonoBehaviour
     }
     */
     public Vector3 position;
-    public bool toStartHouse;
+    public bool toStartRoom;  //若为true则需要更新初始房的roomManager位置
     public Door targetDoor;
     public GameManager.DoorColor color;
 }

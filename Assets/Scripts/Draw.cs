@@ -64,7 +64,7 @@ public class Draw : MonoBehaviour {
         go.GetComponent<Room>().hideIndex.Add(new int[2] {hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() });
         hit.transform.gameObject.SetActive(false);
         GameObject door = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), hit.transform.position, hit.transform.rotation, go.transform);
-        door.GetComponent<Door>().toStartHouse = (GameManager.Instance.currentCrayon == (int)GameManager.DoorColor.WHITE);
+        door.GetComponent<Door>().toStartRoom = (GameManager.Instance.currentCrayon == (int)GameManager.DoorColor.WHITE);
         door.GetComponent<Renderer>().material = color;
         Debug.Log("1cross" + Vector3.Cross(door.transform.forward,door.transform.up));
         CreateOtherDoor(door,color);
@@ -74,22 +74,11 @@ public class Draw : MonoBehaviour {
         GameObject newroom = new GameObject("RoomManager");
         newroom.transform.position = new Vector3(0,0,0);
         newroom.AddComponent<Room>();
-        switch (GameManager.Instance.currentRoom.house)
-        {
-            case GameManager.houseNumber.House0:
-                newroom.GetComponent<Room>().house = GameManager.houseNumber.House1;
-                break;
-            case GameManager.houseNumber.House1:
-                newroom.GetComponent<Room>().house = GameManager.houseNumber.House2;
-                break;
-            case GameManager.houseNumber.House2:
-                newroom.GetComponent<Room>().house = GameManager.houseNumber.House1;
-                break;
-        }
+        newroom.GetComponent<Room>().house = (GameManager.houseNumber)(1 - (int)GameManager.Instance.currentRoom.house);//给新房间指定另一个house
         Vector3 newDoorPos = door.transform.position + Vector3.Cross(door.transform.forward, door.transform.up) *0.5f;
         GameObject otherDoor = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), newDoorPos, door.transform.rotation,newroom.transform);
         ConnectDoor(door, otherDoor);//两门的door类中互相保存对方地址
-        otherDoor.GetComponent<Door>().toStartHouse = (GameManager.Instance.currentRoom.house == GameManager.houseNumber.House0); //标记是否通向初始房
+        otherDoor.GetComponent<Door>().toStartRoom = (GameManager.Instance.currentRoom.house == GameManager.houseNumber.House0); //标记是否通向初始房
         otherDoor.transform.Rotate(new Vector3(0, 0, 180), Space.Self);
         otherDoor.GetComponent<Renderer>().material = color;
         houseChange(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color,newroom.GetComponent<Room>(),otherDoor.GetComponent<Door>());

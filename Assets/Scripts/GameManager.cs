@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     #endregion
     public Room currentRoom;//现在的房间 其中的house则为currentHouse
     public DoorColor lastBuff;
-    //public houseNumber currentHouse;//初始为0 每次画门先判断该值是否为0
     public GameObject player;
     [HideInInspector]public GameObject playerCamera;
     public enum DoorColor
@@ -30,10 +29,10 @@ public class GameManager : MonoBehaviour
     public DoorColor[] crayonColorArray;
     public int[] crayonNumArray;
     public int currentCrayon = 0;//当前蜡笔
-    public GameObject[] houseObject = new GameObject[3];//场景中房间
+    public GameObject[] houseObject = new GameObject[2];//场景中房间
     public enum houseNumber
     {
-        House0,House1, House2
+        House0,House1
     }
     private houseNumber nextNumber;
     void Awake()
@@ -100,8 +99,8 @@ public class GameManager : MonoBehaviour
        // Debug.Log((int)currentRoom.house);
         houseObject[(int)room.house].transform.position = room.housePosition;
         houseObject[(int)room.house].transform.eulerAngles = room.houseRotationEular;
-        //让第三者离远点避免重叠
-        houseObject[3 - (int)room.house - (int)currentRoom.house].transform.position = room.housePosition + new Vector3(0, 100, 0);
+       
+       // houseObject[3 - (int)room.house - (int)currentRoom.house].transform.position = room.housePosition + new Vector3(0, 100, 0);
     }//刷新房间
     
 }
