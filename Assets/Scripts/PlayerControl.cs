@@ -51,7 +51,7 @@ public class PlayerControl : MonoBehaviour {
         }
         }
     }
-
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Door")
@@ -61,6 +61,8 @@ public class PlayerControl : MonoBehaviour {
                 GameManager.Instance.lastRoom = GameManager.Instance.currentRoom;       //将上一个currentRoom更新为lastRoom
                 GameManager.Instance.currentRoom = other.transform.parent.GetComponent<Room>();  //更新currentRoom
             }
+            GameManager.Instance.onMiddle = !(GameManager.Instance.onMiddle);
+            Debug.Log(GameManager.Instance.onMiddle);
             other.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
             Room targetRoom = other.GetComponent<Door>().targetDoor.GetComponentInParent<Room>();
             GameManager.Instance.RefreshRoom(targetRoom);
@@ -73,4 +75,5 @@ public class PlayerControl : MonoBehaviour {
 
         }
     }
+    */
 }

@@ -27,16 +27,16 @@ public class Draw : MonoBehaviour {
             {
                 if (hit.transform.gameObject.tag == "Box")
                 {
-                    Debug.Log("拾取物品");
+                    GameManager.Instance.setText("拾取物品");
                 }
                 else if (hit.transform.gameObject.tag == "DoorPosition")
                 {
-                    Debug.Log("生成门");
+                    GameManager.Instance.setText("生成门");
                     paint(hit);
                 }
                 else
                 {
-                    Debug.Log("无效位置");
+                    GameManager.Instance.setText("无效位置");
                 }
             }
         }
@@ -47,7 +47,14 @@ public class Draw : MonoBehaviour {
         if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].number <= GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].count)
         {//当前蜡笔数量<=当颜色蜡笔的总数量
             GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].number++;
-            CreateDoor(hit);
+            if (!GameManager.Instance.onMiddle)
+            {
+                CreateDoor(hit);
+            }
+            else
+            {
+                GameManager.Instance.setText("不可在此处画门");
+            }
         }
         else
         {
@@ -65,7 +72,6 @@ public class Draw : MonoBehaviour {
         door.transform.eulerAngles += new Vector3(0, 0, -90);
         door.GetComponent<Door>().toStartRoom = (GameManager.Instance.currentCrayon == (int)GameManager.DoorColor.WHITE);
         door.GetComponent<Renderer>().material = color;
-        //Debug.Log("1cross" + Vector3.Cross(door.transform.forward,door.transform.up));
         CreateOtherDoor(door,color,hit);
     }
     void CreateOtherDoor(GameObject door, Material color,RaycastHit hit)
@@ -82,7 +88,6 @@ public class Draw : MonoBehaviour {
         otherDoor.transform.Rotate(new Vector3(0, 0, 180), Space.Self);
         otherDoor.GetComponent<Renderer>().material = color;
         houseChange(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color,newroom.GetComponent<Room>(),otherDoor.GetComponent<Door>());
-        //Debug.Log("2cross" + Vector3.Cross(otherDoor.transform.forward,otherDoor.transform.up));
         newroom.SetActive(false);//创建时隐藏
     }
     void ConnectDoor(GameObject door1,GameObject door2)
@@ -95,13 +100,11 @@ public class Draw : MonoBehaviour {
 
     void houseChange(GameManager.DoorColor color,Room room,Door door)
     {
-        Debug.Log("利用door的位置计算房间位置和旋转,然后将position等属性赋给room");
+        //利用door的位置计算房间位置和旋转,然后将position等属性赋给room
         switch (color)
         {
             case GameManager.DoorColor.PURPLE:
                 room.houseRotationEular = GameManager.Instance.currentRoom.houseRotationEular + new Vector3(180, 0, 0);// + new Vector3(0, 180 * door.transform.up.x, 0);
-                Debug.Log(door.transform.up);
-                Debug.Log(Vector3.Dot(door.transform.up, new Vector3(1, 0, 0)));
                 Vector3 diff = GameManager.Instance.houseObject[(int)GameManager.Instance.currentRoom.house].transform.position - door.targetDoor.gameObject.transform.position;
                 if (Vector3.Dot(door.transform.up, new Vector3(1, 0, 0)) > 0.1 || Vector3.Dot(door.transform.up, new Vector3(1, 0, 0)) < -0.1)
                 {

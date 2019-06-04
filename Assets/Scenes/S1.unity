@@ -96179,6 +96179,7 @@ MonoBehaviour:
   houseObject:
   - {fileID: 68733671}
   - {fileID: 912323848}
+  onMiddle: 0
 --- !u!4 &2072719720
 Transform:
   m_ObjectHideFlags: 0

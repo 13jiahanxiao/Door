@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     {
         House0,House1
     }
+    public bool onMiddle;  //若为true,则玩家处在两个房间的中间状态
     private houseNumber nextNumber;
     void Awake()
     {
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
             Crayon cra = new Crayon(crayonNumArray[i], crayonColorArray[i]);
             crayonList.Add(cra);
         }
-
+        onMiddle = false;
         player = GameObject.FindObjectOfType<PlayerControl>().gameObject;
         playerCamera = Camera.main.gameObject;
     }
@@ -97,8 +98,6 @@ public class GameManager : MonoBehaviour
     */
     public void RefreshRoom(Room room)//参数为需要更新的目标房间
     {
-        //Debug.Log((int)room.house);
-        // Debug.Log((int)currentRoom.house);
         //room.gameObject.SetActive(true);//开启对面房间的roomManager
         if (lastRoom != null)
         {
