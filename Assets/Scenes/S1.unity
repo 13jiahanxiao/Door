@@ -93009,10 +93009,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1417e7b1fad771c4b9973ca2f6ea44ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 8
-  jumpSpeed: 10
+  velocity: 7
+  jumpSpeed: 12
   onGround: 0
-  gravity: 20
+  gravity: 32
 --- !u!54 &1984945227
 Rigidbody:
   m_ObjectHideFlags: 0
