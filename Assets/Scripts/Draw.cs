@@ -87,7 +87,7 @@ public class Draw : MonoBehaviour {
         otherDoor.GetComponent<Door>().toStartRoom = (GameManager.Instance.currentRoom.house == GameManager.houseNumber.House0); //标记是否通向初始房
         otherDoor.transform.Rotate(new Vector3(0, 0, 180), Space.Self);
         otherDoor.GetComponent<Renderer>().material = color;
-        houseChange(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color,newroom.GetComponent<Room>(),otherDoor.GetComponent<Door>());
+        GameManager.Instance.houseChange(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color,newroom.GetComponent<Room>(),otherDoor.GetComponent<Door>());
         newroom.SetActive(false);//创建时隐藏
     }
     void ConnectDoor(GameObject door1,GameObject door2)
@@ -97,7 +97,7 @@ public class Draw : MonoBehaviour {
         door1.GetComponent<Door>().targetDoor = door2.GetComponent<Door>();
         door2.GetComponent<Door>().targetDoor = door1.GetComponent<Door>();
     }
-
+    /*  //已移至GameManager
     void houseChange(GameManager.DoorColor color,Room room,Door door)
     {
         //利用door的位置计算房间位置和旋转,然后将position等属性赋给room
@@ -124,4 +124,5 @@ public class Draw : MonoBehaviour {
                 break;
         }
     }
+    */
 }

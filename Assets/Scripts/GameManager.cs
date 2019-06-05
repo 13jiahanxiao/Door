@@ -120,4 +120,30 @@ public class GameManager : MonoBehaviour
     {
         text.text = s;
     }
+    public void houseChange(DoorColor color, Room room, Door door)
+    {
+        //利用door的位置计算房间位置和旋转,然后将position等属性赋给room
+        switch (color)
+        {
+            case DoorColor.PURPLE:
+                room.houseRotationEular = currentRoom.houseRotationEular + new Vector3(180, 0, 0);// + new Vector3(0, 180 * door.transform.up.x, 0);
+                Vector3 diff = houseObject[(int)currentRoom.house].transform.position - door.targetDoor.gameObject.transform.position;
+                if (Vector3.Dot(door.transform.up, new Vector3(1, 0, 0)) > 0.1 || Vector3.Dot(door.transform.up, new Vector3(1, 0, 0)) < -0.1)
+                {
+                    room.houseRotationEular += new Vector3(0, 180, 0);
+                    Vector3 newdiff = diff + new Vector3((-1) * diff.x, (-1) * diff.y, 0) * 2;
+                    room.housePosition = newdiff + door.gameObject.transform.position;
+                }
+                else
+                {
+                    Vector3 newdiff = diff + new Vector3(0, (-1) * diff.y, (-1) * diff.z) * 2;
+                    room.housePosition = newdiff + door.gameObject.transform.position;
+                }
+                //otherDoor.transform.position
+                //room.houseposition..
+                break;
+            default:
+                break;
+        }
+    }
 }

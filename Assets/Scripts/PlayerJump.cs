@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
 {
-    void Start()
-    {
-
-    }
     void OnTriggerEnter(Collider collider)
     {
         transform.parent.GetComponent<PlayerControl>().onGround = true;
@@ -18,11 +14,24 @@ public class PlayerJump : MonoBehaviour
                 GameManager.Instance.lastRoom = GameManager.Instance.currentRoom;       //将上一个currentRoom更新为lastRoom
                 GameManager.Instance.currentRoom = collider.transform.parent.GetComponent<Room>();  //更新currentRoom
             }
-            GameManager.Instance.onMiddle = !(GameManager.Instance.onMiddle);
-            Debug.Log(GameManager.Instance.onMiddle);
+            //GameManager.Instance.onMiddle = !(GameManager.Instance.onMiddle);
             collider.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
             Room targetRoom =collider.GetComponent<Door>().targetDoor.GetComponentInParent<Room>();
             GameManager.Instance.RefreshRoom(targetRoom);
+        }
+    }
+    void OnTriggerStay(Collider collider)
+    {
+        if (collider.tag == "Middle")
+        {
+            GameManager.Instance.onMiddle = true;
+        }
+    }
+    void OnTriggerExit(Collider collider)
+    {
+        if(collider.tag=="Middle")
+        {
+            GameManager.Instance.onMiddle = false;
         }
     }
 }

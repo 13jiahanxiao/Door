@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//已将碰撞检测移至PlayJump脚本中 以避免子物体重复触发碰撞的问题
 public class PlayerControl : MonoBehaviour {
     private Quaternion rotation;
     private Rigidbody playerRB;
