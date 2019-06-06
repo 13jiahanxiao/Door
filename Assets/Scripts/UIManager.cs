@@ -9,7 +9,12 @@ public class UIManager : MonoBehaviour
     private bool uiActive;
     public GameObject slider;
     public FirstPerspective fp;
+    public List<Image> crayonIcons;
+    private Canvas canvas;
+    public Vector3 firstIconPos;
+    public float iconGap;
 	void Start () {
+        canvas = FindObjectOfType<Canvas>();
         iconInitiate();
         uiActive = false;
         escUI.SetActive(false);
@@ -46,7 +51,10 @@ public class UIManager : MonoBehaviour
     {
         for(int i=0;i<GameManager.Instance.crayonColorArray.Length;i++)
         {
-            
+            Image icon=Instantiate(Resources.Load<Image>("Icon"),canvas.transform);
+            crayonIcons.Add(icon);
+            icon.rectTransform.position = firstIconPos + new Vector3(i * iconGap, 0, 0);
+            icon.sprite = Resources.Load<Sprite>("CrayonIcon/" + GameManager.Instance.crayonColorArray[i].ToString());
         }
     }
 }
