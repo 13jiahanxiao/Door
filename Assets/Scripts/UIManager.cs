@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour {
+public class UIManager : MonoBehaviour
+{
     public GameObject escUI;
     private bool uiActive;
     public GameObject slider;
     public FirstPerspective fp;
 	void Start () {
+        iconInitiate();
         uiActive = false;
         escUI.SetActive(false);
 	}
 	
-	void Update () {
+	void Update ()
+    {
 	if(Input.GetKeyDown(KeyCode.Escape))
         {
            // Slider slider = escUI.transform.Find("SensitivitySlider").gameObject.GetComponent<Slider>();
@@ -35,4 +38,15 @@ public class UIManager : MonoBehaviour {
             }
         }
 	}
+    public static void changeCrayon(int index)  //参数index：当前蜡笔的下标
+    {
+
+    }
+    void iconInitiate()
+    {
+        for(int i=0;i<GameManager.Instance.crayonColorArray.Length;i++)
+        {
+            
+        }
+    }
 }

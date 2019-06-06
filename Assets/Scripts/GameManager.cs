@@ -4,9 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-//问题：1.先创建门，过门时刷新房间信息，导致们的位置与房间位置不一致
-//2.旋转问题未解决
-//3.创建门时使墙壁消失，房间重复利用时墙壁回复的功能未写
 public class GameManager : MonoBehaviour
 {
     #region Instance
@@ -63,17 +60,27 @@ public class GameManager : MonoBehaviour
         #region MouseScroll
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            if (currentCrayon <crayonList.Count-1)
+            if (currentCrayon < crayonList.Count - 1)
+            {
                 currentCrayon++;
-            else 
+            }
+            else
+            {
                 currentCrayon = 0;
+            }
+            UIManager.changeCrayon(currentCrayon);
         }
         if(Input.GetAxis("Mouse ScrollWheel")<0)
         {
             if (currentCrayon >= 1)
+            {
                 currentCrayon--;
-            else if (currentCrayon < 1)
+            }
+            else
+            {
                 currentCrayon = crayonList.Count - 1;
+            }
+            UIManager.changeCrayon(currentCrayon);
         }
         #endregion
     }
@@ -83,19 +90,6 @@ public class GameManager : MonoBehaviour
          return Enum.GetName(crayonList[currentCrayon].color.GetType(), crayonList[currentCrayon].color);
     }
     
-    //public houseNumber currentHouse;
-
-        /*
-    public GameObject CreateRoom(Vector3 pos ,Quaternion rot)
-    {
-        GameObject room = new GameObject("RoomManager");
-        room.AddComponent<Room>();
-        room.GetComponent<Room>().roomPosition = pos;
-        room.GetComponent<Room>().roomRotation = rot;
-        //currentRoom = room.GetComponent<Room>();
-        return room;
-    }//创建房间时使Room类挂在room（doorparent）物体上，Room包括room物体，房间位置，旋转，门个数，房间编号
-    */
     public void RefreshRoom(Room room)//参数为需要更新的目标房间
     {
         //room.gameObject.SetActive(true);//开启对面房间的roomManager
@@ -146,4 +140,15 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+    /*
+public GameObject CreateRoom(Vector3 pos ,Quaternion rot)
+{
+    GameObject room = new GameObject("RoomManager");
+    room.AddComponent<Room>();
+    room.GetComponent<Room>().roomPosition = pos;
+    room.GetComponent<Room>().roomRotation = rot;
+    //currentRoom = room.GetComponent<Room>();
+    return room;
+}//创建房间时使Room类挂在room（doorparent）物体上，Room包括room物体，房间位置，旋转，门个数，房间编号
+*/
 }
