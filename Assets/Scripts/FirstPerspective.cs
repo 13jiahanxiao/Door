@@ -15,16 +15,16 @@ public class FirstPerspective : MonoBehaviour
     public float maximumVert = 45.0f;//垂直旋转的最小角度
     private float _rotationX = 0;//为垂直角度声明一个私有变量
     private GameObject player;
-    private UIManager ui;
+    private Slider slider;
     //private float camY;
     void Start()
     { //将光标锁定到游戏窗口的中心。
+        slider = FindObjectOfType<Slider>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         player = GameObject.FindGameObjectWithTag("Player");
-        ui = GameObject.FindObjectOfType<UIManager>();
-        sensitivityHor = ui.slider.GetComponent<Slider>().value;
-        sensitivityVert = ui.slider.GetComponent<Slider>().value;
+        sensitivityHor = slider.GetComponent<Slider>().value;
+        sensitivityVert = slider.GetComponent<Slider>().value;
         //camY = this.transform.position.y - player.transform.position.y;
     }
     void Update()

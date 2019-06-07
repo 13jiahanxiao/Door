@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
             {
                 currentCrayon = 0;
             }
-            UIManager.changeCrayon(currentCrayon);
+            UIManager.Instance.changeCrayon(currentCrayon);
         }
         if(Input.GetAxis("Mouse ScrollWheel")<0)
         {
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
             {
                 currentCrayon = crayonList.Count - 1;
             }
-            UIManager.changeCrayon(currentCrayon);
+            UIManager.Instance.changeCrayon(currentCrayon);
         }
         #endregion
     }

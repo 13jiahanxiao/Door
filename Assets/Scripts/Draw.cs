@@ -12,7 +12,6 @@ public class Draw : MonoBehaviour {
     public Transform doorParent;
     public GameObject door;
    // Vector3 newDoorPosition;
-
     void Start ()
     { 
         screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);

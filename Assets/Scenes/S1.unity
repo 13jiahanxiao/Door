@@ -43515,7 +43515,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   escUI: {fileID: 1898735773}
-  slider: {fileID: 2073437153}
   fp: {fileID: 534669906}
   crayonIcons: []
   firstIconPos: {x: 90, y: 90, z: 0}

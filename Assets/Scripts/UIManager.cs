@@ -2,18 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
+    #region Instance
+    private static UIManager _Instance;
+    public static UIManager Instance
+    {
+        get { return _Instance; }
+    }
+    #endregion
     public GameObject escUI;
     private bool uiActive;
-    public GameObject slider;
     public FirstPerspective fp;
     public List<Image> crayonIcons;
     private Canvas canvas;
     public Vector3 firstIconPos;
     public float iconGap;
-	void Start () {
+
+    void Awake()
+    {
+        _Instance = this;
+    }
+
+    void Start () {
         canvas = FindObjectOfType<Canvas>();
         iconInitiate();
         uiActive = false;
@@ -43,9 +56,12 @@ public class UIManager : MonoBehaviour
             }
         }
 	}
-    public static void changeCrayon(int index)  //参数index：当前蜡笔的下标
+    public void changeCrayon(int index)  //参数index：当前蜡笔的下标
     {
-
+        for(int i=0;i<GameManager.Instance.crayonColorArray.Length; i++)
+        {
+            crayonIcons[(index + i )% GameManager.Instance.crayonColorArray.Length].transform.DOMove(firstIconPos + new Vector3(i * iconGap, 0, 0), 0.5f);
+        }
     }
     void iconInitiate()
     {
