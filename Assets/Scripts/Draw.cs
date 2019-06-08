@@ -75,6 +75,10 @@ public class Draw : MonoBehaviour {
     }
     void CreateOtherDoor(GameObject door, Material color,RaycastHit hit)
     {
+        if(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color==GameManager.DoorColor.WHITE)
+        {
+            //+++++++++++++++++++++++++++
+        }
         GameObject newroom = new GameObject("RoomManager");
         newroom.transform.position = new Vector3(0,0,0);
         newroom.AddComponent<Room>();
@@ -86,7 +90,7 @@ public class Draw : MonoBehaviour {
         otherDoor.GetComponent<Door>().toStartRoom = (GameManager.Instance.currentRoom.house == GameManager.houseNumber.House0); //标记是否通向初始房
         otherDoor.transform.Rotate(new Vector3(0, 0, 180), Space.Self);
         otherDoor.GetComponent<Renderer>().material = color;
-        GameManager.Instance.houseChange(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color,newroom.GetComponent<Room>(),otherDoor.GetComponent<Door>());
+        GameManager.Instance.targetHouseCalculate(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color,newroom.GetComponent<Room>(),otherDoor.GetComponent<Door>());
         newroom.SetActive(false);//创建时隐藏
     }
     void ConnectDoor(GameObject door1,GameObject door2)

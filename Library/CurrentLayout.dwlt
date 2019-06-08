@@ -112,10 +112,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 948
-  m_MinSize: {x: 713, y: 474}
-  m_MaxSize: {x: 18008, y: 14024}
+  m_MinSize: {x: 711, y: 474}
+  m_MaxSize: {x: 18006, y: 14024}
   vertical: 0
-  controlID: 86
+  controlID: 12
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
   - {fileID: 11}
   - {fileID: 13}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 1
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 474}
   m_MaxSize: {x: 10004, y: 14024}
   vertical: 1
-  controlID: 13
+  controlID: 94
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -240,8 +240,8 @@ MonoBehaviour:
     y: 0
     width: 388
     height: 948
-  m_MinSize: {x: 277, y: 74}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -360,9 +360,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1020.63324, y: 524.9325, z: -24.32074}
+    m_Target: {x: 10.574156, y: 2.6828365, z: -3.9509244}
     speed: 2
-    m_Value: {x: 1020.63324, y: 524.9325, z: -24.32074}
+    m_Value: {x: 10.574156, y: 2.6828365, z: -3.9509244}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -390,13 +390,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.013158557, y: 0.06834986, z: 0.00090950023, w: 0.9975742}
+    m_Target: {x: -0.011133109, y: 0.9643968, z: -0.26100597, w: -0.041118573}
     speed: 2
-    m_Value: {x: -0.013158557, y: 0.06834986, z: 0.00090950023, w: 0.9975742}
+    m_Value: {x: -0.01113311, y: 0.96439683, z: -0.261006, w: -0.041118577}
   m_Size:
-    m_Target: 449.7619
+    m_Target: 10.057267
     speed: 2
-    m_Value: 449.7619
+    m_Value: 10.057267
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -462,21 +462,21 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 16}
-      m_SelectedIDs: fcbeffff
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 08edffffc4330000f842000072570000b4570000ac5a0000
+      m_ExpandedIDs: c0fbffff9c2c0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: FC
-        m_OriginalName: FC
+        m_Name: DoorParent
+        m_OriginalName: DoorParent
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -4858
+        m_UserData: 10962
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -526,7 +526,8 @@ MonoBehaviour:
     m_SceneHandles: 
     m_ShowAllHits: 0
     m_SearchArea: 1
-    m_Folders: []
+    m_Folders:
+    - Assets/Scripts
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -538,7 +539,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: ce2c0000
     m_LastClickedID: 11470
-    m_ExpandedIDs: 00000000d82d0000722e0000e82f00004e300000b23000005c31000064310000a0310000f85b0000fa5b0000fc5b0000fe5b0000005c0000025c0000045c0000
+    m_ExpandedIDs: 00000000442600006a2600006c260000b8260000e2260000262700008427000090280000ce280000f028000020290000aa530000ac530000ae530000b0530000b2530000b4530000b6530000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -563,24 +564,24 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 60}
+    scrollPos: {x: 0, y: 136}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000d82d0000722e0000762e00007a2e0000e82f0000fe2f00004e300000b230000064310000a0310000c4310000f85b0000fa5b0000fc5b0000fe5b0000005c0000025c0000045c0000
+    m_ExpandedIDs: ffffffff00000000442600006a2600006c260000b8260000e2260000262700008427000090280000ce280000f028000020290000aa530000ac530000ae530000b0530000b2530000b4530000b6530000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 1
-      m_OriginalName: 1
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 11898
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 9}
     m_SearchString: 

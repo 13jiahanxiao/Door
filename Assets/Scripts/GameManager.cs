@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
             Crayon cra = new Crayon(crayonNumArray[i], crayonColorArray[i]);
             crayonList.Add(cra);
         }
+        UIManager.Instance.iconInitiate();
         onMiddle = false;
         player = GameObject.FindObjectOfType<PlayerControl>().gameObject;
         playerCamera = Camera.main.gameObject;
@@ -110,11 +111,11 @@ public class GameManager : MonoBehaviour
        
        // houseObject[3 - (int)room.house - (int)currentRoom.house].transform.position = room.housePosition + new Vector3(0, 100, 0);
     }//刷新房间
-    public void setText(String s)
+    public void setText(string s)
     {
         text.text = s;
     }
-    public void houseChange(DoorColor color, Room room, Door door)
+    public void targetHouseCalculate(DoorColor color, Room room, Door door)
     {
         //利用door的位置计算房间位置和旋转,然后将position等属性赋给room
         switch (color)
@@ -135,6 +136,11 @@ public class GameManager : MonoBehaviour
                 }
                 //otherDoor.transform.position
                 //room.houseposition..
+                break;
+            case DoorColor.WHITE:
+                room.housePosition = new Vector3(0,0,0);
+                room.houseRotationEular = new Vector3(0, 0, 0);
+                //player.transform.position=
                 break;
             default:
                 break;

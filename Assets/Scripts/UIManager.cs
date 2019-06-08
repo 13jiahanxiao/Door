@@ -28,7 +28,6 @@ public class UIManager : MonoBehaviour
 
     void Start () {
         canvas = FindObjectOfType<Canvas>();
-        iconInitiate();
         uiActive = false;
         escUI.SetActive(false);
 	}
@@ -58,19 +57,19 @@ public class UIManager : MonoBehaviour
 	}
     public void changeCrayon(int index)  //参数index：当前蜡笔的下标
     {
-        for(int i=0;i<GameManager.Instance.crayonColorArray.Length; i++)
+        for(int i=0;i<GameManager.Instance.crayonList.Count; i++)
         {
-            crayonIcons[(index + i )% GameManager.Instance.crayonColorArray.Length].transform.DOMove(firstIconPos + new Vector3(i * iconGap, 0, 0), 0.5f);
+            crayonIcons[(index + i )% GameManager.Instance.crayonList.Count].transform.DOMove(firstIconPos + new Vector3(i * iconGap, 0, 0), 0.5f);
         }
     }
-    void iconInitiate()
+    public void iconInitiate()
     {
-        for(int i=0;i<GameManager.Instance.crayonColorArray.Length;i++)
+        for(int i=0;i<GameManager.Instance.crayonList.Count;i++)
         {
             Image icon=Instantiate(Resources.Load<Image>("Icon"),canvas.transform);
             crayonIcons.Add(icon);
             icon.rectTransform.position = firstIconPos + new Vector3(i * iconGap, 0, 0);
-            icon.sprite = Resources.Load<Sprite>("CrayonIcon/" + GameManager.Instance.crayonColorArray[i].ToString());
+            icon.sprite = Resources.Load<Sprite>("CrayonIcon/" + GameManager.Instance.crayonList[i].color.ToString());
         }
     }
 }
