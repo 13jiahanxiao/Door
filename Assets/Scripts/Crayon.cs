@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Crayon
 {
-    public int count;
-    public int number=1;
+    public int num;
     public GameManager.DoorColor color;
     public Crayon(int i,GameManager.DoorColor color)
     {
-        count = i;
+        num = i;
         this.color = color;
-        number = 1;
     }
 }

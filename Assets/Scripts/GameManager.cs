@@ -14,9 +14,13 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     public Text text;
+    private Text crayonNum;
+    public float wallThickness;
+    public Room startRoom;
     public Room currentRoom;//现在的房间 其中的house则为currentHouse
     public Room lastRoom;
     public GameObject player;
+    public int[] hide;
     [HideInInspector]public GameObject playerCamera;
     public enum DoorColor
     {
@@ -42,6 +46,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        crayonNum = GameObject.Find("crayonNum").GetComponent<Text>();
+        startRoomInitiate();
         if(crayonNumArray.Length!=crayonColorArray.Length)
         {
             Debug.LogWarning("未同步蜡笔颜色和数量");
@@ -52,6 +58,7 @@ public class GameManager : MonoBehaviour
             crayonList.Add(cra);
         }
         UIManager.Instance.iconInitiate();
+        updateNum();
         onMiddle = false;
         player = GameObject.FindObjectOfType<PlayerControl>().gameObject;
         playerCamera = Camera.main.gameObject;
@@ -69,6 +76,7 @@ public class GameManager : MonoBehaviour
             {
                 currentCrayon = 0;
             }
+            updateNum();
             UIManager.Instance.changeCrayon(currentCrayon);
         }
         if(Input.GetAxis("Mouse ScrollWheel")<0)
@@ -81,9 +89,11 @@ public class GameManager : MonoBehaviour
             {
                 currentCrayon = crayonList.Count - 1;
             }
+            updateNum();
             UIManager.Instance.changeCrayon(currentCrayon);
         }
         #endregion
+        
     }
 
     public string CrayonColorName()
@@ -96,10 +106,16 @@ public class GameManager : MonoBehaviour
         //room.gameObject.SetActive(true);//开启对面房间的roomManager
         if (lastRoom != null)
         {
-            lastRoom.gameObject.SetActive(false); //关闭lastRoom的roomManager
-            for (int i = 0; i < lastRoom.hideIndex.Count; i++)
+            if (lastRoom.transform != currentRoom.transform)
             {
-                Instance.houseObject[(int)lastRoom.house].transform.GetChild(lastRoom.hideIndex[i][0]).GetChild(lastRoom.hideIndex[i][1]).gameObject.SetActive(true);
+                for (int i = 0; i < lastRoom.hideIndex.Count; i++)
+                {
+                    Instance.houseObject[(int)lastRoom.house].transform.GetChild(lastRoom.hideIndex[i][0]).GetChild(lastRoom.hideIndex[i][1]).gameObject.SetActive(true);
+                }
+            }
+            if (lastRoom.transform != room.transform&&lastRoom.transform!=currentRoom.transform)
+            {
+                lastRoom.gameObject.SetActive(false); //关闭lastRoom的roomManager
             }
         }
         for (int i = 0; i < room.hideIndex.Count; i++)
@@ -108,12 +124,23 @@ public class GameManager : MonoBehaviour
         }
         houseObject[(int)room.house].transform.position = room.housePosition;
         houseObject[(int)room.house].transform.eulerAngles = room.houseRotationEular;
-       
-       // houseObject[3 - (int)room.house - (int)currentRoom.house].transform.position = room.housePosition + new Vector3(0, 100, 0);
+
+        // houseObject[3 - (int)room.house - (int)currentRoom.house].transform.position = room.housePosition + new Vector3(0, 100, 0);
     }//刷新房间
+    void startRoomInitiate()
+    {
+        currentRoom = startRoom;
+        startRoom.housePosition = new Vector3(0, 0, 0);
+        startRoom.houseRotationEular = new Vector3(0, 0, 0);
+        startRoom.house = houseNumber.House0;
+    }
     public void setText(string s)
     {
         text.text = s;
+    }
+    public void updateNum()
+    {
+        crayonNum.text = "当前颜色蜡笔剩余:" + crayonList[currentCrayon].num;
     }
     public void targetHouseCalculate(DoorColor color, Room room, Door door)
     {
@@ -146,6 +173,44 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+
+    public void whiteDoorCalculate(Door door,Material color, RaycastHit hit)
+    {
+        hide = new int[2] { hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() };
+        GameManager.Instance.startRoom.hideIndex.Add(new int[2] { hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() });
+        GameObject otherDoor = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), GameManager.Instance.startRoom.transform);
+        otherDoor.GetComponent<Door>().color = GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color;
+        //otherDoor.transform.eulerAngles = door.transform.eulerAngles - currentRoom.houseRotationEular;
+        //otherDoor.transform.Rotate(GameManager.Instance.currentRoom.houseRotationEular, Space.Self);
+        ConnectDoor(door.gameObject, otherDoor);
+        //Vector3 diff = houseObject[(int)currentRoom.house].transform.position - door.gameObject.transform.position;
+        if (Vector3.Dot(door.transform.up, new Vector3(1, 0, 0)) > 0.1 || Vector3.Dot(door.transform.up, new Vector3(1, 0, 0)) < -0.1)
+        {
+            otherDoor.transform.eulerAngles = door.transform.eulerAngles - currentRoom.houseRotationEular;
+            //Vector3 newdiff = diff + new Vector3((-1) * diff.x, (-1) * diff.y, 0) * 2;
+            // otherDoor.transform.position = startRoom.housePosition - newdiff;
+        }
+        else
+        {
+            otherDoor.transform.eulerAngles = door.transform.eulerAngles - currentRoom.houseRotationEular + new Vector3(0, 180, 0);
+            //Vector3 newdiff = diff + new Vector3(0, (-1) * diff.y, (-1) * diff.z) * 2;
+            //otherDoor.transform.position = startRoom.housePosition - newdiff;
+        }
+        
+        //otherDoor.transform.position = houseObject[(int)startRoom.house].transform.GetChild(hide[0]).GetChild(hide[1]).position +
+        //    otherDoor.transform.up * wallThickness/2;
+        
+        otherDoor.GetComponent<Renderer>().material = color;
+    }
+
+    public void ConnectDoor(GameObject door1, GameObject door2)
+    {
+        door1.GetComponent<Door>().position = door1.transform.position;
+        door2.GetComponent<Door>().position = door2.transform.position;
+        door1.GetComponent<Door>().targetDoor = door2.GetComponent<Door>();
+        door2.GetComponent<Door>().targetDoor = door1.GetComponent<Door>();
+    }
+}
     /*
 public GameObject CreateRoom(Vector3 pos ,Quaternion rot)
 {
@@ -157,4 +222,4 @@ public GameObject CreateRoom(Vector3 pos ,Quaternion rot)
     return room;
 }//创建房间时使Room类挂在room（doorparent）物体上，Room包括room物体，房间位置，旋转，门个数，房间编号
 */
-}
+

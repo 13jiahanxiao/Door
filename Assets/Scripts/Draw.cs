@@ -43,11 +43,12 @@ public class Draw : MonoBehaviour {
 
     public void paint(RaycastHit hit)
     {
-        if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].number <= GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].count)
-        {//当前蜡笔数量<=当颜色蜡笔的总数量
-            GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].number++;
+        if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].num>0)
+        {
             if (!GameManager.Instance.onMiddle)
             {
+                GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].num--;
+                GameManager.Instance.updateNum();
                 CreateDoor(hit);
             }
             else
@@ -65,40 +66,39 @@ public class Draw : MonoBehaviour {
         Material color = Resources.Load<Material>("DoorColor/"+GameManager.Instance.CrayonColorName());//门颜色
 
         GameObject go = GameManager.Instance.currentRoom.gameObject;
-        go.GetComponent<Room>().hideIndex.Add(new int[2] {hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() });  //将消去方格的下标存于room中
+        int[] hide = new int[2] { hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() };
+        go.GetComponent<Room>().hideIndex.Add(hide);  //将消去方格的下标存于room中
         hit.transform.gameObject.SetActive(false);
-        GameObject door = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), hit.transform.position+hit.transform.right*1f, hit.transform.rotation, go.transform);
+        GameObject door = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), hit.transform.position+hit.transform.right*GameManager.Instance.wallThickness/2, hit.transform.rotation, go.transform);
+        door.GetComponent<Door>().color = GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color;
         door.transform.eulerAngles += new Vector3(0, 0, -90);
-        door.GetComponent<Door>().toStartRoom = (GameManager.Instance.currentCrayon == (int)GameManager.DoorColor.WHITE);
+        door.GetComponent<Door>().toStartRoom = (GameManager.Instance.currentCrayon == (int)GameManager.DoorColor.WHITE);  
         door.GetComponent<Renderer>().material = color;
-        CreateOtherDoor(door,color,hit);
+        if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.WHITE)
+        {
+            GameManager.Instance.whiteDoorCalculate(door.GetComponent<Door>(), color, hit);
+        }
+        else
+        {
+            CreateOtherDoor(door, color, hit);
+        }
     }
     void CreateOtherDoor(GameObject door, Material color,RaycastHit hit)
     {
-        if(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color==GameManager.DoorColor.WHITE)
-        {
-            //+++++++++++++++++++++++++++
-        }
-        GameObject newroom = new GameObject("RoomManager");
-        newroom.transform.position = new Vector3(0,0,0);
-        newroom.AddComponent<Room>();
-        newroom.GetComponent<Room>().hideIndex.Add(new int[2] { hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() });
-        newroom.GetComponent<Room>().house = (GameManager.houseNumber)(1 - (int)GameManager.Instance.currentRoom.house);//给新房间指定另一个house
-        Vector3 newDoorPos = door.transform.position - door.transform.up * 4;
-        GameObject otherDoor = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), newDoorPos, door.transform.rotation,newroom.transform);
-        ConnectDoor(door, otherDoor);//两门的door类中互相保存对方地址
-        otherDoor.GetComponent<Door>().toStartRoom = (GameManager.Instance.currentRoom.house == GameManager.houseNumber.House0); //标记是否通向初始房
+            GameObject newroom = new GameObject("RoomManager");
+            newroom.transform.position = new Vector3(0, 0, 0);
+            newroom.AddComponent<Room>();
+            newroom.GetComponent<Room>().hideIndex.Add(new int[2] { hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() });
+            newroom.GetComponent<Room>().house = (GameManager.houseNumber)(1 - (int)GameManager.Instance.currentRoom.house);//给新房间指定另一个house
+            Vector3 newDoorPos = door.transform.position - door.transform.up * GameManager.Instance.wallThickness*2;
+            GameObject otherDoor = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), newDoorPos, door.transform.rotation, newroom.transform);
+            GameManager.Instance.ConnectDoor(door, otherDoor);//两门的door类中互相保存对方地址
+            otherDoor.GetComponent<Door>().toStartRoom = (GameManager.Instance.currentRoom.house == GameManager.houseNumber.House0); //标记是否通向初始房
+        otherDoor.GetComponent<Door>().color = GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color;
         otherDoor.transform.Rotate(new Vector3(0, 0, 180), Space.Self);
-        otherDoor.GetComponent<Renderer>().material = color;
-        GameManager.Instance.targetHouseCalculate(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color,newroom.GetComponent<Room>(),otherDoor.GetComponent<Door>());
-        newroom.SetActive(false);//创建时隐藏
-    }
-    void ConnectDoor(GameObject door1,GameObject door2)
-    {
-        door1.GetComponent<Door>().position = door1.transform.position;
-        door2.GetComponent<Door>().position = door2.transform.position;
-        door1.GetComponent<Door>().targetDoor = door2.GetComponent<Door>();
-        door2.GetComponent<Door>().targetDoor = door1.GetComponent<Door>();
+            otherDoor.GetComponent<Renderer>().material = color;
+            GameManager.Instance.targetHouseCalculate(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color, newroom.GetComponent<Room>(), otherDoor.GetComponent<Door>());
+            newroom.SetActive(false);//创建时隐藏
     }
     /*  //已移至GameManager
     void houseChange(GameManager.DoorColor color,Room room,Door door)
