@@ -9,9 +9,13 @@ public class PlayerCollision : MonoBehaviour
         transform.parent.GetComponent<PlayerControl>().onGround = true;
         if (collider.tag == "Door")
         {
+            if(GameManager.Instance.blackDoor!=null)
+            {
+                collider.GetComponent<Door>().targetDoor = GameManager.Instance.blackDoor;
+            }
             collider.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
             GameManager.Instance.currentRoom = collider.transform.parent.GetComponent<Room>();
-            if (collider.GetComponent<Door>().color==GameManager.DoorColor.WHITE)
+            if (collider.GetComponent<Door>().color==GameManager.DoorColor.WHITE||collider.GetComponent<Door>().color==GameManager.DoorColor.BLACK)
             {
                 for (int i = 0; i < GameManager.Instance.lastRoom.hideIndex.Count; i++)
                 {
@@ -19,10 +23,11 @@ public class PlayerCollision : MonoBehaviour
                 }
                 GameManager.Instance.lastRoom.gameObject.SetActive(false);
                 GameManager.Instance.lastRoom = GameManager.Instance.currentRoom;
-                GameManager.Instance.currentRoom = GameManager.Instance.startRoom;
+                GameManager.Instance.currentRoom = collider.GetComponent<Door>().targetDoor.transform.parent.GetComponent<Room>();
                 //Room targetRoom = collider.GetComponent<Door>().targetDoor.GetComponentInParent<Room>();
-                GameManager.Instance.RefreshRoom(GameManager.Instance.startRoom);
+                GameManager.Instance.RefreshRoom(collider.GetComponent<Door>().targetDoor.transform.parent.GetComponent<Room>());
                 collider.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
+                //待加判断：是否是从初始房间通向其他房间
                 collider.GetComponent<Door>().targetDoor.transform.position 
                     = GameManager.Instance.houseObject[(int)GameManager.Instance.startRoom.house].transform.GetChild(GameManager.Instance.hide[0]).GetChild(GameManager.Instance.hide[1]).position +
                      collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness /2;

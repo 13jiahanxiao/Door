@@ -20369,7 +20369,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440586148}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.88, y: 8.57, z: 0}
+  m_LocalPosition: {x: 10.3, y: 9.32, z: -1.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 68733672}
@@ -20387,7 +20387,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 50
+  m_Range: 14
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -20529,7 +20529,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 446606759}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.88, y: 8.57, z: 0}
+  m_LocalPosition: {x: 9.66, y: 10.31, z: -1.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 912323849}
@@ -20547,7 +20547,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 50
+  m_Range: 14
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -96302,14 +96302,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 601037306}
+  blackDoor: {fileID: 0}
   wallThickness: 2
   startRoom: {fileID: 127934966}
   currentRoom: {fileID: 0}
   lastRoom: {fileID: 0}
   player: {fileID: 1984945221}
+  hide: 
   playerCamera: {fileID: 0}
-  crayonColorArray: 0200000004000000
-  crayonNumArray: 0500000001000000
+  crayonColorArray: 020000000400000005000000
+  crayonNumArray: 050000000100000001000000
   currentCrayon: 0
   houseObject:
   - {fileID: 68733671}

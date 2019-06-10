@@ -74,7 +74,7 @@ public class Draw : MonoBehaviour {
         door.transform.eulerAngles += new Vector3(0, 0, -90);
         door.GetComponent<Door>().toStartRoom = (GameManager.Instance.currentCrayon == (int)GameManager.DoorColor.WHITE);  
         door.GetComponent<Renderer>().material = color;
-        if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.WHITE)
+        if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.WHITE|| GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.BLACK)
         {
             GameManager.Instance.whiteDoorCalculate(door.GetComponent<Door>(), color, hit);
         }

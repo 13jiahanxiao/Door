@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     public Text text;
+    public Door blackDoor;
     private Text crayonNum;
     public float wallThickness;
     public Room startRoom;
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]public GameObject playerCamera;
     public enum DoorColor
     {
-        RED = 0, GREEN, PURPLE, YELLOW,WHITE
+        RED = 0, GREEN, PURPLE, YELLOW,WHITE,BLACK
 
     }
     //public Crayon[] crayonArray = new Crayon[4];
@@ -66,7 +67,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         #region MouseScroll
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
             if (currentCrayon < crayonList.Count - 1)
             {
@@ -79,7 +80,7 @@ public class GameManager : MonoBehaviour
             updateNum();
             UIManager.Instance.changeCrayon(currentCrayon);
         }
-        if(Input.GetAxis("Mouse ScrollWheel")<0)
+        if(Input.GetAxis("Mouse ScrollWheel")>0)
         {
             if (currentCrayon >= 1)
             {
