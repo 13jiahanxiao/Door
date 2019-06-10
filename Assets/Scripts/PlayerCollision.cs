@@ -17,10 +17,12 @@ public class PlayerCollision : MonoBehaviour
                 {
                     GameManager.Instance.houseObject[(int)GameManager.Instance.lastRoom.house].transform.GetChild(GameManager.Instance.lastRoom.hideIndex[i][0]).GetChild(GameManager.Instance.lastRoom.hideIndex[i][1]).gameObject.SetActive(true);
                 }
+                GameManager.Instance.lastRoom.gameObject.SetActive(false);
                 GameManager.Instance.lastRoom = GameManager.Instance.currentRoom;
                 GameManager.Instance.currentRoom = GameManager.Instance.startRoom;
-                Room targetRoom = collider.GetComponent<Door>().targetDoor.GetComponentInParent<Room>();
-                GameManager.Instance.RefreshRoom(targetRoom);
+                //Room targetRoom = collider.GetComponent<Door>().targetDoor.GetComponentInParent<Room>();
+                GameManager.Instance.RefreshRoom(GameManager.Instance.startRoom);
+                collider.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
                 collider.GetComponent<Door>().targetDoor.transform.position 
                     = GameManager.Instance.houseObject[(int)GameManager.Instance.startRoom.house].transform.GetChild(GameManager.Instance.hide[0]).GetChild(GameManager.Instance.hide[1]).position +
                      collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness /2;
@@ -37,6 +39,13 @@ public class PlayerCollision : MonoBehaviour
                 //GameManager.Instance.onMiddle = !(GameManager.Instance.onMiddle);
                 Room targetRoom = collider.GetComponent<Door>().targetDoor.GetComponentInParent<Room>();
                 GameManager.Instance.RefreshRoom(targetRoom);
+                if (GameManager.Instance.lastRoom != null)
+                {
+                    if (GameManager.Instance.lastRoom.transform != targetRoom.transform && GameManager.Instance.lastRoom.transform != GameManager.Instance.currentRoom.transform)
+                    {
+                        GameManager.Instance.lastRoom.gameObject.SetActive(false); //关闭lastRoom的roomManager
+                    }
+                }
                 GameManager.Instance.lastRoom = targetRoom;
             }
         }

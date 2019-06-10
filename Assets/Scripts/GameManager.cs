@@ -113,10 +113,6 @@ public class GameManager : MonoBehaviour
                     Instance.houseObject[(int)lastRoom.house].transform.GetChild(lastRoom.hideIndex[i][0]).GetChild(lastRoom.hideIndex[i][1]).gameObject.SetActive(true);
                 }
             }
-            if (lastRoom.transform != room.transform&&lastRoom.transform!=currentRoom.transform)
-            {
-                lastRoom.gameObject.SetActive(false); //关闭lastRoom的roomManager
-            }
         }
         for (int i = 0; i < room.hideIndex.Count; i++)
         {
