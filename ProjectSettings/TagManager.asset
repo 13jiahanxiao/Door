@@ -7,6 +7,7 @@ TagManager:
   - DoorPosition
   - Door
   - Middle
+  - Item
   layers:
   - Default
   - TransparentFX

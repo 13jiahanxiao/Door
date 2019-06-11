@@ -104,6 +104,8 @@ public class GameManager : MonoBehaviour
     
     public void RefreshRoom(Room room)//参数为需要更新的目标房间
     {
+        Debug.Log(room.house);
+        
         //room.gameObject.SetActive(true);//开启对面房间的roomManager
         if (lastRoom != null)
         {
@@ -130,6 +132,7 @@ public class GameManager : MonoBehaviour
         startRoom.housePosition = new Vector3(0, 0, 0);
         startRoom.houseRotationEular = new Vector3(0, 0, 0);
         startRoom.house = houseNumber.House0;
+        Debug.Log(startRoom.house);
     }
     public void setText(string s)
     {

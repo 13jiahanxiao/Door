@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    void OnTriggerEnter(Collider collider)
+    public void OnTriggerEnter(Collider collider)
     {
         transform.parent.GetComponent<PlayerControl>().onGround = true;
         if (collider.tag == "Door")
@@ -25,7 +25,8 @@ public class PlayerCollision : MonoBehaviour
                 GameManager.Instance.lastRoom = GameManager.Instance.currentRoom;
                 GameManager.Instance.currentRoom = collider.GetComponent<Door>().targetDoor.transform.parent.GetComponent<Room>();
                 //Room targetRoom = collider.GetComponent<Door>().targetDoor.GetComponentInParent<Room>();
-                GameManager.Instance.RefreshRoom(collider.GetComponent<Door>().targetDoor.transform.parent.GetComponent<Room>());
+                //GameManager.Instance.RefreshRoom(collider.GetComponent<Door>().targetDoor.transform.parent.GetComponent<Room>());
+                GameManager.Instance.RefreshRoom(GameManager.Instance.startRoom);
                 collider.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
                 //待加判断：是否是从初始房间通向其他房间
                 collider.GetComponent<Door>().targetDoor.transform.position 

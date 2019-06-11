@@ -24,7 +24,7 @@ public class Draw : MonoBehaviour {
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (hit.transform.gameObject.tag == "Box")
+                if (hit.transform.gameObject.tag == "Item")
                 {
                     GameManager.Instance.setText("拾取物品");
                 }
