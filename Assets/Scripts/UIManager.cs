@@ -17,9 +17,14 @@ public class UIManager : MonoBehaviour
     private bool uiActive;
     public FirstPerspective fp;
     public List<Image> crayonIcons;
+    public List<Image> itemIcons;
     private Canvas canvas;
     public Vector3 firstIconPos;
+    public Vector3 firstItemPos;
     public float iconGap;
+    public float iconGapy;
+    public Image circle;
+    public float fillspeed;
 
     void Awake()
     {
@@ -28,6 +33,7 @@ public class UIManager : MonoBehaviour
 
     void Start () {
         canvas = FindObjectOfType<Canvas>();
+        circle = canvas.transform.Find("Circle").GetComponent<Image>();
         uiActive = false;
         escUI.SetActive(false);
 	}
@@ -66,11 +72,28 @@ public class UIManager : MonoBehaviour
     {
         for(int i=0;i<GameManager.Instance.crayonList.Count;i++)
         {
-            Image icon=Instantiate(Resources.Load<Image>("Icon"),canvas.transform);
+            Image icon=Instantiate(Resources.Load<Image>("CrayonIcon"),canvas.transform);
             crayonIcons.Add(icon);
             icon.rectTransform.position = firstIconPos + new Vector3(i * iconGap, 0, 0);
             icon.rectTransform.sizeDelta = new Vector2(19.05f, 160.55f);
             icon.sprite = Resources.Load<Sprite>("CrayonIcon/" + GameManager.Instance.crayonList[i].color.ToString());
         }
+    }
+    public void pickItem(string name)
+    {
+        GameObject[] g;
+        g=GameObject.FindGameObjectsWithTag("Item");
+        for (int i = 0; i < g.Length; i++)
+        {
+            if (g[i].name == name)
+            {
+                Destroy(g[i]);
+            }
+        }
+        Image icon = Instantiate(Resources.Load<Image>("ItemIcon"), canvas.transform);
+        icon.name = name;
+        icon.rectTransform.position = firstItemPos + new Vector3(0, itemIcons.Count * iconGapy, 0);
+        itemIcons.Add(icon);
+        icon.sprite = Resources.Load<Sprite>("ItemIcon/" + name);
     }
 }

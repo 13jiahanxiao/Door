@@ -22,20 +22,40 @@ public class Draw : MonoBehaviour {
         ray = Camera.main.ScreenPointToRay(screenCenter);
         if(Physics.Raycast(ray, out hit, distance))
         {
+            if(Input.GetMouseButtonUp(0))
+            {
+                UIManager.Instance.circle.fillAmount = 0;
+            }
             if (Input.GetMouseButtonDown(0))
             {
                 if (hit.transform.gameObject.tag == "Item")
                 {
                     GameManager.Instance.setText("拾取物品");
+                    UIManager.Instance.pickItem(hit.transform.name);
                 }
-                else if (hit.transform.gameObject.tag == "DoorPosition")
-                {
-                    GameManager.Instance.setText("生成门");
-                    paint(hit);
-                }
-                else
+                else if(hit.transform.gameObject.tag != "DoorPosition")
                 {
                     GameManager.Instance.setText("无效位置");
+                }
+            }
+            if(Input.GetMouseButton(0))
+            {
+                if (hit.transform.gameObject.tag == "DoorPosition")
+                {
+                    if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].num > 0)
+                    {
+                        UIManager.Instance.circle.fillAmount += UIManager.Instance.fillspeed * Time.deltaTime;
+                        if (UIManager.Instance.circle.fillAmount > 0.999)
+                        {
+                            GameManager.Instance.setText("生成门");
+                            paint(hit);
+                            UIManager.Instance.circle.fillAmount = 0;
+                        }
+                    }
+                    else
+                    {
+                        GameManager.Instance.setText("蜡笔耗尽");
+                    }
                 }
             }
         }
@@ -55,10 +75,6 @@ public class Draw : MonoBehaviour {
             {
                 GameManager.Instance.setText("不可在此处画门");
             }
-        }
-        else
-        {
-            GameManager.Instance.setText("蜡笔耗尽");
         }
     }
     void CreateDoor(RaycastHit hit)
@@ -100,32 +116,4 @@ public class Draw : MonoBehaviour {
             GameManager.Instance.targetHouseCalculate(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color, newroom.GetComponent<Room>(), otherDoor.GetComponent<Door>());
             newroom.SetActive(false);//创建时隐藏
     }
-    /*  //已移至GameManager
-    void houseChange(GameManager.DoorColor color,Room room,Door door)
-    {
-        //利用door的位置计算房间位置和旋转,然后将position等属性赋给room
-        switch (color)
-        {
-            case GameManager.DoorColor.PURPLE:
-                room.houseRotationEular = GameManager.Instance.currentRoom.houseRotationEular + new Vector3(180, 0, 0);// + new Vector3(0, 180 * door.transform.up.x, 0);
-                Vector3 diff = GameManager.Instance.houseObject[(int)GameManager.Instance.currentRoom.house].transform.position - door.targetDoor.gameObject.transform.position;
-                if (Vector3.Dot(door.transform.up, new Vector3(1, 0, 0)) > 0.1 || Vector3.Dot(door.transform.up, new Vector3(1, 0, 0)) < -0.1)
-                {
-                    room.houseRotationEular += new Vector3(0, 180, 0);
-                    Vector3 newdiff = diff + new Vector3((-1)*diff.x, (-1) * diff.y, 0) * 2;
-                    room.housePosition = newdiff + door.gameObject.transform.position;
-                }
-                else
-                {
-                    Vector3 newdiff = diff + new Vector3(0, (-1) * diff.y, (-1) * diff.z) * 2;
-                    room.housePosition = newdiff + door.gameObject.transform.position;
-                }
-                //otherDoor.transform.position
-                //room.houseposition..
-                break;
-            default:
-                break;
-        }
-    }
-    */
 }

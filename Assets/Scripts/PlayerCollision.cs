@@ -6,7 +6,10 @@ public class PlayerCollision : MonoBehaviour
 {
     public void OnTriggerEnter(Collider collider)
     {
-        transform.parent.GetComponent<PlayerControl>().onGround = true;
+        if (!collider.isTrigger)
+        {
+            transform.parent.GetComponent<PlayerControl>().onGround = true;
+        }
         if (collider.tag == "Door")
         {
             collider.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
