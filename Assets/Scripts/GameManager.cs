@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Room currentRoom;//现在的房间 其中的house则为currentHouse
     public Room lastRoom;
     public GameObject player;
+    public bool canMove;
     public int[] hide;
     [HideInInspector]public GameObject playerCamera;
     public enum DoorColor
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        canMove = true;
         crayonNum = GameObject.Find("crayonNum").GetComponent<Text>();
         startRoomInitiate();
         if(crayonNumArray.Length!=crayonColorArray.Length)
@@ -104,7 +106,7 @@ public class GameManager : MonoBehaviour
     
     public void RefreshRoom(Room room)//参数为需要更新的目标房间
     {
-        Debug.Log(room.house);
+        //Debug.Log(room.house);
         
         //room.gameObject.SetActive(true);//开启对面房间的roomManager
         if (lastRoom != null)
@@ -122,6 +124,7 @@ public class GameManager : MonoBehaviour
             Instance.houseObject[(int)room.house].transform.GetChild(room.hideIndex[i][0]).GetChild(room.hideIndex[i][1]).gameObject.SetActive(false);
         }
         houseObject[(int)room.house].transform.position = room.housePosition;
+        //Debug.Log(room.housePosition);
         houseObject[(int)room.house].transform.eulerAngles = room.houseRotationEular;
 
         // houseObject[3 - (int)room.house - (int)currentRoom.house].transform.position = room.housePosition + new Vector3(0, 100, 0);
@@ -132,7 +135,6 @@ public class GameManager : MonoBehaviour
         startRoom.housePosition = new Vector3(0, 0, 0);
         startRoom.houseRotationEular = new Vector3(0, 0, 0);
         startRoom.house = houseNumber.House0;
-        Debug.Log(startRoom.house);
     }
     public void setText(string s)
     {
@@ -147,7 +149,7 @@ public class GameManager : MonoBehaviour
         //利用door的位置计算房间位置和旋转,然后将position等属性赋给room
         switch (color)
         {
-            case DoorColor.PURPLE:
+            case DoorColor.RED:
                 room.houseRotationEular = currentRoom.houseRotationEular + new Vector3(180, 0, 0);// + new Vector3(0, 180 * door.transform.up.x, 0);
                 Vector3 diff = houseObject[(int)currentRoom.house].transform.position - door.targetDoor.gameObject.transform.position;
                 if (Vector3.Dot(door.transform.up, new Vector3(1, 0, 0)) > 0.1 || Vector3.Dot(door.transform.up, new Vector3(1, 0, 0)) < -0.1)
@@ -180,6 +182,10 @@ public class GameManager : MonoBehaviour
         GameManager.Instance.startRoom.hideIndex.Add(new int[2] { hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() });
         GameObject otherDoor = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), GameManager.Instance.startRoom.transform);
         otherDoor.GetComponent<Door>().color = GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color;
+        if(otherDoor.GetComponent<Door>().color==DoorColor.BLACK)
+        {
+            blackDoor = otherDoor.GetComponent<Door>();
+        }
         //otherDoor.transform.eulerAngles = door.transform.eulerAngles - currentRoom.houseRotationEular;
         //otherDoor.transform.Rotate(GameManager.Instance.currentRoom.houseRotationEular, Space.Self);
         ConnectDoor(door.gameObject, otherDoor);

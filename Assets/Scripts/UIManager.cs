@@ -69,6 +69,7 @@ public class UIManager : MonoBehaviour
             Image icon=Instantiate(Resources.Load<Image>("Icon"),canvas.transform);
             crayonIcons.Add(icon);
             icon.rectTransform.position = firstIconPos + new Vector3(i * iconGap, 0, 0);
+            icon.rectTransform.sizeDelta = new Vector2(19.05f, 160.55f);
             icon.sprite = Resources.Load<Sprite>("CrayonIcon/" + GameManager.Instance.crayonList[i].color.ToString());
         }
     }

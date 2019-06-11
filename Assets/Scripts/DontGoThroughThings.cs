@@ -37,7 +37,7 @@ public class DontGoThroughThings : MonoBehaviour
 
         if (movementSqrMagnitude > sqrMinimumExtent)
         {
-           // Debug.Log(66);
+            // Debug.Log(66);
             float movementMagnitude = Mathf.Sqrt(movementSqrMagnitude);
             RaycastHit[] hit;
             hit = Physics.RaycastAll(previousPosition, movementThisStep, movementMagnitude, layerMask.value);
@@ -50,7 +50,7 @@ public class DontGoThroughThings : MonoBehaviour
                     if (hit[i].collider.isTrigger)
                     {
                         hitTrigger = true;
-                        if (hit[i].collider.tag =="Door")
+                        if (hit[i].collider.tag == "Door")
                         {
                             transform.Find("Sphere").GetComponent<PlayerCollision>().OnTriggerEnter(hit[i].collider);
                             break;
@@ -61,33 +61,36 @@ public class DontGoThroughThings : MonoBehaviour
                 {
                     for (int i = 0; i < hit.Length; i++)
                     {
-                        if (!hit[i].collider.isTrigger)
+
+                        //Debug.Log("333");
+                        if(GameManager.Instance.canMove)//if (!hitTrigger)
                         {
-                            Debug.Log("333");
-                            myRigidbody.position = hit[i].point - (movementThisStep / movementMagnitude) * partialExtent;
+                            myRigidbody.position = hit[i].point - (movementThisStep / movementMagnitude) * partialExtent;//有bug!!!!!!!!!!!!!
+                            Debug.Log(hit[i].point - (movementThisStep / movementMagnitude) * partialExtent);
                             break;
                         }
+
                     }
                 }
 
-            }
 
-        }
-        /*
-        else
-        {
-            //Debug.Log("666");
-            float movementMagnitude = Mathf.Sqrt(movementSqrMagnitude);
-            RaycastHit hitInfo;
-            if (Physics.Raycast(previousPosition, movementThisStep, out hitInfo, movementMagnitude, layerMask.value))
+            }
+            /*
+            else
             {
-                if (hitInfo.collider.isTrigger)
+                //Debug.Log("666");
+                float movementMagnitude = Mathf.Sqrt(movementSqrMagnitude);
+                RaycastHit hitInfo;
+                if (Physics.Raycast(previousPosition, movementThisStep, out hitInfo, movementMagnitude, layerMask.value))
                 {
-                    transform.Find("Sphere").SendMessage("ooo", hitInfo.collider);
+                    if (hitInfo.collider.isTrigger)
+                    {
+                        transform.Find("Sphere").SendMessage("ooo", hitInfo.collider);
+                    }
                 }
             }
+            */
+            previousPosition = myRigidbody.position;
         }
-        */
-        previousPosition = myRigidbody.position;
     }
 }

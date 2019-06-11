@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.25856343, g: 0.25856343, b: 0.25856343, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -20038,7 +20038,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 189, y: 184}
+  m_AnchoredPosition: {x: 189, y: 236}
   m_SizeDelta: {x: 339.1, y: 79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &435451886
@@ -42769,8 +42769,8 @@ MonoBehaviour:
   escUI: {fileID: 1898735773}
   fp: {fileID: 534669906}
   crayonIcons: []
-  firstIconPos: {x: 90, y: 90, z: 0}
-  iconGap: 150
+  firstIconPos: {x: 50, y: 90, z: 0}
+  iconGap: 80
 --- !u!4 &923602177
 Transform:
   m_ObjectHideFlags: 0
@@ -86557,7 +86557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1867607371}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 50, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 793584908}
@@ -95314,10 +95314,11 @@ MonoBehaviour:
   currentRoom: {fileID: 0}
   lastRoom: {fileID: 0}
   player: {fileID: 1984945221}
+  canMove: 0
   hide: 
   playerCamera: {fileID: 0}
-  crayonColorArray: 020000000400000005000000
-  crayonNumArray: 050000000100000001000000
+  crayonColorArray: 000000000400000005000000
+  crayonNumArray: 010000000100000001000000
   currentCrayon: 0
   houseObject:
   - {fileID: 68733671}

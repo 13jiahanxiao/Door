@@ -9,14 +9,14 @@ public class PlayerCollision : MonoBehaviour
         transform.parent.GetComponent<PlayerControl>().onGround = true;
         if (collider.tag == "Door")
         {
-            if(GameManager.Instance.blackDoor!=null)
-            {
-                collider.GetComponent<Door>().targetDoor = GameManager.Instance.blackDoor;
-            }
             collider.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
             GameManager.Instance.currentRoom = collider.transform.parent.GetComponent<Room>();
             if (collider.GetComponent<Door>().color==GameManager.DoorColor.WHITE||collider.GetComponent<Door>().color==GameManager.DoorColor.BLACK)
             {
+                if (GameManager.Instance.blackDoor != null)
+                {
+                    collider.GetComponent<Door>().targetDoor = GameManager.Instance.blackDoor;
+                }
                 for (int i = 0; i < GameManager.Instance.lastRoom.hideIndex.Count; i++)
                 {
                     GameManager.Instance.houseObject[(int)GameManager.Instance.lastRoom.house].transform.GetChild(GameManager.Instance.lastRoom.hideIndex[i][0]).GetChild(GameManager.Instance.lastRoom.hideIndex[i][1]).gameObject.SetActive(true);
@@ -26,6 +26,7 @@ public class PlayerCollision : MonoBehaviour
                 GameManager.Instance.currentRoom = collider.GetComponent<Door>().targetDoor.transform.parent.GetComponent<Room>();
                 //Room targetRoom = collider.GetComponent<Door>().targetDoor.GetComponentInParent<Room>();
                 //GameManager.Instance.RefreshRoom(collider.GetComponent<Door>().targetDoor.transform.parent.GetComponent<Room>());
+                //Debug.Log("!!");
                 GameManager.Instance.RefreshRoom(GameManager.Instance.startRoom);
                 collider.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
                 //待加判断：是否是从初始房间通向其他房间
@@ -34,6 +35,8 @@ public class PlayerCollision : MonoBehaviour
                      collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness /2;
                  //角色坐标转换 并且为了避免bug 所以要传送到偏前的位置
                  GameManager.Instance.player.transform.position = collider.GetComponent<Door>().targetDoor.transform.position + collider.GetComponent<Door>().targetDoor.transform.up * 2;
+                Debug.Log(collider.GetComponent<Door>().targetDoor.transform.position + collider.GetComponent<Door>().targetDoor.transform.up * 2);
+                StartCoroutine(dontMove());
             }
             else
             {
@@ -70,5 +73,11 @@ public class PlayerCollision : MonoBehaviour
         {
             GameManager.Instance.onMiddle = false;
         }
+    }
+    IEnumerator dontMove()
+    {
+        GameManager.Instance.canMove = false;
+        yield return new WaitForSeconds(0.5f);
+        GameManager.Instance.canMove = true;
     }
 }
