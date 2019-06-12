@@ -67,7 +67,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _ShapeLineWidth: 0.43
+    - _ShapeLineWidth: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -76,4 +76,4 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShapeColor: {r: 0.4493592, g: 0.9622642, b: 0.5937266, a: 1}
+    - _ShapeColor: {r: 0.9607843, g: 0.5142276, b: 0.4509804, a: 1}

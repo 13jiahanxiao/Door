@@ -31,7 +31,7 @@ Material:
     - _Atten: 1
     - _BumpScale: 1
     - _Gloss: 20
-    - _RotationSpeed: 43
+    - _RotationSpeed: 31.84
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Specular: {r: 1, g: 1, b: 1, a: 1}

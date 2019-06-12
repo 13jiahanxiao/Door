@@ -67,9 +67,9 @@
     <Compile Include="Assets\Scripts\DontGoThroughThings.cs" />
     <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\Draw.cs" />
-    <Compile Include="Assets\Scripts\FCCollider.cs" />
     <Compile Include="Assets\Scripts\FirstPerspective.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\ItemCollider.cs" />
     <Compile Include="Assets\Scripts\PlayerCollision.cs" />
     <Compile Include="Assets\Scripts\PlayerControl.cs" />
     <Compile Include="Assets\Scripts\PostEffect.cs" />
