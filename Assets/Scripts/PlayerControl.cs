@@ -36,7 +36,10 @@ public class PlayerControl : MonoBehaviour {
         if(cam!=null)
         {
             camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
-            playerRB.velocity = v * camForward * velocity + h * cam.right * velocity + new Vector3(0, playerRB.velocity.y,0);
+            if (new Vector2(playerRB.velocity.x,playerRB.velocity.z).magnitude<=new Vector2(velocity,velocity).magnitude)
+            {
+                playerRB.velocity = v * camForward * velocity + h * cam.right * velocity + new Vector3(0, playerRB.velocity.y, 0);
+            }
         }
         else
         {
@@ -44,11 +47,11 @@ public class PlayerControl : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (onGround)
+            if (onGround&&playerRB.velocity.y>=-0.1)
             {
                 playerRB.velocity = new Vector3(playerRB.velocity.x, jumpSpeed, playerRB.velocity.z);
                 onGround = false;
-        }
+            }
         }
     }
     /*

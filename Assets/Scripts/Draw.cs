@@ -37,6 +37,10 @@ public class Draw : MonoBehaviour {
                 {
                     GameManager.Instance.setText("无效位置");
                 }
+                else if(GameManager.Instance.onMiddle)
+                {
+                    GameManager.Instance.setText("不可在此处画门");
+                }
             }
             if(Input.GetMouseButton(0))
             {
@@ -70,10 +74,6 @@ public class Draw : MonoBehaviour {
                 GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].num--;
                 GameManager.Instance.updateNum();
                 CreateDoor(hit);
-            }
-            else
-            {
-                GameManager.Instance.setText("不可在此处画门");
             }
         }
     }

@@ -36,9 +36,16 @@ public class PlayerCollision : MonoBehaviour
                 collider.GetComponent<Door>().targetDoor.transform.position 
                     = GameManager.Instance.houseObject[(int)GameManager.Instance.startRoom.house].transform.GetChild(GameManager.Instance.hide[0]).GetChild(GameManager.Instance.hide[1]).position +
                      collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness /2;
-                 //角色坐标转换 并且为了避免bug 所以要传送到偏前的位置
-                 GameManager.Instance.player.transform.position = collider.GetComponent<Door>().targetDoor.transform.position + collider.GetComponent<Door>().targetDoor.transform.up * 2;
-                Debug.Log(collider.GetComponent<Door>().targetDoor.transform.position + collider.GetComponent<Door>().targetDoor.transform.up * 2);
+                //角色坐标转换 并且为了避免bug 所以要传送到偏前的位置
+                //GameManager.Instance.player.GetComponent<Rigidbody>().velocity = GameManager.Instance.player.GetComponent<Rigidbody>().velocity.sqrMagnitude * collider.GetComponent<Door>().targetDoor.transform.up;
+                GameManager.Instance.player.transform.position = collider.GetComponent<Door>().targetDoor.transform.position + collider.GetComponent<Door>().targetDoor.transform.up * 2;
+                Vector3 currentVelocity = GameManager.Instance.player.GetComponent<Rigidbody>().velocity;
+                Vector3 newVelocity = currentVelocity.magnitude * collider.GetComponent<Door>().targetDoor.transform.up.normalized;
+                GameManager.Instance.player.GetComponent<Rigidbody>().AddForce(newVelocity - currentVelocity, ForceMode.VelocityChange);
+                Debug.Log(GameManager.Instance.player.GetComponent<Rigidbody>().velocity);
+
+                //Debug.Log(collider.GetComponent<Door>().targetDoor.transform.position + collider.GetComponent<Door>().targetDoor.transform.up * 2);
+                //Debug.Log(Time.time);
                 StartCoroutine(dontMove());
             }
             else
@@ -80,7 +87,7 @@ public class PlayerCollision : MonoBehaviour
     IEnumerator dontMove()
     {
         GameManager.Instance.canMove = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.04f);
         GameManager.Instance.canMove = true;
     }
 }

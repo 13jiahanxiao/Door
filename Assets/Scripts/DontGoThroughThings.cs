@@ -61,12 +61,13 @@ public class DontGoThroughThings : MonoBehaviour
                 {
                     for (int i = 0; i < hit.Length; i++)
                     {
-
+                        
                         //Debug.Log("333");
                         if(GameManager.Instance.canMove)//if (!hitTrigger)
                         {
-                            myRigidbody.position = hit[i].point - (movementThisStep / movementMagnitude) * partialExtent;//有bug!!!!!!!!!!!!!
-                            Debug.Log(hit[i].point - (movementThisStep / movementMagnitude) * partialExtent);
+                            transform.position = hit[i].point - (movementThisStep / movementMagnitude) * partialExtent;
+                            //Debug.Log(hit[i].point - (movementThisStep / movementMagnitude) * partialExtent);
+                            Debug.Log("位置重置"+Time.time);
                             break;
                         }
 
