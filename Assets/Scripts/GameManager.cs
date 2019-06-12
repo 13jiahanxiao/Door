@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public bool canMove;
     public int[] hide;
+    public bool whiteExist;
     [HideInInspector]public GameObject playerCamera;
     public enum DoorColor
     {
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        whiteExist = false;
         canMove = true;
         crayonNum = GameObject.Find("crayonNum").GetComponent<Text>();
         startRoomInitiate();

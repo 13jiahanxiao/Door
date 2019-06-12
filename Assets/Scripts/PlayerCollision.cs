@@ -18,6 +18,10 @@ public class PlayerCollision : MonoBehaviour
             {
                 if (GameManager.Instance.blackDoor != null)
                 {
+                    collider.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
+                    collider.GetComponent<Door>().targetDoor.transform.position
+                       = GameManager.Instance.houseObject[(int)GameManager.Instance.startRoom.house].transform.GetChild(GameManager.Instance.hide[0]).GetChild(GameManager.Instance.hide[1]).position +
+                        collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness / 2;
                     collider.GetComponent<Door>().targetDoor = GameManager.Instance.blackDoor;
                 }
                 for (int i = 0; i < GameManager.Instance.lastRoom.hideIndex.Count; i++)
@@ -27,12 +31,8 @@ public class PlayerCollision : MonoBehaviour
                 GameManager.Instance.lastRoom.gameObject.SetActive(false);
                 GameManager.Instance.lastRoom = GameManager.Instance.currentRoom;
                 GameManager.Instance.currentRoom = collider.GetComponent<Door>().targetDoor.transform.parent.GetComponent<Room>();
-                //Room targetRoom = collider.GetComponent<Door>().targetDoor.GetComponentInParent<Room>();
-                //GameManager.Instance.RefreshRoom(collider.GetComponent<Door>().targetDoor.transform.parent.GetComponent<Room>());
-                //Debug.Log("!!");
                 GameManager.Instance.RefreshRoom(GameManager.Instance.startRoom);
                 collider.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
-                //待加判断：是否是从初始房间通向其他房间
                 collider.GetComponent<Door>().targetDoor.transform.position 
                     = GameManager.Instance.houseObject[(int)GameManager.Instance.startRoom.house].transform.GetChild(GameManager.Instance.hide[0]).GetChild(GameManager.Instance.hide[1]).position +
                      collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness /2;

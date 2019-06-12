@@ -11,6 +11,7 @@ public class Draw : MonoBehaviour {
     
     public Transform doorParent;
     public GameObject door;
+    public bool canDraw;
    // Vector3 newDoorPosition;
     void Start ()
     { 
@@ -25,6 +26,7 @@ public class Draw : MonoBehaviour {
             if(Input.GetMouseButtonUp(0))
             {
                 UIManager.Instance.circle.fillAmount = 0;
+                canDraw = false;
             }
             if (Input.GetMouseButtonDown(0))
             {
@@ -33,33 +35,55 @@ public class Draw : MonoBehaviour {
                     GameManager.Instance.setText("拾取物品");
                     UIManager.Instance.pickItem(hit.transform.name);
                 }
-                else if(hit.transform.gameObject.tag != "DoorPosition")
+                else if (hit.transform.gameObject.tag == "DoorPosition")
                 {
-                    GameManager.Instance.setText("无效位置");
-                }
-                else if(GameManager.Instance.onMiddle)
-                {
-                    GameManager.Instance.setText("不可在此处画门");
-                }
-            }
-            if(Input.GetMouseButton(0))
-            {
-                if (hit.transform.gameObject.tag == "DoorPosition")
-                {
-                    if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].num > 0)
+                    if (GameManager.Instance.onMiddle)
                     {
-                        UIManager.Instance.circle.fillAmount += UIManager.Instance.fillspeed * Time.deltaTime;
-                        if (UIManager.Instance.circle.fillAmount > 0.999)
-                        {
-                            GameManager.Instance.setText("生成门");
-                            paint(hit);
-                            UIManager.Instance.circle.fillAmount = 0;
-                        }
+                        GameManager.Instance.setText("不可在此处画门");
                     }
-                    else
+                    else if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].num <= 0)
                     {
                         GameManager.Instance.setText("蜡笔耗尽");
                     }
+                    else if ((GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.WHITE||
+                       GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.BLACK)&&
+                        GameManager.Instance.currentRoom.transform == GameManager.Instance.startRoom.transform)
+                    { 
+                            GameManager.Instance.setText("初始房间中不能画白门或黑门");
+                    }
+                    else if(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.BLACK&&!GameManager.Instance.whiteExist)
+                    {
+                        GameManager.Instance.setText("必须存在白门才能画黑门");
+                    }
+                    else
+                    {
+                        canDraw = true;
+                    }
+                        
+                }
+                else if (hit.transform.gameObject.tag != "DoorPosition")
+                {
+                    GameManager.Instance.setText("无效位置");
+                }
+            }
+            if(Input.GetMouseButton(0)&&canDraw==true)
+            {
+                if (hit.transform.gameObject.tag == "DoorPosition")
+                {
+                    UIManager.Instance.circle.fillAmount += UIManager.Instance.fillspeed * Time.deltaTime;
+                    if (UIManager.Instance.circle.fillAmount > 0.999)
+                    {
+                        GameManager.Instance.setText("生成门");
+                        paint(hit);
+                        UIManager.Instance.circle.fillAmount = 0;
+                        canDraw = false;
+                    }
+                    
+                }
+                else
+                {
+                    UIManager.Instance.circle.fillAmount = 0;
+                    canDraw = false;
                 }
             }
         }
@@ -90,7 +114,12 @@ public class Draw : MonoBehaviour {
         door.transform.eulerAngles += new Vector3(0, 0, -90);
         door.GetComponent<Door>().toStartRoom = (GameManager.Instance.currentCrayon == (int)GameManager.DoorColor.WHITE);  
         door.GetComponent<Renderer>().material = color;
-        if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.WHITE|| GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.BLACK)
+        if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.WHITE)
+        {
+            GameManager.Instance.whiteDoorCalculate(door.GetComponent<Door>(), color, hit);
+            GameManager.Instance.whiteExist = true;
+        }
+        else if(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.BLACK)
         {
             GameManager.Instance.whiteDoorCalculate(door.GetComponent<Door>(), color, hit);
         }

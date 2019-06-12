@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     public float iconGapy;
     public Image circle;
     public float fillspeed;
+    public Image restart;
 
     void Awake()
     {
@@ -34,15 +35,16 @@ public class UIManager : MonoBehaviour
     void Start () {
         canvas = FindObjectOfType<Canvas>();
         circle = canvas.transform.Find("Circle").GetComponent<Image>();
+        restart = canvas.transform.Find("Restart").GetComponent<Image>();
         uiActive = false;
         escUI.SetActive(false);
 	}
 	
 	void Update ()
     {
-	if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-           // Slider slider = escUI.transform.Find("SensitivitySlider").gameObject.GetComponent<Slider>();
+            // Slider slider = escUI.transform.Find("SensitivitySlider").gameObject.GetComponent<Slider>();
             if (!uiActive) //开启UI
             {
                 fp.enabled = false;
@@ -59,6 +61,20 @@ public class UIManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
+        }
+        if(Input.GetKey(KeyCode.R))
+        {
+            restart.fillAmount += fillspeed * Time.deltaTime;
+            restart.transform.GetChild(0).gameObject.SetActive(true);
+            if(restart.fillAmount>0.999)
+            {
+                LevelManager.ReloadScene();
+            }
+        }
+        if(Input.GetKeyUp(KeyCode.R))
+        {
+            restart.fillAmount = 0;
+            restart.transform.GetChild(0).gameObject.SetActive(false);
         }
 	}
     public void changeCrayon(int index)  //参数index：当前蜡笔的下标
