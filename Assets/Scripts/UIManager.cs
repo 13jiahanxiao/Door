@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour
             restart.transform.GetChild(0).gameObject.SetActive(true);
             if(restart.fillAmount>0.999)
             {
-                LevelManager.ReloadScene();
+                LevelManager.Instance.ReloadScene();
             }
         }
         if(Input.GetKeyUp(KeyCode.R))
@@ -97,6 +97,10 @@ public class UIManager : MonoBehaviour
     }
     public void pickItem(string name)
     {
+        if(name=="FC")
+        {
+            LevelManager.Instance.nextScene();
+        }
         GameObject[] g;
         g=GameObject.FindGameObjectsWithTag("Item");
         for (int i = 0; i < g.Length; i++)
@@ -111,5 +115,18 @@ public class UIManager : MonoBehaviour
         icon.rectTransform.position = firstItemPos + new Vector3(0, itemIcons.Count * iconGapy, 0);
         itemIcons.Add(icon);
         icon.sprite = Resources.Load<Sprite>("ItemIcon/" + name);
+    }
+    public void useKey()
+    {
+        Debug.Log("开锁");
+        Image t =itemIcons.Find(target =>
+        {
+            if (target.name == "Key1")
+            {
+                return true;
+            }
+            else return false;
+        });
+        itemIcons.Remove(t);
     }
 }

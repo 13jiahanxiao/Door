@@ -5,6 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    #region Instance
+    private static LevelManager _Instance;
+    public static LevelManager Instance
+    {
+        get { return _Instance; }
+    }
+    #endregion
+    void Awake()
+    {
+        _Instance = this;
+    }
     void Start()
     {
         
@@ -14,9 +25,14 @@ public class LevelManager : MonoBehaviour
     {
         
     }
-  public static
-        void ReloadScene()
+  public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void nextScene()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

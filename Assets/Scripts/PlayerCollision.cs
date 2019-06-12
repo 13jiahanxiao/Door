@@ -18,10 +18,6 @@ public class PlayerCollision : MonoBehaviour
             {
                 if (GameManager.Instance.blackDoor != null)
                 {
-                    collider.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
-                    collider.GetComponent<Door>().targetDoor.transform.position
-                       = GameManager.Instance.houseObject[(int)GameManager.Instance.startRoom.house].transform.GetChild(GameManager.Instance.hide[0]).GetChild(GameManager.Instance.hide[1]).position +
-                        collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness / 2;
                     collider.GetComponent<Door>().targetDoor = GameManager.Instance.blackDoor;
                 }
                 for (int i = 0; i < GameManager.Instance.lastRoom.hideIndex.Count; i++)

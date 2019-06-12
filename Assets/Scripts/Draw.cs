@@ -35,6 +35,11 @@ public class Draw : MonoBehaviour {
                     GameManager.Instance.setText("拾取物品");
                     UIManager.Instance.pickItem(hit.transform.name);
                 }
+                else if(hit.transform.gameObject.tag=="Lock")
+                {
+                    GameManager.Instance.setText("开锁");
+                    UIManager.Instance.useKey();
+                }
                 else if (hit.transform.gameObject.tag == "DoorPosition")
                 {
                     if (GameManager.Instance.onMiddle)
