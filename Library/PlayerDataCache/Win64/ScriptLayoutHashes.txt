@@ -1,8 +1,13 @@
 Win64
 PlayerPath?
-F:/games/door/1/Door.exe
+F:/games/door/3/Door.exe
 SceneListBegin?
+Assets/Scenes/StartScene.unity
+Assets/Scenes/S0.unity
 Assets/Scenes/S1.unity
+Assets/Scenes/S2.unity
+Assets/Scenes/S3.unity
+Assets/Scenes/thanks.unity
 SceneListEnd?
 984dcc0ba3707b7691fbdca8ff508d28 Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
 01aa15e337e3a9c62f15153dfac6d589 Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
@@ -18,6 +23,7 @@ e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 201e3fde670b00545944bb3db215c80a UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.ItemCollider
 e7a73f5f78ba6445195ec23b74a1ce2d Unity.TextMeshPro.dll:TMPro.TMP_ScrollbarEventHandler
 10ac5c5ef955208ad520b62e7dcb90f2 Assembly-CSharp.dll:.PlayerControl
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
@@ -114,18 +120,22 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 92fec3d57c18f63ace3ab49364eae85f Assembly-CSharp.dll:.Door
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.PlayerJump
+b9994c15957e5f7beb6114563c2108ae Assembly-CSharp.dll:.StartUI
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.PlayerCollision
 303ad70ce203ad874efe2965d0fbcff9 Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsEventTracker
 7fb9de8dcf73854b6b328eca1f7a6e6d Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsTracker
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LevelManager
 94017dcc9f00fe671ea7dc427b4da011 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
-424456812f3132bb3f8f8ca461c5de82 Assembly-CSharp.dll:.Draw
-3e1e1ffb4eb20b806f24615d7a9767d2 Assembly-CSharp.dll:.GameManager
+3b6bee1ee519b3772c500c47b320828c Assembly-CSharp.dll:.Draw
+f65462b60d2cc73188cb0e3f88278c15 Assembly-CSharp.dll:.GameManager
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 ef852eaa08f52bb3ef4e6d09cc4d99bc Assembly-CSharp.dll:.FirstPerspective
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.PostEffect
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.Analytics.Editor.dll:UnityEditor.Analytics.AnalyticsEventTrackerEditor
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
 fb6dc7482d64341a4fc2b98f35928251 Assembly-CSharp.dll:.SensivitySilider
+704dcd31abc789439bc3f3cd10b58c2b DOTween.dll:DG.Tweening.Core.DOTweenComponent
+9a65634b0f2713c6c2d2dd4d09159a88 DOTween.dll:DG.Tweening.Core.DOTweenSettings
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
 fd947d620f7ca5a4f794de6bbbe1bc52 Assembly-CSharp.dll:.Brightness
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
@@ -163,8 +173,11 @@ a4f0a4f62100f1a4fb5cbe0e00dde83f Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 5fc094978ce3e3591a7500ed380d854a Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 17a1705b87a48dd5e53dbbca63d47471 Assembly-CSharp.dll:.Room
+71238ecd94a9a900f66e11edec285929 Assembly-CSharp.dll:.DontGoThroughThings
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
-8d422158ba97f1dcd6227ee84cfad4c9 Assembly-CSharp.dll:.UIManager
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Rotation
+17b0b827c01bdbc8a5e9d614df33a557 Assembly-CSharp.dll:.UIManager
+afc5b93a7b192de2dcb3832fe35a5c7e Assembly-CSharp.dll:.ChestDoor

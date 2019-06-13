@@ -35,10 +35,20 @@ public class Draw : MonoBehaviour {
                     UIManager.Instance.setText("拾取物品");
                     UIManager.Instance.pickItem(hit.transform.name);
                 }
+
                 else if(hit.transform.gameObject.tag=="Lock")
                 {
-                    UIManager.Instance.setText("开锁");
-                    UIManager.Instance.useKey();
+                    if (UIManager.Instance.itemIcons.Count>0)
+                    {
+                        if (hit.transform.parent.eulerAngles.y>45|| hit.transform.parent.eulerAngles.y < -45)
+                        UIManager.Instance.setText("开锁");
+                        hit.transform.parent.parent.GetComponent<ChestDoor>().chestDoorOpen();
+                        UIManager.Instance.useKey();
+                    }
+                    else
+                    {
+                        UIManager.Instance.setText("缺少钥匙");
+                    }
                 }
                 else if (hit.transform.gameObject.tag == "DoorPosition")
                 {
@@ -87,7 +97,7 @@ public class Draw : MonoBehaviour {
                     }
                     if (UIManager.Instance.circle.fillAmount > 0.999)
                     {
-                        UIManager.Instance.setText("生成门");
+                        //UIManager.Instance.setText("生成门");
                         paint(hit);
                         UIManager.Instance.circle.fillAmount = 0;
                         canDraw = false;
@@ -140,6 +150,8 @@ public class Draw : MonoBehaviour {
         }
         else if(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.BLACK)
         {
+            door.GetComponent<Collider>().isTrigger = false;
+            door.tag = "Untagged";
             GameManager.Instance.whiteDoorCalculate(door.GetComponent<Door>(), color, hit);
         }
         else

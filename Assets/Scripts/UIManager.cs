@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     [HideInInspector] public Text text;
     public GameObject clear;
     public float appearSpeed;
+    public string startText;
 
     void Awake()
     {
@@ -43,6 +44,7 @@ public class UIManager : MonoBehaviour
         restart = canvas.transform.Find("Restart").GetComponent<Image>();
         uiActive = false;
         escUI.SetActive(false);
+        setText(startText);
     }
 
     void Update()
@@ -80,6 +82,24 @@ public class UIManager : MonoBehaviour
         {
             restart.fillAmount = 0;
             restart.transform.GetChild(0).gameObject.SetActive(false);
+        }
+    }
+    public void introduce(GameManager.DoorColor color)
+    {
+
+        switch (color)
+        {
+            case GameManager.DoorColor.RED:
+                setText("红门通向一个垂直翻转的房间");
+                break;
+            case GameManager.DoorColor.WHITE:
+                setText("白门通向初始房间");
+                break;
+            case GameManager.DoorColor.BLACK:
+                setText("黑门不可进入，但可以改变白门出口的位置");
+                break;
+            default:
+                break;
         }
     }
     public void setText(string s)
@@ -149,7 +169,6 @@ public class UIManager : MonoBehaviour
     }
     public void useKey()
     {
-        Debug.Log("开锁");
         Image t = itemIcons.Find(target =>
          {
              if (target.name == "Key1")

@@ -16,6 +16,9 @@ public class PlayerCollision : MonoBehaviour
             GameManager.Instance.currentRoom = collider.transform.parent.GetComponent<Room>();
             if (collider.GetComponent<Door>().color==GameManager.DoorColor.WHITE||collider.GetComponent<Door>().color==GameManager.DoorColor.BLACK)
             {
+                collider.GetComponent<Door>().targetDoor.transform.position
+                   = GameManager.Instance.houseObject[(int)GameManager.Instance.startRoom.house].transform.GetChild(GameManager.Instance.hide[0][0]).GetChild(GameManager.Instance.hide[0][1]).position +
+                    collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness / 2;
                 if (GameManager.Instance.blackDoor != null)
                 {
                     collider.GetComponent<Door>().targetDoor = GameManager.Instance.blackDoor;
@@ -29,9 +32,12 @@ public class PlayerCollision : MonoBehaviour
                 GameManager.Instance.currentRoom = collider.GetComponent<Door>().targetDoor.transform.parent.GetComponent<Room>();
                 GameManager.Instance.RefreshRoom(GameManager.Instance.startRoom);
                 collider.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
-                collider.GetComponent<Door>().targetDoor.transform.position 
-                    = GameManager.Instance.houseObject[(int)GameManager.Instance.startRoom.house].transform.GetChild(GameManager.Instance.hide[0]).GetChild(GameManager.Instance.hide[1]).position +
-                     collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness /2;
+                if (GameManager.Instance.blackDoor != null)
+                {
+                    collider.GetComponent<Door>().targetDoor.transform.position
+                        = GameManager.Instance.houseObject[(int)GameManager.Instance.startRoom.house].transform.GetChild(GameManager.Instance.hide[1][0]).GetChild(GameManager.Instance.hide[1][1]).position +
+                         collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness / 2;
+                }
                 //角色坐标转换 并且为了避免bug 所以要传送到偏前的位置
                 //GameManager.Instance.player.GetComponent<Rigidbody>().velocity = GameManager.Instance.player.GetComponent<Rigidbody>().velocity.sqrMagnitude * collider.GetComponent<Door>().targetDoor.transform.up;
                 GameManager.Instance.player.transform.position = collider.GetComponent<Door>().targetDoor.transform.position + collider.GetComponent<Door>().targetDoor.transform.up * 2;

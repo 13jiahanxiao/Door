@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public Room lastRoom;
     public GameObject player;
     public bool canMove;
-    public int[] hide;
+    public int[][] hide;
     public bool whiteExist;
     [HideInInspector]public GameObject playerCamera;
     public enum DoorColor
@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         canMove = true;
         crayonNum = GameObject.Find("crayonNum").GetComponent<Text>();
         startRoomInitiate();
+        hide = new int[2][];
         if(crayonNumArray.Length!=crayonColorArray.Length)
         {
             Debug.LogWarning("未同步蜡笔颜色和数量");
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
             {
                 currentCrayon = 0;
             }
+            UIManager.Instance.introduce(crayonList[currentCrayon].color);
             updateNum();
             UIManager.Instance.changeCrayon(currentCrayon);
         }
@@ -95,6 +97,7 @@ public class GameManager : MonoBehaviour
             {
                 currentCrayon = crayonList.Count - 1;
             }
+            UIManager.Instance.introduce(crayonList[currentCrayon].color);
             updateNum();
             UIManager.Instance.changeCrayon(currentCrayon);
         }
@@ -175,9 +178,18 @@ public class GameManager : MonoBehaviour
 
     public void whiteDoorCalculate(Door door,Material color, RaycastHit hit)
     {
-        hide = new int[2] { hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() };
+        if (door.color == DoorColor.WHITE)
+        {
+            hide[0] = new int[2] { hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() };
+        }
+        else
+        {
+            hide[1] = new int[2] { hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() };
+        }
         GameManager.Instance.startRoom.hideIndex.Add(new int[2] { hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() });
         GameObject otherDoor = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), GameManager.Instance.startRoom.transform);
+        otherDoor.GetComponent<Collider>().isTrigger = false;
+        otherDoor.tag = "Untagged";
         otherDoor.GetComponent<Door>().color = GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color;
         if(otherDoor.GetComponent<Door>().color==DoorColor.BLACK)
         {
