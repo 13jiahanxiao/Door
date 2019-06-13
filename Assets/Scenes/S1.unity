@@ -14042,7 +14042,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 35
+    m_FontSize: 29
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -49009,7 +49009,7 @@ MonoBehaviour:
   whiteExist: 0
   playerCamera: {fileID: 0}
   crayonColorArray: 000000000400000005000000
-  crayonNumArray: 010000000100000001000000
+  crayonNumArray: 020000000100000001000000
   currentCrayon: 0
   houseObject:
   - {fileID: 68733671}
@@ -50914,6 +50914,16 @@ PrefabInstance:
     - target: {fileID: 1650369371257329745, guid: 8fca04647b81c3c45881ee34ecc002b0,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650369371089984453, guid: 8fca04647b81c3c45881ee34ecc002b0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 1650369371089984453, guid: 8fca04647b81c3c45881ee34ecc002b0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

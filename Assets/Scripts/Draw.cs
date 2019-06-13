@@ -63,6 +63,7 @@ public class Draw : MonoBehaviour {
                     else
                     {
                         canDraw = true;
+                        UIManager.Instance.circle.color = new Color(1, 1, 1, 1);
                     }
                         
                 }
@@ -76,6 +77,14 @@ public class Draw : MonoBehaviour {
                 if (hit.transform.gameObject.tag == "DoorPosition")
                 {
                     UIManager.Instance.circle.fillAmount += UIManager.Instance.fillspeed * Time.deltaTime;
+                    if(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color==GameManager.DoorColor.RED)
+                    {
+                        UIManager.Instance.circle.color += new Color(0,-1f,-1f,0) * UIManager.Instance.fillspeed * Time.deltaTime;
+                    }
+                    else if(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.BLACK)
+                    {
+                        UIManager.Instance.circle.color += new Color(-1f, -1f, -1f, 0) * UIManager.Instance.fillspeed * Time.deltaTime;
+                    }
                     if (UIManager.Instance.circle.fillAmount > 0.999)
                     {
                         UIManager.Instance.setText("生成门");
