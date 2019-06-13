@@ -16,23 +16,12 @@ public class LevelManager : MonoBehaviour
     {
         _Instance = this;
     }
-    void Start()
-    {
-        
-    }
-    
-    void Update()
-    {
-        
-    }
   public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void nextScene()
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

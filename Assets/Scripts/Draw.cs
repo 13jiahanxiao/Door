@@ -21,13 +21,13 @@ public class Draw : MonoBehaviour {
 	void Update ()
     {
         ray = Camera.main.ScreenPointToRay(screenCenter);
-        if(Physics.Raycast(ray, out hit, distance))
+        if (Input.GetMouseButtonUp(0))
         {
-            if(Input.GetMouseButtonUp(0))
-            {
-                UIManager.Instance.circle.fillAmount = 0;
-                canDraw = false;
-            }
+            UIManager.Instance.circle.fillAmount = 0;
+            canDraw = false;
+        }
+        if (Physics.Raycast(ray, out hit, distance))
+        {
             if (Input.GetMouseButtonDown(0))
             {
                 if (hit.transform.gameObject.tag == "Item")
