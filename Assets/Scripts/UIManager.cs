@@ -92,11 +92,10 @@ public class UIManager : MonoBehaviour
     {
         for (t.color = new Color(1,1,1,0); t.color.a<=0.9 ; )
         {
-            Debug.Log(t.color);
+            //Debug.Log(t.color);
             t.color += new Color(0, 0, 0,appearSpeed*Time.deltaTime );
             yield return null;
         }
-        Debug.Log("ok");
         for (t.color = new Color(1,1,1,1); t.color.a >=0.1;)
         {
             t.color -= new Color(0, 0, 0, appearSpeed * Time.deltaTime);
