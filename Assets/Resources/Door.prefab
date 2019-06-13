@@ -66,6 +66,7 @@ GameObject:
   - component: {fileID: 7262486616821193757}
   - component: {fileID: 7262486616821193746}
   - component: {fileID: 7262486616821193747}
+  - component: {fileID: 3981635432507949405}
   m_Layer: 0
   m_Name: Door
   m_TagString: Door
@@ -162,3 +163,16 @@ MonoBehaviour:
   toStartRoom: 0
   targetDoor: {fileID: 0}
   color: 0
+--- !u!114 &3981635432507949405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7262486616821193744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 448d522f52c83b249be1285b78eae4b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 10

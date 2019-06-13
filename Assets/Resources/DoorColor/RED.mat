@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: RED
-  m_Shader: {fileID: 4800000, guid: 330d7608850a1b049a96a7d503065c37, type: 3}
+  m_Shader: {fileID: 34, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -24,14 +24,22 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 3baffdaf63762d9459ed2e3b522f0164, type: 3}
+        m_Texture: {fileID: 2800000, guid: a00c50c51d041744e8be551b25a3121e, type: 3}
+        m_Scale: {x: 0.8, y: 0.8}
+        m_Offset: {x: -0.9, y: 0.09}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Atten: 1
     - _BumpScale: 1
     - _Gloss: 20
-    - _RotationSpeed: 31.84
+    - _Parallax: 0.02
+    - _RotationSpeed: 32.61
+    - _Shininess: 0.511
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Emission: {r: 0.24528301, g: 0, b: 0, a: 0}
+    - _SpecColor: {r: 0.509434, g: 0.4781951, b: 0.4781951, a: 0}
     - _Specular: {r: 1, g: 1, b: 1, a: 1}
