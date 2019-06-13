@@ -43,6 +43,8 @@ public class DontGoThroughThings : MonoBehaviour
             hit = Physics.RaycastAll(previousPosition, movementThisStep, movementMagnitude, layerMask.value);
             if (hit != null)
             {
+                if(hit.Length!=0)
+                Debug.Log(hit.Length);
                 //Debug.Log("33");
                 bool hitTrigger = false;
                 for (int i = 0; i < hit.Length; i++)
@@ -62,7 +64,7 @@ public class DontGoThroughThings : MonoBehaviour
                     for (int i = 0; i < hit.Length; i++)
                     {
                         
-                        //Debug.Log("333");
+                        Debug.Log("333");
                         if(GameManager.Instance.canMove)//if (!hitTrigger)
                         {
                             transform.position = hit[i].point - (movementThisStep / movementMagnitude) * partialExtent;
