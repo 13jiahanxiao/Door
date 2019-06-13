@@ -32,33 +32,33 @@ public class Draw : MonoBehaviour {
             {
                 if (hit.transform.gameObject.tag == "Item")
                 {
-                    GameManager.Instance.setText("拾取物品");
+                    UIManager.Instance.setText("拾取物品");
                     UIManager.Instance.pickItem(hit.transform.name);
                 }
                 else if(hit.transform.gameObject.tag=="Lock")
                 {
-                    GameManager.Instance.setText("开锁");
+                    UIManager.Instance.setText("开锁");
                     UIManager.Instance.useKey();
                 }
                 else if (hit.transform.gameObject.tag == "DoorPosition")
                 {
                     if (GameManager.Instance.onMiddle)
                     {
-                        GameManager.Instance.setText("不可在此处画门");
+                        UIManager.Instance.setText("不可在此处画门");
                     }
                     else if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].num <= 0)
                     {
-                        GameManager.Instance.setText("蜡笔耗尽");
+                        UIManager.Instance.setText("蜡笔耗尽");
                     }
                     else if ((GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.WHITE||
                        GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.BLACK)&&
                         GameManager.Instance.currentRoom.transform == GameManager.Instance.startRoom.transform)
-                    { 
-                            GameManager.Instance.setText("初始房间中不能画白门或黑门");
+                    {
+                        UIManager.Instance.setText("初始房间中不能画白门或黑门");
                     }
                     else if(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.BLACK&&!GameManager.Instance.whiteExist)
                     {
-                        GameManager.Instance.setText("必须存在白门才能画黑门");
+                        UIManager.Instance.setText("必须存在白门才能画黑门");
                     }
                     else
                     {
@@ -68,7 +68,7 @@ public class Draw : MonoBehaviour {
                 }
                 else if (hit.transform.gameObject.tag != "DoorPosition")
                 {
-                    GameManager.Instance.setText("无效位置");
+                    UIManager.Instance.setText("无效位置");
                 }
             }
             if(Input.GetMouseButton(0)&&canDraw==true)
@@ -78,7 +78,7 @@ public class Draw : MonoBehaviour {
                     UIManager.Instance.circle.fillAmount += UIManager.Instance.fillspeed * Time.deltaTime;
                     if (UIManager.Instance.circle.fillAmount > 0.999)
                     {
-                        GameManager.Instance.setText("生成门");
+                        UIManager.Instance.setText("生成门");
                         paint(hit);
                         UIManager.Instance.circle.fillAmount = 0;
                         canDraw = false;

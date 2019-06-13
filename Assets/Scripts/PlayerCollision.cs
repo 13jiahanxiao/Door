@@ -38,7 +38,7 @@ public class PlayerCollision : MonoBehaviour
                 Vector3 currentVelocity = GameManager.Instance.player.GetComponent<Rigidbody>().velocity;
                 Vector3 newVelocity = currentVelocity.magnitude * collider.GetComponent<Door>().targetDoor.transform.up.normalized;
                 GameManager.Instance.player.GetComponent<Rigidbody>().AddForce(newVelocity - currentVelocity, ForceMode.VelocityChange);
-                Debug.Log(GameManager.Instance.player.GetComponent<Rigidbody>().velocity);
+                //Debug.Log(GameManager.Instance.player.GetComponent<Rigidbody>().velocity);
 
                 //Debug.Log(collider.GetComponent<Door>().targetDoor.transform.position + collider.GetComponent<Door>().targetDoor.transform.up * 2);
                 //Debug.Log(Time.time);

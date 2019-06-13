@@ -66,8 +66,7 @@ public class DontGoThroughThings : MonoBehaviour
                         if(GameManager.Instance.canMove)//if (!hitTrigger)
                         {
                             transform.position = hit[i].point - (movementThisStep / movementMagnitude) * partialExtent;
-                            //Debug.Log(hit[i].point - (movementThisStep / movementMagnitude) * partialExtent);
-                            Debug.Log("位置重置"+Time.time);
+                            //Debug.Log("位置重置"+Time.time);
                             break;
                         }
 

@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
         get { return _Instance; }
     }
     #endregion
-    public Text text;
     public Door blackDoor;
     private Text crayonNum;
     public float wallThickness;
@@ -49,6 +48,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        houseObject[1] = GameObject.Instantiate(houseObject[0], new Vector3(0, 30, 0), new Quaternion(0, 0, 0, 0));
+
         whiteExist = false;
         canMove = true;
         crayonNum = GameObject.Find("crayonNum").GetComponent<Text>();
@@ -108,7 +109,6 @@ public class GameManager : MonoBehaviour
     
     public void RefreshRoom(Room room)//参数为需要更新的目标房间
     {
-        //Debug.Log(room.house);
         
         //room.gameObject.SetActive(true);//开启对面房间的roomManager
         if (lastRoom != null)
@@ -126,7 +126,6 @@ public class GameManager : MonoBehaviour
             Instance.houseObject[(int)room.house].transform.GetChild(room.hideIndex[i][0]).GetChild(room.hideIndex[i][1]).gameObject.SetActive(false);
         }
         houseObject[(int)room.house].transform.position = room.housePosition;
-        //Debug.Log(room.housePosition);
         houseObject[(int)room.house].transform.eulerAngles = room.houseRotationEular;
 
         // houseObject[3 - (int)room.house - (int)currentRoom.house].transform.position = room.housePosition + new Vector3(0, 100, 0);
@@ -137,10 +136,6 @@ public class GameManager : MonoBehaviour
         startRoom.housePosition = new Vector3(0, 0, 0);
         startRoom.houseRotationEular = new Vector3(0, 0, 0);
         startRoom.house = houseNumber.House0;
-    }
-    public void setText(string s)
-    {
-        text.text = s;
     }
     public void updateNum()
     {

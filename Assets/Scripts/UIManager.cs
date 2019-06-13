@@ -26,7 +26,9 @@ public class UIManager : MonoBehaviour
     [HideInInspector] public Image circle;
     public float fillspeed;
     [HideInInspector] public Image restart;
+    [HideInInspector] public Text text;
     public GameObject clear;
+    public float appearSpeed;
 
     void Awake()
     {
@@ -36,6 +38,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         canvas = FindObjectOfType<Canvas>();
+        text = canvas.transform.Find("Text").GetComponent<Text>();
         circle = canvas.transform.Find("Circle").GetComponent<Image>();
         restart = canvas.transform.Find("Restart").GetComponent<Image>();
         uiActive = false;
@@ -78,6 +81,28 @@ public class UIManager : MonoBehaviour
             restart.fillAmount = 0;
             restart.transform.GetChild(0).gameObject.SetActive(false);
         }
+    }
+    public void setText(string s)
+    {
+        text.text = s;
+        StopCoroutine("textAppear");
+        StartCoroutine(textAppear(text));
+    }
+    IEnumerator textAppear(Text t)
+    {
+        for (t.color = new Color(1,1,1,0); t.color.a<=0.9 ; )
+        {
+            Debug.Log(t.color);
+            t.color += new Color(0, 0, 0,appearSpeed*Time.deltaTime );
+            yield return null;
+        }
+        Debug.Log("ok");
+        for (t.color = new Color(1,1,1,1); t.color.a >=0.1;)
+        {
+            t.color -= new Color(0, 0, 0, appearSpeed * Time.deltaTime);
+            yield return null;
+        }
+        t.color = new Color(1,1,1,0);
     }
     public void changeCrayon(int index)  //参数index：当前蜡笔的下标
     {
