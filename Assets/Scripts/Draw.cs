@@ -111,6 +111,11 @@ public class Draw : MonoBehaviour {
                 }
             }
         }
+        else
+        {
+            UIManager.Instance.circle.fillAmount = 0;
+            canDraw = false;
+        }
     }
 
     public void paint(RaycastHit hit)

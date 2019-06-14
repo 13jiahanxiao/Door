@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00012207031, y: 189.17}
-  m_SizeDelta: {x: 1039.4, y: 477.35}
+  m_AnchoredPosition: {x: 0.000024319, y: 210.45}
+  m_SizeDelta: {x: 680.5, y: 320.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2501610043090780594
 CanvasRenderer:
@@ -109,8 +109,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00012207031, y: -0.7699585}
-  m_SizeDelta: {x: 1039.4, y: 479}
+  m_AnchoredPosition: {x: 0, y: 10.609985}
+  m_SizeDelta: {x: 652.7, y: 332.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2501610044535297614
 CanvasRenderer:
@@ -153,9 +153,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5C0F\u7D22\u4ECE\u8BB0\u4E8B\u8D77\u5C31\u6700\u7231\u7528\u8721\u7B14\u6D82\u6D82\u753B\u753B\uFF0C\u7236\u6BCD\u5E38\u5E38\u544A\u8BC9\u4ED6\uFF1A\u753B\u7B14\u662F\u6253\u5F00\u5E7B\u60F3\u5927\u95E8\u7684\u94A5\u5319\uFF0C\u901A\u8FC7\u7ED8\u753B\u53EF\u4EE5\u5C06\u60F3\u8C61\u6620\u5C04\u5230\u73B0\u5B9E\u4E2D\u3002\u5728\u7236\u6BCD\u7684\u9F13\u52B1\u4E0B\uFF0C\u5C0F\u7D22\u5BF9\u7ED8\u753B\u6709\u6D53\u539A\u7684\u5174\u8DA3\u3002\u51C6\u5907\u4E0A\u5C0F\u5B66\u540E\uFF0C\u4E3A\u4E86\u8BA9\u5B69\u5B50\u4E13\u6CE8\u5B66\u4E60\uFF0C\u7236\u6BCD\u5E73\u65F6\u4F1A\u628A\u6E38\u620F\u673A\u7B49\u7269\u54C1\u653E\u5230\u5B69\u5B50\u591F\u4E0D\u7740\u7684\u5730\u65B9\uFF0C\u800C\u5C0F\u7D22\u5728\u5BB6\u4E2D\u65E0\u804A\u6D82\u9E26\u65F6\u60CA\u5947\u5730\u53D1\u73B0\uFF0C\u81EA\u5DF1\u753B\u51FA\u7684\u95E8\u53EF\u4EE5\u901A\u5411\u4E00\u4E2A\u65B0\u7684\u7A7A\u95F4\u3002\u3002\u3002\n\n\u64CD\u4F5C\u65B9\u5F0F\uFF1A\nW/A/S/D\u79FB\u52A8
-    \u7A7A\u683C\u8DF3\u8DC3\n\u6EDA\u8F6E\u5207\u6362\u753B\u7B14 \u5DE6\u952E\u62FE\u53D6\u9AD8\u4EAE\u7269\u54C1
-    \u6361\u8D77\u6E38\u620F\u673A\u5373\u53EF\u8FC7\u5173\n\u9762\u5BF9\u5899\u58C1\u6216\u5730\u677F\u957F\u6309\u5DE6\u952E\u753B\u95E8\n\u4E0D\u540C\u989C\u8272\u7684\u8721\u7B14\u753B\u51FA\u7684\u95E8\u6709\u4E0D\u540C\u6548\u679C\n\u6309\u4F4FR\u952E\u91CD\u65B0\u5F00\u59CB"
+  m_Text: "\n\u64CD\u4F5C\u65B9\u5F0F\uFF1A\nW/A/S/D\u79FB\u52A8 \u7A7A\u683C\u8DF3\u8DC3\n\u6EDA\u8F6E\u5207\u6362\u753B\u7B14
+    \n\u9762\u5BF9\u5899\u58C1\u6216\u5730\u677F\u957F\u6309\u5DE6\u952E\u753B\u95E8\n\u4E0D\u540C\u989C\u8272\u7684\u8721\u7B14\u753B\u51FA\u7684\u95E8\u6709\u4E0D\u540C\u6548\u679C\n\u6309\u4F4FR\u952E\u91CD\u65B0\u5F00\u59CB\n\u5DE6\u952E\u62FE\u53D6\u9AD8\u4EAE\u7269\u54C1\u2014\u2014\u6361\u8D77\u6E38\u620F\u673A\u5373\u53EF\u8FC7\u5173"
 --- !u!1 &5618470354633850721
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,7 +874,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5618470356231450741}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: quitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &5618470356455345397

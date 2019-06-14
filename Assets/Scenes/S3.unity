@@ -22394,6 +22394,7 @@ MonoBehaviour:
   clear: {fileID: 1168619809}
   appearSpeed: 1
   startText: "\u8FD9\u6B21\u6E38\u620F\u673A\u88AB\u7C98\u4F4F\u4E86\uFF01 \u9ED1\u8272\u7816\u5757\u4E0A\u65E0\u6CD5\u753B\u95E8"
+  slowAppearSpeed: 0.3
 --- !u!4 &923602177
 Transform:
   m_ObjectHideFlags: 0
@@ -28488,32 +28489,32 @@ PrefabInstance:
     - target: {fileID: 5243908947667738740, guid: 8b865d872d5d75c4e82ef8666069c919,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5243908947667738740, guid: 8b865d872d5d75c4e82ef8666069c919,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5243908947667738740, guid: 8b865d872d5d75c4e82ef8666069c919,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5243908947667738740, guid: 8b865d872d5d75c4e82ef8666069c919,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5243908947667738740, guid: 8b865d872d5d75c4e82ef8666069c919,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5243908947667738740, guid: 8b865d872d5d75c4e82ef8666069c919,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5243908947667738740, guid: 8b865d872d5d75c4e82ef8666069c919,
         type: 3}
@@ -47567,7 +47568,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1984945221}
   m_LocalRotation: {x: -0, y: 0.3768735, z: -0, w: 0.92626476}
-  m_LocalPosition: {x: 7.18, y: 2.137, z: 0}
+  m_LocalPosition: {x: 3.05, y: 2.137, z: -7.78}
   m_LocalScale: {x: 0.683606, y: 0.7485739, z: 0.7215014}
   m_Children:
   - {fileID: 139385535}

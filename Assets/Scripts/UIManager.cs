@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
     public GameObject clear;
     public float appearSpeed;
     public string startText;
+    public float slowAppearSpeed;
 
     void Awake()
     {
@@ -44,7 +45,7 @@ public class UIManager : MonoBehaviour
         restart = canvas.transform.Find("Restart").GetComponent<Image>();
         uiActive = false;
         escUI.SetActive(false);
-        setText(startText);
+        setText(startText,slowAppearSpeed);
     }
 
     void Update()
@@ -90,13 +91,13 @@ public class UIManager : MonoBehaviour
         switch (color)
         {
             case GameManager.DoorColor.RED:
-                setText("红门通向一个垂直翻转的房间");
+                setText("红门通向一个垂直翻转的房间",0.5f);
                 break;
             case GameManager.DoorColor.WHITE:
-                setText("白门通向初始房间");
+                setText("白门通向初始房间",0.5f);
                 break;
             case GameManager.DoorColor.BLACK:
-                setText("黑门不可进入，但可以改变白门出口的位置");
+                setText("黑门不可进入，但可以将白门出口的位置设为黑门所在位置",0.5f);
                 break;
             default:
                 break;
@@ -107,6 +108,12 @@ public class UIManager : MonoBehaviour
         text.text = s;
         StopCoroutine("textAppear");
         StartCoroutine(textAppear(text));
+    }
+    public void setText(string s,float speed)
+    {
+        text.text = s;
+        StopCoroutine("textAppear");
+        StartCoroutine(textAppear(text,speed));
     }
     IEnumerator textAppear(Text t)
     {
@@ -122,6 +129,21 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
         t.color = new Color(1,1,1,0);
+    }
+    IEnumerator textAppear(Text t,float speed)
+    {
+        for (t.color = new Color(1, 1, 1, 0); t.color.a <= 0.9;)
+        {
+            //Debug.Log(t.color);
+            t.color += new Color(0, 0, 0, speed * Time.deltaTime);
+            yield return null;
+        }
+        for (t.color = new Color(1, 1, 1, 1); t.color.a >= 0.1;)
+        {
+            t.color -= new Color(0, 0, 0, speed * Time.deltaTime);
+            yield return null;
+        }
+        t.color = new Color(1, 1, 1, 0);
     }
     public void changeCrayon(int index)  //参数index：当前蜡笔的下标
     {

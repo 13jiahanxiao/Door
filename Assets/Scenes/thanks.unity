@@ -221,7 +221,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 75}
-  m_SizeDelta: {x: 500, y: 500}
+  m_SizeDelta: {x: 1068.7, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &364885530
 MonoBehaviour:
@@ -256,7 +256,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u611F\u8C22\u6E38\u73A9!"
+  m_Text: Thx for playing!!!
 --- !u!222 &364885531
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -600,7 +600,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -138.95001}
+  m_AnchoredPosition: {x: 0, y: -213}
   m_SizeDelta: {x: 137, y: 72.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4368018667044934487
