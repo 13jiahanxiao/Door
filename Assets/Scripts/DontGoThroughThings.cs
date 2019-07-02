@@ -51,7 +51,6 @@ public class DontGoThroughThings : MonoBehaviour
                         if (hit[i].collider.tag == "Door")
                         {
                             transform.Find("Sphere").GetComponent<PlayerCollision>().OnTriggerEnter(hit[i].collider);
-                            break;
                         }
                     }
                 }
