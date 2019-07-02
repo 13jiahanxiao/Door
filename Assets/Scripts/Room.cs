@@ -5,7 +5,7 @@ using UnityEngine;
 public class Room:MonoBehaviour
 {
     public GameManager.houseNumber house;
-   // public GameManager.houseNumber nextHouse;
+
     public Vector3 housePosition;
     public Vector3 houseRotationEular;
     public List<GameObject> doorList = new List<GameObject>();

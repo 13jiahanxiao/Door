@@ -13,114 +13,106 @@ public class GameManager : MonoBehaviour
         get { return _Instance; }
     }
     #endregion
-    public Door blackDoor;
-    private Text crayonNum;
-    public float wallThickness;
+
+    #region 枚举类型
+    public enum DoorColor
+    {
+        RED = 0, GREEN, PURPLE, YELLOW, WHITE, BLACK
+
+    }
+    public enum houseNumber
+    {
+        House0, House1
+    }
+    #endregion
+
+    #region 房间变量
+    public GameObject[] houseObject = new GameObject[2];//场景中房间
     public Room startRoom;
     public Room currentRoom;//现在的房间 其中的house则为currentHouse
     public Room lastRoom;
-    public GameObject player;
-    public bool canMove;
-    public int[][] hide;
-    public bool whiteExist;
-    [HideInInspector]public GameObject playerCamera;
-    public enum DoorColor
-    {
-        RED = 0, GREEN, PURPLE, YELLOW,WHITE,BLACK
-
-    }
-    //public Crayon[] crayonArray = new Crayon[4];
-    public List<Crayon> crayonList = new List<Crayon>();//蜡笔类用来存储蜡笔数量，颜色
-    public DoorColor[] crayonColorArray;
-    public int[] crayonNumArray;
-    public int currentCrayon = 0;//当前蜡笔
-    public GameObject[] houseObject = new GameObject[2];//场景中房间
-    public enum houseNumber
-    {
-        House0,House1
-    }
-    public bool onMiddle;  //若为true,则玩家处在两个房间的中间状态
     private houseNumber nextNumber;
+    #endregion
+
+    #region 蜡笔相关变量
+    public int[] crayonNumArray;//每关蜡笔个数
+    public DoorColor[] crayonColorArray;//每关蜡笔颜色
+    public List<Crayon> crayonList = new List<Crayon>();//蜡笔类用来存储蜡笔数量，颜色
+    public int currentCrayon = 0;//当前蜡笔
+    #endregion
+
+    public bool whiteExist;//白门是否存在
+    public bool canMove; 
+
+    public int[][] hide;
+
+    public bool onMiddle;  //若为true,则玩家处在两个房间的中间状态
+
+    public GameObject player;
+    [HideInInspector] public GameObject playerCamera;
+
+    public Door blackDoor;//黑门
+    public float wallThickness;
+
+
     void Awake()
     {
-        //isStart = true;
         _Instance = this;
     }
     void Start()
     {
+        #region 变量赋值
         houseObject[1] = GameObject.Instantiate(houseObject[0], new Vector3(0, 30, 0), new Quaternion(0, 0, 0, 0));
-
+        player = GameObject.FindObjectOfType<PlayerControl>().gameObject;
+        playerCamera = Camera.main.gameObject;
         whiteExist = false;
         canMove = true;
-        crayonNum = GameObject.Find("crayonNum").GetComponent<Text>();
-        startRoomInitiate();
+        onMiddle = false;
         hide = new int[2][];
-        if(crayonNumArray.Length!=crayonColorArray.Length)
+#endregion
+        startRoomInitiate();
+        CrayonNumColorInitiate();
+        UIManager.Instance.iconInitiate();
+    }
+    void Update()
+    {
+        MouseScroll(); 
+    }
+
+    void startRoomInitiate()
+    {
+        currentRoom = startRoom;
+        startRoom.housePosition = new Vector3(0, 0, 0);
+        startRoom.houseRotationEular = new Vector3(0, 0, 0);
+        startRoom.house = houseNumber.House0;
+    }
+    void CrayonNumColorInitiate()
+    {
+        if (crayonNumArray.Length != crayonColorArray.Length)
         {
             Debug.LogWarning("未同步蜡笔颜色和数量");
         }
-        for(int i = 0; i <crayonNumArray.Length ; i++) //每关的颜色和数量在inspector面板中指定
+        for (int i = 0; i < crayonNumArray.Length; i++) //每关的颜色和数量在inspector面板中指定
         {
             Crayon cra = new Crayon(crayonNumArray[i], crayonColorArray[i]);
             crayonList.Add(cra);
         }
-        UIManager.Instance.iconInitiate();
-        updateNum();
-        onMiddle = false;
-        player = GameObject.FindObjectOfType<PlayerControl>().gameObject;
-        playerCamera = Camera.main.gameObject;
-    }
-    void Update()
-    {
-        #region MouseScroll
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)
-        {
-            if (currentCrayon < crayonList.Count - 1)
-            {
-                currentCrayon++;
-            }
-            else
-            {
-                currentCrayon = 0;
-            }
-            UIManager.Instance.introduce(crayonList[currentCrayon].color);
-            updateNum();
-            UIManager.Instance.changeCrayon(currentCrayon);
-        }
-        if(Input.GetAxis("Mouse ScrollWheel")>0)
-        {
-            if (currentCrayon >= 1)
-            {
-                currentCrayon--;
-            }
-            else
-            {
-                currentCrayon = crayonList.Count - 1;
-            }
-            UIManager.Instance.introduce(crayonList[currentCrayon].color);
-            updateNum();
-            UIManager.Instance.changeCrayon(currentCrayon);
-        }
-        #endregion
-        
     }
 
     public string CrayonColorName()
     {
          return Enum.GetName(crayonList[currentCrayon].color.GetType(), crayonList[currentCrayon].color);
-    }
+    }//返回颜色名
     
     public void RefreshRoom(Room room)//参数为需要更新的目标房间
     {
-        
-        //room.gameObject.SetActive(true);//开启对面房间的roomManager
         if (lastRoom != null)
         {
             if (lastRoom.transform != currentRoom.transform)
             {
                 for (int i = 0; i < lastRoom.hideIndex.Count; i++)
                 {
-                    Instance.houseObject[(int)lastRoom.house].transform.GetChild(lastRoom.hideIndex[i][0]).GetChild(lastRoom.hideIndex[i][1]).gameObject.SetActive(true);
+                    houseObject[(int)lastRoom.house].transform.GetChild(lastRoom.hideIndex[i][0]).GetChild(lastRoom.hideIndex[i][1]).gameObject.SetActive(true);
                 }
             }
         }
@@ -133,17 +125,6 @@ public class GameManager : MonoBehaviour
 
         // houseObject[3 - (int)room.house - (int)currentRoom.house].transform.position = room.housePosition + new Vector3(0, 100, 0);
     }//刷新房间
-    void startRoomInitiate()
-    {
-        currentRoom = startRoom;
-        startRoom.housePosition = new Vector3(0, 0, 0);
-        startRoom.houseRotationEular = new Vector3(0, 0, 0);
-        startRoom.house = houseNumber.House0;
-    }
-    public void updateNum()
-    {
-        crayonNum.text = "当前颜色蜡笔剩余:" + crayonList[currentCrayon].num;
-    }
     public void targetHouseCalculate(DoorColor color, Room room, Door door)
     {
         //利用door的位置计算房间位置和旋转,然后将position等属性赋给room
@@ -191,7 +172,8 @@ public class GameManager : MonoBehaviour
         otherDoor.GetComponent<Collider>().isTrigger = false;
         otherDoor.tag = "Untagged";
         otherDoor.GetComponent<Door>().color = GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color;
-        if(otherDoor.GetComponent<Door>().color==DoorColor.BLACK)
+
+        if (otherDoor.GetComponent<Door>().color==DoorColor.BLACK)
         {
             blackDoor = otherDoor.GetComponent<Door>();
         }
@@ -225,16 +207,39 @@ public class GameManager : MonoBehaviour
         door1.GetComponent<Door>().targetDoor = door2.GetComponent<Door>();
         door2.GetComponent<Door>().targetDoor = door1.GetComponent<Door>();
     }
+
+    public void MouseScroll()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            if (currentCrayon < crayonList.Count - 1)
+            {
+                currentCrayon++;
+            }
+            else
+            {
+                currentCrayon = 0;
+            }
+            UIManager.Instance.introduce(crayonList[currentCrayon].color);
+            UIManager.Instance.updateNum();
+            UIManager.Instance.changeCrayon(currentCrayon);
+        }
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            if (currentCrayon >= 1)
+            {
+                currentCrayon--;
+            }
+            else
+            {
+                currentCrayon = crayonList.Count - 1;
+            }
+            UIManager.Instance.introduce(crayonList[currentCrayon].color);
+            UIManager.Instance.updateNum();
+            UIManager.Instance.changeCrayon(currentCrayon);
+        }
+    }//鼠标滑轮上下滚
+    
 }
-    /*
-public GameObject CreateRoom(Vector3 pos ,Quaternion rot)
-{
-    GameObject room = new GameObject("RoomManager");
-    room.AddComponent<Room>();
-    room.GetComponent<Room>().roomPosition = pos;
-    room.GetComponent<Room>().roomRotation = rot;
-    //currentRoom = room.GetComponent<Room>();
-    return room;
-}//创建房间时使Room类挂在room（doorparent）物体上，Room包括room物体，房间位置，旋转，门个数，房间编号
-*/
+
 
