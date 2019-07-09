@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     public bool whiteExist;//白门是否存在
     public bool canMove; 
 
-    public int[][] hide;
+    public int[][] hide; //hide[0]:白门   hide[1]:黑门
 
     public bool onMiddle;  //若为true,则玩家处在两个房间的中间状态
 

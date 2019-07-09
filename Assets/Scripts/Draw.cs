@@ -170,7 +170,7 @@ public class Draw : MonoBehaviour
         newroom.AddComponent<Room>();
         newroom.GetComponent<Room>().hideIndex.Add(new int[2] { hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() });
         newroom.GetComponent<Room>().house = (GameManager.houseNumber)(1 - (int)GameManager.Instance.currentRoom.house);//给新房间指定另一个house
-        Vector3 newDoorPos = door.transform.position - door.transform.up * GameManager.Instance.wallThickness * 2;
+        Vector3 newDoorPos = door.transform.position - door.transform.up * GameManager.Instance.wallThickness * 2; //注意！这里虽然计算了门位置 但实际上黑白门位置要碰撞时才计算
         GameObject otherDoor = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), newDoorPos, door.transform.rotation, newroom.transform);
         Transform[] child = otherDoor.GetComponentsInChildren<Transform>();
         child[2].gameObject.GetComponent<MeshRenderer>().materials[0].CopyPropertiesFromMaterial(wallMaterial);

@@ -16,21 +16,39 @@ public class PlayerCollision : MonoBehaviour
             GameManager.Instance.currentRoom = collider.transform.parent.GetComponent<Room>();
             if (collider.GetComponent<Door>().color==GameManager.DoorColor.WHITE||collider.GetComponent<Door>().color==GameManager.DoorColor.BLACK)
             {
-                collider.GetComponent<Door>().targetDoor.transform.position
-                   = GameManager.Instance.houseObject[(int)GameManager.Instance.startRoom.house].transform.GetChild(GameManager.Instance.hide[0][0]).GetChild(GameManager.Instance.hide[0][1]).position +
-                    collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness / 2;
-                if (GameManager.Instance.blackDoor != null)
-                {
-                    collider.GetComponent<Door>().targetDoor = GameManager.Instance.blackDoor;
-                }
                 for (int i = 0; i < GameManager.Instance.lastRoom.hideIndex.Count; i++)
                 {
                     GameManager.Instance.houseObject[(int)GameManager.Instance.lastRoom.house].transform.GetChild(GameManager.Instance.lastRoom.hideIndex[i][0]).GetChild(GameManager.Instance.lastRoom.hideIndex[i][1]).gameObject.SetActive(true);
                 }
                 GameManager.Instance.lastRoom.gameObject.SetActive(false);
                 GameManager.Instance.lastRoom = GameManager.Instance.currentRoom;
-                GameManager.Instance.currentRoom = collider.GetComponent<Door>().targetDoor.transform.parent.GetComponent<Room>();
+                if (GameManager.Instance.blackDoor != null)
+                {
+                    GameManager.Instance.blackDoor.transform.parent.GetComponent<Room>();
+                }
+                else
+                {
+                    GameManager.Instance.currentRoom = collider.GetComponent<Door>().targetDoor.transform.parent.GetComponent<Room>();
+                }
                 GameManager.Instance.RefreshRoom(GameManager.Instance.startRoom);
+                collider.GetComponent<Door>().targetDoor.transform.position
+                   = GameManager.Instance.houseObject[(int)GameManager.Instance.startRoom.house].transform.GetChild(GameManager.Instance.hide[0][0]).GetChild(GameManager.Instance.hide[0][1]).position +
+                    collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness / 2;
+                collider.GetComponent<Door>().targetDoor.transform.Rotate(new Vector3(0, 180, 0),Space.Self);
+                Debug.Log(GameManager.Instance.houseObject[(int)GameManager.Instance.startRoom.house].transform.GetChild(GameManager.Instance.hide[0][0]).GetChild(GameManager.Instance.hide[0][1]).position);
+                Debug.Log(collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness / 2);
+                if (GameManager.Instance.blackDoor != null)
+                {
+                    collider.GetComponent<Door>().targetDoor = GameManager.Instance.blackDoor;
+                }
+                //for (int i = 0; i < GameManager.Instance.lastRoom.hideIndex.Count; i++)
+                //{
+                //    GameManager.Instance.houseObject[(int)GameManager.Instance.lastRoom.house].transform.GetChild(GameManager.Instance.lastRoom.hideIndex[i][0]).GetChild(GameManager.Instance.lastRoom.hideIndex[i][1]).gameObject.SetActive(true);
+               // }
+                //GameManager.Instance.lastRoom.gameObject.SetActive(false);
+               // GameManager.Instance.lastRoom = GameManager.Instance.currentRoom;
+               // GameManager.Instance.currentRoom = collider.GetComponent<Door>().targetDoor.transform.parent.GetComponent<Room>();
+               // GameManager.Instance.RefreshRoom(GameManager.Instance.startRoom);
                 collider.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
                 if (GameManager.Instance.blackDoor != null)
                 {

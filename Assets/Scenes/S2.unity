@@ -48794,22 +48794,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dffb3346150c0ff44a9769248d548df5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackDoor: {fileID: 0}
-  wallThickness: 2
-  startRoom: {fileID: 127934966}
-  currentRoom: {fileID: 0}
-  lastRoom: {fileID: 0}
-  player: {fileID: 1984945221}
-  canMove: 0
-  whiteExist: 0
-  playerCamera: {fileID: 0}
-  crayonColorArray: 000000000400000005000000
-  crayonNumArray: 010000000100000001000000
-  currentCrayon: 0
   houseObject:
   - {fileID: 68733671}
   - {fileID: 0}
+  startRoom: {fileID: 127934966}
+  currentRoom: {fileID: 0}
+  lastRoom: {fileID: 0}
+  crayonNumArray: 050000000100000001000000
+  crayonColorArray: 000000000400000005000000
+  currentCrayon: 0
+  whiteExist: 0
+  canMove: 0
   onMiddle: 0
+  player: {fileID: 1984945221}
+  playerCamera: {fileID: 0}
+  blackDoor: {fileID: 0}
+  wallThickness: 2
 --- !u!4 &2072719720
 Transform:
   m_ObjectHideFlags: 0
