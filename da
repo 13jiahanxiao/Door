@@ -1,0 +1,329 @@
+[33mcommit b05b7ccb9f5814c7d25b934a7fb7f255691c1454[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: JiaHanXiao <JianHanXiao@outlook.com>
+Date:   Tue Jul 2 21:57:57 2019 +0800
+
+    6.2
+
+[33mcommit 88b580e2a5da31bc382fa73d22136818369ab870[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Fri Jun 14 19:10:28 2019 +0800
+
+    6.1
+
+[33mcommit b2182a5566269570a192bac59e16af32f7573039[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Thu Jun 13 23:20:30 2019 +0800
+
+    6.0
+
+[33mcommit a66d2902bbbac55ad043639af3f63d9f2bfb2b7e[m
+Merge: 59aa4f0 386d126
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Thu Jun 13 14:36:45 2019 +0800
+
+    Merge branch 'master' of github.com:thmokedfish/Door
+
+[33mcommit 59aa4f04217f6ceeb05cf5494e7fe06b96cab861[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Thu Jun 13 14:35:58 2019 +0800
+
+    5.52
+
+[33mcommit 386d1262e9a3567567d2d42edfc424baadb6e52e[m
+Author: JiaHanXiao <JianHanXiao@outlook.com>
+Date:   Thu Jun 13 14:33:58 2019 +0800
+
+    5.52
+
+[33mcommit af2e0b16e9bbe6a457819cabac04edb9f3427711[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Thu Jun 13 13:17:38 2019 +0800
+
+    5.51
+
+[33mcommit 345ffc725836039b61c8be4d82fad765bb0b7b68[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Thu Jun 13 12:51:52 2019 +0800
+
+    5.5
+    
+    UI优化
+
+[33mcommit c268fbe9e6268d38b7f9a57e1907a19067911030[m
+Merge: 0a8ee71 dd331b0
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Thu Jun 13 12:40:27 2019 +0800
+
+    Merge branch 'master' of github.com:thmokedfish/Door
+
+[33mcommit 0a8ee717b59ca53b7bbae4cb2cab57c6028d5507[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Thu Jun 13 12:39:17 2019 +0800
+
+    5.21
+
+[33mcommit dd331b03f4b2432038597d12b9eb901dd9b4754c[m
+Author: JiaHanXiao <JianHanXiao@outlook.com>
+Date:   Thu Jun 13 12:31:18 2019 +0800
+
+    5.4
+
+[33mcommit 45cbe46af8a62350331e28a6ce35a6094156f316[m
+Author: JiaHanXiao <JianHanXiao@outlook.com>
+Date:   Thu Jun 13 11:14:38 2019 +0800
+
+    5.2
+
+[33mcommit 26d93b33becd99200744282da93a8931ab58e5e5[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Thu Jun 13 09:27:52 2019 +0800
+
+    5.1
+
+[33mcommit 1297d48dbb49eaf8eaabb6ea54ed29b2c9c63add[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Wed Jun 12 22:25:44 2019 +0800
+
+    5.0
+
+[33mcommit cfad3f75a45abbe342636fe8776c036ea849cdc2[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Wed Jun 12 20:13:46 2019 +0800
+
+    4.6
+
+[33mcommit 3df72b10204f3e7507ef201d0cff70efcfe07a87[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Wed Jun 12 18:19:54 2019 +0800
+
+    4.5
+
+[33mcommit 825a3bbc6eabe212ca95f59ae16df04fd1621543[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Wed Jun 12 13:38:00 2019 +0800
+
+    4.4
+
+[33mcommit 471f1f8945916317cd91f7a78af285703a18e2e9[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Tue Jun 11 23:08:51 2019 +0800
+
+    4.3
+
+[33mcommit 5150220c9cedf6506c6ed2679632bc30eb84a8ee[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Tue Jun 11 20:33:26 2019 +0800
+
+    4.2
+
+[33mcommit a4b076a1194f5c4becf879f7131f166603abdf49[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Tue Jun 11 13:20:45 2019 +0800
+
+    4.1
+
+[33mcommit 04e8ae82e9ee297690b1c4e191fd880f77bc72dd[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Tue Jun 11 12:11:43 2019 +0800
+
+    4.0
+    
+    添加防穿透功能；
+    开始导入美术素材
+
+[33mcommit 5e7f959c3a59a11d5c66823ba4b9556a55ca4122[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Mon Jun 10 13:51:09 2019 +0800
+
+    3.6
+
+[33mcommit a00f1a2e1f4127ce7aa4744bf2c4297738c3739e[m
+Author: JiaHanXiao <JianHanXiao@outlook.com>
+Date:   Mon Jun 10 13:17:41 2019 +0800
+
+    3.5
+
+[33mcommit 0432f9583597a3aa60874cc146ae22914c8abd1a[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Mon Jun 10 12:33:41 2019 +0800
+
+    3.4
+    
+    添加黑门功能
+
+[33mcommit 44776c57579521d37c440a478f03258a21c32c8c[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Mon Jun 10 10:18:36 2019 +0800
+
+    3.3
+    
+    修复roommanager不能正确关闭的bug
+
+[33mcommit 28735bcd77f44480eedd550c354e647934730997[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Sun Jun 9 23:24:20 2019 +0800
+
+    3.3
+    
+    添加白门
+    修复海量bug
+    bug待处理1、不能正确地关闭roomManager的问题
+    2、速度过快问题
+
+[33mcommit a6f7a457f676af7ee24fe91232eeed60e8dae1ac[m
+Merge: bad8911 80f6630
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Sun Jun 9 14:15:23 2019 +0800
+
+    Merge branch 'master' of github.com:thmokedfish/Door
+
+[33mcommit 80f6630c12587d1299229a45b5a59d2973f4447e[m
+Author: JiaHanXiao <JianHanXiao@outlook.com>
+Date:   Sun Jun 9 09:53:38 2019 +0800
+
+    3.2
+
+[33mcommit bad891130cb5debdecace055d8b0f1df249309b4[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Sat Jun 8 20:35:41 2019 +0800
+
+    3.1.1
+
+[33mcommit 25fe4a721a9c2ec850fc84a009916030487f5a0c[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Fri Jun 7 14:45:32 2019 +0800
+
+    3.1
+
+[33mcommit c72dacc5b9f734634bc3b0bb24492472ee9b759e[m
+Author: JiaHanXiao <JianHanXiao@outlook.com>
+Date:   Fri Jun 7 11:33:52 2019 +0800
+
+    3.0
+
+[33mcommit 10c44539430fd01ae24f5a8e6fa6a96421c63215[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Fri Jun 7 00:34:21 2019 +0800
+
+    2.1.3.1
+    
+    添加icon初始化
+
+[33mcommit b13e41cad17e07dc74d13c3936672099bd95e612[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Thu Jun 6 23:07:41 2019 +0800
+
+    2.1.2.3
+
+[33mcommit fdcda82a2b011485d04472cfa2342bf7c58fbe2f[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Wed Jun 5 11:29:14 2019 +0800
+
+    2.1.2.2
+    
+    修复可画门状态有时不正确的bug
+
+[33mcommit 638f6260e80dd6b895e7e97fe8c4770c453c8535[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Tue Jun 4 18:56:54 2019 +0800
+
+    2.1.2.1
+    
+    修改角色参数 优化跳跃
+
+[33mcommit d03894fe03a03737a041157c1b0d4f5278c6df16[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Tue Jun 4 18:46:23 2019 +0800
+
+    2.1.2
+    
+    修复在两房间穿梭途中画门的逻辑
+
+[33mcommit 76dc2f4dc640a155c33ac153655e68773a425bda[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Mon Jun 3 18:04:22 2019 +0800
+
+    2.1.1
+    
+    添加文字提示
+
+[33mcommit 23d7784ce1b1c929b5c83d5be5d905f0b0db1d84[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Mon Jun 3 17:31:57 2019 +0800
+
+    2.1
+    
+    完善紫门功能；修复bug；修改房间砖块大小
+
+[33mcommit 16c65e2797469816b8bb5e29d42591086b297c8d[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Mon Jun 3 10:19:43 2019 +0800
+
+    2.0双房间版本
+
+[33mcommit a82515506d808ddb2a0f49c13f5eecf6286a5817[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Mon Jun 3 09:47:38 2019 +0800
+
+    1.2
+
+[33mcommit 807c5e2d8b7876cf4df745948995b4a2089a4862[m
+Merge: 646b5e0 71a7685
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Thu May 30 15:21:07 2019 +0800
+
+    Merge branch 'master' of github.com:thmokedfish/Door
+
+[33mcommit 71a76853086ba44fd9ff9fa00bb914daa897f8f6[m
+Author: jiahanxiao <2565659862@qq.com>
+Date:   Thu May 30 12:29:14 2019 +0800
+
+    屏幕后处理
+
+[33mcommit 646b5e082022aea146fafe5750eebe92b366543c[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Wed May 29 22:01:17 2019 +0800
+
+    commit1
+
+[33mcommit 0426b0613f4a68ab707673a192c39171e6f892ac[m
+Author: jiahanxiao <2565659862@qq.com>
+Date:   Wed May 29 00:03:01 2019 +0800
+
+    1.0
+
+[33mcommit 8fb94871098adedb27446b70852a0553d380171b[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Sat May 25 23:34:45 2019 +0800
+
+    滚轮切换画笔
+
+[33mcommit 65eb8ef5af8e0a77ac9c6a7d5b65f046d71bc44c[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Sat May 25 18:40:00 2019 +0800
+
+    完善结构
+
+[33mcommit 3aceed524ebf54577bf52978a55c561e9bafeb57[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Wed May 22 21:22:11 2019 +0800
+
+    更改架构
+
+[33mcommit e12b873d980dc79967bd54939151ad737d966cb5[m
+Author: Gu Tianqi <ntpeter164@126.com>
+Date:   Wed May 22 17:49:03 2019 +0800
+
+    new commit
+
+[33mcommit 8f630b0eef6d4170b93324a917822165e59c32f2[m
+Author: thmokedfish <40079741+thmokedfish@users.noreply.github.com>
+Date:   Mon May 20 13:08:03 2019 +0800
+
+    Initial
+
+[33mcommit 70f70c3b78e8c4951438d90c9f3fa9e337ead5d8[m
+Author: thmokedfish <40079741+thmokedfish@users.noreply.github.com>
+Date:   Wed May 15 22:38:38 2019 +0800
+
+    Initial commit
