@@ -7,6 +7,7 @@ public class SensivitySilider : MonoBehaviour {
     public FirstPerspective fp;
     private Slider slider;
 	void Start () {
+        fp = FindObjectOfType<FirstPerspective>();
         slider = this.GetComponent<Slider>();
     }
     public void changeSensitivity()

@@ -10,7 +10,7 @@ public class PlayerControl : MonoBehaviour {
     public float velocity;
     private float h, v;
     public float jumpSpeed;
-    [HideInInspector] public bool onGround;
+     public bool onGround;
     public float gravity = 1;
 	private void Start ()
     {

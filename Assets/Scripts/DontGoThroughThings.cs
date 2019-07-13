@@ -15,6 +15,7 @@ public class DontGoThroughThings : MonoBehaviour
     private Vector3 previousPosition;
     private Rigidbody myRigidbody;
     private Collider myCollider;
+    public bool hitTrigger;
     
     void Start()
     {
@@ -33,23 +34,25 @@ public class DontGoThroughThings : MonoBehaviour
         float movementMagnitude = Mathf.Sqrt(movementSqrMagnitude);
         RaycastHit[] hit;
         hit = Physics.RaycastAll(previousPosition, movementThisStep, movementMagnitude, layerMask.value);
+        hitTrigger = false;
 
-        if (movementSqrMagnitude > sqrMinimumExtent)
+        //if (movementSqrMagnitude > sqrMinimumExtent)
         {
             if (hit != null)
             {
-                if(hit.Length!=0)
-                Debug.Log(hit.Length);
-                //Debug.Log("33");
-                bool hitTrigger = false;
+                //if(hit.Length!=0)
+               // Debug.Log(hit.Length);
                 for (int i = 0; i < hit.Length; i++)
                 {
-                    if (hit[i].collider.isTrigger)
+                    if (hit[i].transform.name != "Sphere")
                     {
-                        hitTrigger = true;
-                        if (hit[i].collider.tag == "Door")
+                        if (hit[i].collider.isTrigger)
                         {
-                            transform.Find("Sphere").GetComponent<PlayerCollision>().ooo(hit[i].collider);
+                            hitTrigger = true;
+                            if (hit[i].collider.tag == "Door")
+                            {
+                                transform.Find("Sphere").GetComponent<PlayerCollision>().ooo(hit[i].collider);
+                            }
                         }
                     }
                 }
@@ -57,8 +60,7 @@ public class DontGoThroughThings : MonoBehaviour
                 {
                     for (int i = 0; i < hit.Length; i++)
                     {
-                        
-                        Debug.Log("333");
+                        Debug.Log("ss");
                         if(GameManager.Instance.canMove)//if (!hitTrigger)
                         {
                             transform.position = hit[i].point - (movementThisStep / movementMagnitude) * partialExtent;
@@ -72,17 +74,17 @@ public class DontGoThroughThings : MonoBehaviour
 
             }
         }
-        else
+       // else
         {
-            if(hit!=null)
+          //  if(hit!=null)
             {
-                for (int i = 0; i < hit.Length; i++)
+             //   for (int i = 0; i < hit.Length; i++)
                 {
-                    if (hit[i].collider.isTrigger)
+               //     if (hit[i].collider.isTrigger)
                     {
-                        if (hit[i].collider.tag == "Door")
+                     //   if (hit[i].collider.tag == "Door")
                         {
-                            transform.Find("Sphere").GetComponent<PlayerCollision>().ooo(hit[i].collider);
+                   //         transform.Find("Sphere").GetComponent<PlayerCollision>().ooo(hit[i].collider);
                         }
                     }
                 }

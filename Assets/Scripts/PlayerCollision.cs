@@ -6,15 +6,19 @@ public class PlayerCollision : MonoBehaviour
 {
     public void ooo(Collider collider)
     {
-        if (!collider.isTrigger)
+        if (collider.GetComponent<Door>())
         {
-            transform.parent.GetComponent<PlayerControl>().onGround = true;
+           // Debug.Log(collider.GetComponent<Door>().color);
+        }
+        //if (!collider.isTrigger)
+        {
+            //transform.parent.GetComponent<PlayerControl>().onGround = true;
         }
         if (collider.tag == "Door")
         {
             collider.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
             GameManager.Instance.currentRoom = collider.transform.parent.GetComponent<Room>();
-            Debug.Log(GameManager.Instance.currentRoom);
+          //  Debug.Log(GameManager.Instance.currentRoom);
             if (collider.GetComponent<Door>().color==GameManager.DoorColor.WHITE||collider.GetComponent<Door>().color==GameManager.DoorColor.BLACK)
             {
                 for (int i = 0; i < GameManager.Instance.lastRoom.hideIndex.Count; i++)
@@ -36,8 +40,8 @@ public class PlayerCollision : MonoBehaviour
                    = GameManager.Instance.houseObject[(int)GameManager.Instance.startRoom.house].transform.GetChild(GameManager.Instance.hide[0][0]).GetChild(GameManager.Instance.hide[0][1]).position +
                     collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness / 2;
                 collider.GetComponent<Door>().targetDoor.transform.Rotate(new Vector3(0, 180, 0),Space.Self);
-                Debug.Log(GameManager.Instance.houseObject[(int)GameManager.Instance.startRoom.house].transform.GetChild(GameManager.Instance.hide[0][0]).GetChild(GameManager.Instance.hide[0][1]).position);
-                Debug.Log(collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness / 2);
+               // Debug.Log(GameManager.Instance.houseObject[(int)GameManager.Instance.startRoom.house].transform.GetChild(GameManager.Instance.hide[0][0]).GetChild(GameManager.Instance.hide[0][1]).position);
+               // Debug.Log(collider.GetComponent<Door>().targetDoor.transform.up * GameManager.Instance.wallThickness / 2);
                 if (GameManager.Instance.blackDoor != null)
                 {
                     collider.GetComponent<Door>().targetDoor = GameManager.Instance.blackDoor;
@@ -90,7 +94,13 @@ public class PlayerCollision : MonoBehaviour
             }
         }
     }
-
+    void OnTriggerEnter(Collider collider)
+    {
+        if (!collider.isTrigger)
+        {
+            transform.parent.GetComponent<PlayerControl>().onGround = true;
+        }
+    }
     void OnTriggerStay(Collider collider)
     {
         if (collider.tag == "Middle")
