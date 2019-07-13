@@ -30,13 +30,12 @@ public class DontGoThroughThings : MonoBehaviour
     {
         Vector3 movementThisStep = myRigidbody.position - previousPosition;
         float movementSqrMagnitude = movementThisStep.sqrMagnitude;
+        float movementMagnitude = Mathf.Sqrt(movementSqrMagnitude);
+        RaycastHit[] hit;
+        hit = Physics.RaycastAll(previousPosition, movementThisStep, movementMagnitude, layerMask.value);
 
         if (movementSqrMagnitude > sqrMinimumExtent)
         {
-            // Debug.Log(66);
-            float movementMagnitude = Mathf.Sqrt(movementSqrMagnitude);
-            RaycastHit[] hit;
-            hit = Physics.RaycastAll(previousPosition, movementThisStep, movementMagnitude, layerMask.value);
             if (hit != null)
             {
                 if(hit.Length!=0)
@@ -50,7 +49,7 @@ public class DontGoThroughThings : MonoBehaviour
                         hitTrigger = true;
                         if (hit[i].collider.tag == "Door")
                         {
-                            transform.Find("Sphere").GetComponent<PlayerCollision>().OnTriggerEnter(hit[i].collider);
+                            transform.Find("Sphere").GetComponent<PlayerCollision>().ooo(hit[i].collider);
                         }
                     }
                 }
@@ -72,22 +71,23 @@ public class DontGoThroughThings : MonoBehaviour
 
 
             }
-            /*
-            else
+        }
+        else
+        {
+            if(hit!=null)
             {
-                //Debug.Log("666");
-                float movementMagnitude = Mathf.Sqrt(movementSqrMagnitude);
-                RaycastHit hitInfo;
-                if (Physics.Raycast(previousPosition, movementThisStep, out hitInfo, movementMagnitude, layerMask.value))
+                for (int i = 0; i < hit.Length; i++)
                 {
-                    if (hitInfo.collider.isTrigger)
+                    if (hit[i].collider.isTrigger)
                     {
-                        transform.Find("Sphere").SendMessage("ooo", hitInfo.collider);
+                        if (hit[i].collider.tag == "Door")
+                        {
+                            transform.Find("Sphere").GetComponent<PlayerCollision>().ooo(hit[i].collider);
+                        }
                     }
                 }
             }
-            */
-            previousPosition = myRigidbody.position;
         }
+        previousPosition = myRigidbody.position;
     }
 }

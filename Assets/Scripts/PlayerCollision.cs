@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    public void OnTriggerEnter(Collider collider)
+    public void ooo(Collider collider)
     {
         if (!collider.isTrigger)
         {
@@ -14,6 +14,7 @@ public class PlayerCollision : MonoBehaviour
         {
             collider.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
             GameManager.Instance.currentRoom = collider.transform.parent.GetComponent<Room>();
+            Debug.Log(GameManager.Instance.currentRoom);
             if (collider.GetComponent<Door>().color==GameManager.DoorColor.WHITE||collider.GetComponent<Door>().color==GameManager.DoorColor.BLACK)
             {
                 for (int i = 0; i < GameManager.Instance.lastRoom.hideIndex.Count; i++)
