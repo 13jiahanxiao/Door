@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
             case DoorColor.RED:
                 room.houseRotationEular = currentRoom.houseRotationEular + new Vector3(180, 0, 0);// + new Vector3(0, 180 * door.transform.up.x, 0);
                 Vector3 diff = houseObject[(int)currentRoom.house].transform.position - door.targetDoor.gameObject.transform.position;
-                if (Vector3.Dot(door.transform.up, new Vector3(1, 0, 0)) > 0.1 || Vector3.Dot(door.transform.up, new Vector3(1, 0, 0)) < -0.1)
+                if (Mathf.Abs( Vector3.Dot(door.transform.up, new Vector3(1, 0, 0))) > 0.1)
                 {
                     room.houseRotationEular += new Vector3(0, 180, 0);
                     Vector3 newdiff = diff + new Vector3((-1) * diff.x, (-1) * diff.y, 0) * 2;
