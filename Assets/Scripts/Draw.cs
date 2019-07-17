@@ -85,13 +85,17 @@ public class Draw : MonoBehaviour
                 if (hit.transform.gameObject.tag == "DoorPosition")
                 {
                     UIManager.Instance.circle.fillAmount += UIManager.Instance.fillspeed * Time.deltaTime;
-                    if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.RED)
+                    switch (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color )
                     {
+                        case GameManager.DoorColor.RED:
                         UIManager.Instance.circle.color += new Color(0, -1f, -1f, 0) * UIManager.Instance.fillspeed * Time.deltaTime;
-                    }
-                    else if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.BLACK)
-                    {
+                            break;
+                        case GameManager.DoorColor.BLACK:
                         UIManager.Instance.circle.color += new Color(-1f, -1f, -1f, 0) * UIManager.Instance.fillspeed * Time.deltaTime;
+                            break;
+                        case GameManager.DoorColor.BLUE:
+                            UIManager.Instance.circle.color += new Color(-1f, -0.5f, 0, 0) * UIManager.Instance.fillspeed * Time.deltaTime;
+                            break;
                     }
                     if (UIManager.Instance.circle.fillAmount > 0.999)
                     {
@@ -124,7 +128,14 @@ public class Draw : MonoBehaviour
             {
                 GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].num--;
                 UIManager.Instance.updateNum();
-                CreateDoor(hit);
+                if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.BLUE)
+                {
+                    CreateBlueDoor(hit);
+                }
+                else
+                {
+                    CreateDoor(hit);
+                }
             }
         }
     }
@@ -139,8 +150,7 @@ public class Draw : MonoBehaviour
         go.GetComponent<Room>().hideIndex.Add(hide);  //将消去方格的下标存于room中
         hit.transform.gameObject.SetActive(false);
         GameObject door = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), hit.transform.position + hit.transform.right * GameManager.Instance.wallThickness / 2, hit.transform.rotation, go.transform);
-        Transform[] child = door.GetComponentsInChildren<Transform>();
-        child[2].gameObject.GetComponent<MeshRenderer>().materials[0].CopyPropertiesFromMaterial(wallMaterial);
+        door.transform.Find("Wall").gameObject.GetComponent<MeshRenderer>().materials[0].CopyPropertiesFromMaterial(wallMaterial);
 
         door.GetComponent<Door>().color = GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color;
         door.transform.eulerAngles += new Vector3(0, 0, -90);
@@ -172,9 +182,7 @@ public class Draw : MonoBehaviour
         newroom.GetComponent<Room>().house = (GameManager.houseNumber)(1 - (int)GameManager.Instance.currentRoom.house);//给新房间指定另一个house
         Vector3 newDoorPos = door.transform.position - door.transform.up * GameManager.Instance.wallThickness * 2; //注意！这里虽然计算了门位置 但实际上黑白门位置要碰撞时才计算
         GameObject otherDoor = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), newDoorPos, door.transform.rotation, newroom.transform);
-        Transform[] child = otherDoor.GetComponentsInChildren<Transform>();
-        child[2].gameObject.GetComponent<MeshRenderer>().materials[0].CopyPropertiesFromMaterial(wallMaterial);
-
+        otherDoor.transform.Find("Wall").gameObject.GetComponent<MeshRenderer>().materials[0].CopyPropertiesFromMaterial(wallMaterial);
         GameManager.Instance.ConnectDoor(door, otherDoor);//两门的door类中互相保存对方地址
         otherDoor.GetComponent<Door>().toStartRoom = (GameManager.Instance.currentRoom.house == GameManager.houseNumber.House0); //标记是否通向初始房
         otherDoor.GetComponent<Door>().color = GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color;
@@ -182,5 +190,17 @@ public class Draw : MonoBehaviour
         otherDoor.GetComponent<Renderer>().material = color;
         GameManager.Instance.targetHouseCalculate(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color, newroom.GetComponent<Room>(), otherDoor.GetComponent<Door>());
         newroom.SetActive(false);//创建时隐藏
+    }
+    void CreateBlueDoor(RaycastHit hit)
+    {
+        Material wallMaterial = hit.transform.gameObject.GetComponent<MeshRenderer>().materials[0];
+        GameObject go = GameManager.Instance.currentRoom.gameObject;
+        int[] hide = new int[2] { hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() };
+        go.GetComponent<Room>().hideIndex.Add(hide);  //将消去方格的下标存于room中
+        hit.transform.gameObject.SetActive(false);
+        GameObject door = Instantiate<GameObject>(Resources.Load<GameObject>("BlueDoor"), hit.transform.position + hit.transform.right * GameManager.Instance.wallThickness / 2, hit.transform.rotation, go.transform);
+        door.transform.Find("Wall").gameObject.GetComponent<MeshRenderer>().materials[0].CopyPropertiesFromMaterial(wallMaterial);
+        door.GetComponent<Door>().color = GameManager.DoorColor.BLUE;
+        door.transform.eulerAngles += new Vector3(0, 0, -90);
     }
 }

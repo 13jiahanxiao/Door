@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 //已将碰撞检测移至PlayJump脚本中 以避免子物体重复触发碰撞的问题
-public class PlayerControl : MonoBehaviour {
+public class PlayerControl : MonoBehaviour
+{
     private Quaternion rotation;
     private Rigidbody playerRB;
     private Transform cam;
@@ -10,11 +11,17 @@ public class PlayerControl : MonoBehaviour {
     public float velocity;
     private float h, v;
     public float jumpSpeed;
-     public bool onGround;
+    public float rotateSpeed;
+    public bool onGround;
+    public Vector3 defaultGravityDirection = new Vector3(0, -1, 0);
+    public Vector3 setedGravityDirection;
+    public Vector3 targetGravityDirection;
     public float gravity = 1;
-	private void Start ()
+    private Transform t;
+    public bool rotating;
+    private void Start()
     {
-        if(Camera.main!=null)
+        if (Camera.main != null)
         {
             cam = Camera.main.transform;
         }
@@ -23,20 +30,23 @@ public class PlayerControl : MonoBehaviour {
             Debug.LogWarning(
                    "Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.", gameObject);
         }
-        rotation = this.transform.rotation;
+        //rotation = this.transform.rotation;
+        setedGravityDirection = defaultGravityDirection;
         playerRB = this.gameObject.GetComponent<Rigidbody>();
-	}
+        rotating = false;
+    }
 
     private void Update()
     {
-        playerRB.AddForce(0, -playerRB.mass*gravity, 0);
+        playerRB.AddForce(setedGravityDirection * (playerRB.mass * gravity));
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
-        this.transform.rotation = rotation;
-        if(cam!=null)
+        transform.rotation = Quaternion.FromToRotation(Vector3.up*(-1), setedGravityDirection);
+       // this.transform.rotation = rotation;
+        if (cam != null)
         {
             camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
-            if (new Vector2(playerRB.velocity.x,playerRB.velocity.z).magnitude<=new Vector2(velocity,velocity).magnitude)
+            if (new Vector2(playerRB.velocity.x, playerRB.velocity.z).magnitude <= new Vector2(velocity, velocity).magnitude)
             {
                 playerRB.velocity = v * camForward * velocity + h * cam.right * velocity + new Vector3(0, playerRB.velocity.y, 0);
             }
@@ -47,36 +57,27 @@ public class PlayerControl : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (onGround&&playerRB.velocity.y>=-0.1)
+            if (onGround && playerRB.velocity.y >= -0.1)
             {
                 playerRB.velocity = new Vector3(playerRB.velocity.x, jumpSpeed, playerRB.velocity.z);
                 onGround = false;
             }
         }
-    }
-    /*
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Door")
+        if(Input.GetKey(KeyCode.M))
         {
-            if(GameManager.Instance.currentRoom.transform!=other.GetComponentInParent<Room>().transform)//两者若相等 则意味着更新前的currentRoom就是门所在的room，即角色没有去另一个房间
+            setedGravityDirection = Quaternion.AngleAxis(rotateSpeed * Time.deltaTime, Vector3.Cross(setedGravityDirection, new Vector3(-1, 0, 0))) * setedGravityDirection;
+            //if (this.transform.up.x > -0.999)
             {
-                GameManager.Instance.lastRoom = GameManager.Instance.currentRoom;       //将上一个currentRoom更新为lastRoom
-                GameManager.Instance.currentRoom = other.transform.parent.GetComponent<Room>();  //更新currentRoom
+            //    blueRotate(GameManager.Instance.setedGravityDirection, new Vector3(-1, 0, 0), rotateSpeed);
             }
-            GameManager.Instance.onMiddle = !(GameManager.Instance.onMiddle);
-            Debug.Log(GameManager.Instance.onMiddle);
-            other.GetComponent<Door>().targetDoor.transform.parent.gameObject.SetActive(true);
-            Room targetRoom = other.GetComponent<Door>().targetDoor.GetComponentInParent<Room>();
-            GameManager.Instance.RefreshRoom(targetRoom);
-            // other.transform.parent.gameObject.SetActive(true);
-            //GameManager.Instance.RefreshRoom(room);
-
-            //Vector3 position= other.GetComponent<Door>().targetDoor.position;
-            //position.x = position.x + 1;
-            //this.transform.position = position;
-
         }
     }
-    */
+    public void blueRotate(Vector3 startUp, Vector3 endUp, float speed)
+    {
+        rotating= true;
+        Debug.Log("!");
+        t = this.transform;
+        t.Rotate(Vector3.Cross(startUp, endUp), Vector3.Angle(startUp, endUp)*speed*Time.deltaTime, Space.Self);
+        this.transform.rotation = t.rotation;
+    }
 }

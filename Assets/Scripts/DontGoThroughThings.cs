@@ -15,7 +15,6 @@ public class DontGoThroughThings : MonoBehaviour
     private Vector3 previousPosition;
     private Rigidbody myRigidbody;
     private Collider myCollider;
-    public bool hitTrigger;
 
     void Start()
     {
@@ -34,7 +33,6 @@ public class DontGoThroughThings : MonoBehaviour
         float movementMagnitude = Mathf.Sqrt(movementSqrMagnitude);
         RaycastHit[] hit;
         hit = Physics.RaycastAll(previousPosition, movementThisStep, movementMagnitude, layerMask.value);
-        hitTrigger = false;
 
         //if (movementSqrMagnitude > sqrMinimumExtent)
         {
@@ -44,37 +42,31 @@ public class DontGoThroughThings : MonoBehaviour
                 // Debug.Log(hit.Length);
                 for (int i = 0; i < hit.Length; i++)
                 {
-                    if (hit[i].transform.name != "Sphere")
+                    if (hit[i].collider.tag == "Door")
                     {
-                        if (hit[i].collider.isTrigger)
-                        {
-                            hitTrigger = true;
-                            if (hit[i].collider.tag == "Door")
-                            {
-                                transform.Find("Sphere").GetComponent<PlayerCollision>().ooo(hit[i].collider);
-                            }
-                        }
+                        transform.Find("Sphere").GetComponent<PlayerCollision>().DoorTrigger(hit[i].collider);
+                    }
+                    else if(hit[i].collider.name=="BlueArea")
+                    {
+                        GameManager.Instance.currentBlueArea = hit[i].transform;
+                        GetComponent<PlayerControl>().setedGravityDirection = GameManager.Instance.currentBlueArea.up;
+                        GameManager.Instance.player.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
                     }
                 }
-                // if (!hitTrigger)
 
-                for (int i = 0; i < hit.Length; i++)
+                if (GameManager.Instance.canMove)
                 {
-                  //  Debug.Log(1);
-                    if (GameManager.Instance.canMove)//if (!hitTrigger)
-                   {
-                        //Debug.Log(2);
+                    for (int i = 0; i < hit.Length; i++)
+                    {
                         if (!hit[i].collider.isTrigger)
                         {
                             Debug.Log("move");
-                           transform.position = hit[i].point - (movementThisStep / movementMagnitude) * partialExtent;
+                            transform.position = hit[i].point - (movementThisStep / movementMagnitude) * partialExtent;
                             //Debug.Log("位置重置"+Time.time);
                             break;
                         }
                     }
-
                 }
-
 
             }
         }

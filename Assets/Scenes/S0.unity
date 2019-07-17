@@ -2146,7 +2146,7 @@ Transform:
   m_GameObject: {fileID: 55480606}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1, y: 2, z: 0}
-  m_LocalScale: {x: 4, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 1, z: 1}
   m_Children:
   - {fileID: 2130158503}
   - {fileID: 1211002504}
@@ -10094,7 +10094,7 @@ Transform:
   m_GameObject: {fileID: 417479046}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 19, y: 1.98, z: -2}
-  m_LocalScale: {x: 4, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 1, z: 1}
   m_Children:
   - {fileID: 1447607410}
   - {fileID: 1310983635}
@@ -12302,7 +12302,7 @@ Transform:
   m_GameObject: {fileID: 517590034}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 17, y: 0, z: -2}
-  m_LocalScale: {x: 4, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 1, z: 1}
   m_Children:
   - {fileID: 234773694}
   - {fileID: 1887727118}
@@ -30091,7 +30091,7 @@ Transform:
   m_GameObject: {fileID: 1215012133}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 11, y: 2, z: 8}
-  m_LocalScale: {x: 4, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 1, z: 1}
   m_Children:
   - {fileID: 137627408}
   - {fileID: 289632225}
@@ -41668,7 +41668,7 @@ Transform:
   m_GameObject: {fileID: 1743969557}
   m_LocalRotation: {x: 0.70710695, y: -0.70710665, z: 0, w: 0}
   m_LocalPosition: {x: 17, y: 20, z: 0}
-  m_LocalScale: {x: 4, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 1, z: 1}
   m_Children:
   - {fileID: 1325104202}
   - {fileID: 2009854996}
@@ -43502,7 +43502,7 @@ Transform:
   m_GameObject: {fileID: 1804821287}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 9, y: 2, z: -10}
-  m_LocalScale: {x: 4, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 1, z: 1}
   m_Children:
   - {fileID: 1832650822}
   - {fileID: 129064268}
@@ -48483,6 +48483,9 @@ MonoBehaviour:
   startRoom: {fileID: 127934966}
   currentRoom: {fileID: 0}
   lastRoom: {fileID: 0}
+  defaultGravityDirection: {x: 0, y: -1, z: 0}
+  setedGravityDirection: {x: 0, y: 0, z: 0}
+  currentBlueArea: {fileID: 0}
   crayonNumArray: 01000000
   crayonColorArray: 00000000
   currentCrayon: 0

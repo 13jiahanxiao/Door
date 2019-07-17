@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     #region 枚举类型
     public enum DoorColor
     {
-        RED = 0, GREEN, PURPLE, YELLOW, WHITE, BLACK
+        RED = 0, GREEN, PURPLE, YELLOW, WHITE, BLACK,BLUE
 
     }
     public enum houseNumber
@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public Room startRoom;
     public Room currentRoom;//现在的房间 其中的house则为currentHouse
     public Room lastRoom;
+    public Transform currentBlueArea;
     private houseNumber nextNumber;
     #endregion
 
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
         canMove = true;
         onMiddle = false;
         hide = new int[2][];
+        //currentBlueArea = null;
 #endregion
         startRoomInitiate();
         CrayonNumColorInitiate();
