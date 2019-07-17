@@ -114,13 +114,6 @@ public class PlayerCollision : MonoBehaviour
         {
             GameManager.Instance.onMiddle = false;
         }
-        if(collider.name=="BlueArea")
-        {
-            if(collider.transform==GameManager.Instance.currentBlueArea)
-            {
-                transform.parent.GetComponent<PlayerControl>().setedGravityDirection = new Vector3(0, -1, 0);
-            }
-        }
     }
     IEnumerator dontMove()
     {

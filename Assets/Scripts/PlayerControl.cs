@@ -80,4 +80,27 @@ public class PlayerControl : MonoBehaviour
         t.Rotate(Vector3.Cross(startUp, endUp), Vector3.Angle(startUp, endUp)*speed*Time.deltaTime, Space.Self);
         this.transform.rotation = t.rotation;
     }
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.name == "BlueArea")
+        {
+            Debug.Log("enter");
+            GameManager.Instance.currentBlueArea = collider.transform;
+            setedGravityDirection = GameManager.Instance.currentBlueArea.up;
+            GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+        }
+    }
+    void OnTriggerExit(Collider collider)
+    {
+        if (collider.name == "BlueArea")
+        {
+            if (collider.transform == GameManager.Instance.currentBlueArea)
+            {
+                Debug.Log("exit");
+                setedGravityDirection = new Vector3(0, -1, 0);
+                GameManager.Instance.currentBlueArea = null;
+                GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            }
+        }
+    }
 }

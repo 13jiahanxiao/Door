@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
         uiActive = false;
         escUI.SetActive(false);
         setText(startText,slowAppearSpeed);
+        fp = GameObject.FindObjectOfType<Camera>().GetComponent<FirstPerspective>();
     }
 
     void Update()

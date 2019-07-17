@@ -46,12 +46,6 @@ public class DontGoThroughThings : MonoBehaviour
                     {
                         transform.Find("Sphere").GetComponent<PlayerCollision>().DoorTrigger(hit[i].collider);
                     }
-                    else if(hit[i].collider.name=="BlueArea")
-                    {
-                        GameManager.Instance.currentBlueArea = hit[i].transform;
-                        GetComponent<PlayerControl>().setedGravityDirection = GameManager.Instance.currentBlueArea.up;
-                        GameManager.Instance.player.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
-                    }
                 }
 
                 if (GameManager.Instance.canMove)
