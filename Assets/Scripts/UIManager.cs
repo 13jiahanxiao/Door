@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     #endregion
     private Text crayonNum;//文本显示蜡笔数量
 
-    public GameObject escUI;
+    private GameObject escUI;
     private bool uiActive;
     public FirstPerspective fp;
 
@@ -26,7 +26,6 @@ public class UIManager : MonoBehaviour
 
     public Vector3 firstIconPos;
     public Vector3 firstItemPos;
-
     public float iconGap;
     public float iconGapy;
 
@@ -53,9 +52,13 @@ public class UIManager : MonoBehaviour
         restart = canvas.transform.Find("Restart").GetComponent<Image>();
         crayonNum = GameObject.Find("crayonNum").GetComponent<Text>();
         uiActive = false;
+        fp = GameObject.FindObjectOfType<Camera>().GetComponent<FirstPerspective>();
+        fp.slider = FindObjectOfType<Slider>();
+        fp.sensitivityHor = fp.slider.GetComponent<Slider>().value;
+        fp.sensitivityVert = fp.slider.GetComponent<Slider>().value;
+        escUI = GameObject.Find("Canvas/Esc");
         escUI.SetActive(false);
         setText(startText,slowAppearSpeed);
-        fp = GameObject.FindObjectOfType<Camera>().GetComponent<FirstPerspective>();
     }
 
     void Update()
