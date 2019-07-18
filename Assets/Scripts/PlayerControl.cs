@@ -21,6 +21,7 @@ public class PlayerControl : MonoBehaviour
     private Transform t;
     public bool rotating;
     public int model;
+    public float blueMoveSpeed = 0.03f;
     Collider trigger;
     private void Start()
     {
@@ -45,11 +46,11 @@ public class PlayerControl : MonoBehaviour
 
         if (model !=0)
         {
-            this.transform.Translate(setedGravityDirection*0.03f, Space.World);
+            this.transform.Translate(setedGravityDirection*blueMoveSpeed*Time.deltaTime, Space.World);
             if (Input.GetKeyDown(KeyCode.F))
             {
                 model = 0;
-                trigger.gameObject.SetActive(false);
+               // trigger.gameObject.SetActive(false);
                // setedGravityDirection = new Vector3(0, -1, 0);
                 GameManager.Instance.currentBlueArea = null;
                 GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
@@ -82,7 +83,7 @@ public class PlayerControl : MonoBehaviour
             if (model >0)
             {
                 model = 2;
-                trigger.gameObject.SetActive(false);
+                //trigger.gameObject.SetActive(false);
                 trigger = collider;
             }
             else
