@@ -19,6 +19,8 @@ public class PlayerControl : MonoBehaviour
     public float gravity = 1;
     private Transform t;
     public bool rotating;
+    public int model;
+    Collider trigger;
     private void Start()
     {
         if (Camera.main != null)
@@ -34,59 +36,80 @@ public class PlayerControl : MonoBehaviour
         setedGravityDirection = defaultGravityDirection;
         playerRB = this.gameObject.GetComponent<Rigidbody>();
         rotating = false;
+        model = 0;
     }
 
     private void Update()
     {
-        playerRB.AddForce(setedGravityDirection * (playerRB.mass * gravity));
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
-        transform.rotation = Quaternion.FromToRotation(Vector3.up*(-1), setedGravityDirection);
-       // this.transform.rotation = rotation;
-        if (cam != null)
+
+        if (model !=0)
         {
-            camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
-            if (new Vector2(playerRB.velocity.x, playerRB.velocity.z).magnitude <= new Vector2(velocity, velocity).magnitude)
+            this.transform.Translate(setedGravityDirection*0.03f, Space.World);
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                playerRB.velocity = v * camForward * velocity + h * cam.right * velocity + new Vector3(0, playerRB.velocity.y, 0);
+                model = 0;
+                trigger.gameObject.SetActive(false);
+                setedGravityDirection = new Vector3(0, -1, 0);
+                GameManager.Instance.currentBlueArea = null;
+                GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                Invoke("Active", 3);
             }
         }
         else
         {
-            playerRB.velocity = new Vector3(h * velocity, playerRB.velocity.y, v * velocity);
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (onGround && playerRB.velocity.y >= -0.1)
+            playerRB.AddForce(defaultGravityDirection * (playerRB.mass * gravity));
+            h = Input.GetAxis("Horizontal");
+            v = Input.GetAxis("Vertical");
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                playerRB.velocity = new Vector3(playerRB.velocity.x, jumpSpeed, playerRB.velocity.z);
-                onGround = false;
+                if (onGround && playerRB.velocity.y >= -0.1)
+                {
+                    playerRB.velocity = new Vector3(playerRB.velocity.x, jumpSpeed, playerRB.velocity.z);
+                    onGround = false;
+                }
             }
-        }
-        if(Input.GetKey(KeyCode.M))
-        {
-            setedGravityDirection = Quaternion.AngleAxis(rotateSpeed * Time.deltaTime, Vector3.Cross(setedGravityDirection, new Vector3(-1, 0, 0))) * setedGravityDirection;
-            //if (this.transform.up.x > -0.999)
-            {
-            //    blueRotate(GameManager.Instance.setedGravityDirection, new Vector3(-1, 0, 0), rotateSpeed);
-            }
+            transform.rotation = Quaternion.FromToRotation(Vector3.up * (-1), setedGravityDirection);
+            camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
+            playerRB.velocity = v * camForward * velocity + h * cam.right * velocity + new Vector3(0, playerRB.velocity.y, 0);
         }
     }
     public void blueRotate(Vector3 startUp, Vector3 endUp, float speed)
     {
-        rotating= true;
+        rotating = true;
         Debug.Log("!");
         t = this.transform;
-        t.Rotate(Vector3.Cross(startUp, endUp), Vector3.Angle(startUp, endUp)*speed*Time.deltaTime, Space.Self);
+        t.Rotate(Vector3.Cross(startUp, endUp), Vector3.Angle(startUp, endUp) * speed * Time.deltaTime, Space.Self);
         this.transform.rotation = t.rotation;
     }
     void OnTriggerEnter(Collider collider)
     {
         if (collider.name == "BlueArea")
         {
-            Debug.Log("enter");
+            if (model == 1)
+            {
+                model = 2;
+                trigger.gameObject.SetActive(false);
+                trigger = collider;
+            }
+            else
+            {
+                trigger = collider;
+                model = 1;
+            }
             GameManager.Instance.currentBlueArea = collider.transform;
             setedGravityDirection = GameManager.Instance.currentBlueArea.up;
+            if (setedGravityDirection.x !=0)
+            {
+                this.transform.position = new Vector3(this.transform.position.x, collider.transform.position.y, collider.transform.position.z);
+            }
+            if (setedGravityDirection.y != 0)
+            {
+                this.transform.position = new Vector3(collider.transform.position.x, this.transform.position.y, collider.transform.position.z);
+            }
+            if (setedGravityDirection.z != 0)
+            {
+                this.transform.position = new Vector3(collider.transform.position.x, collider.transform.position.y, this.transform.position.z);
+            }
             GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         }
     }
@@ -96,11 +119,12 @@ public class PlayerControl : MonoBehaviour
         {
             if (collider.transform == GameManager.Instance.currentBlueArea)
             {
-                Debug.Log("exit");
-                setedGravityDirection = new Vector3(0, -1, 0);
-                GameManager.Instance.currentBlueArea = null;
-                GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                model = 0;
             }
         }
+    }
+    void Active()
+    {
+        trigger.gameObject.SetActive(true);
     }
 }
