@@ -112,6 +112,7 @@ public class GameManager : MonoBehaviour
         {
             if (lastRoom.transform != currentRoom.transform)
             {
+               // Debug.Log("last  "+lastRoom.hideIndex.Count);
                 for (int i = 0; i < lastRoom.hideIndex.Count; i++)
                 {
                     houseObject[(int)lastRoom.house].transform.GetChild(lastRoom.hideIndex[i][0]).GetChild(lastRoom.hideIndex[i][1]).gameObject.SetActive(true);
@@ -120,6 +121,7 @@ public class GameManager : MonoBehaviour
         }
         for (int i = 0; i < room.hideIndex.Count; i++)
         {
+           // Debug.Log(room.hideIndex.Count);
             Instance.houseObject[(int)room.house].transform.GetChild(room.hideIndex[i][0]).GetChild(room.hideIndex[i][1]).gameObject.SetActive(false);
         }
         houseObject[(int)room.house].transform.position = room.housePosition;
