@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":-20.587646484375,"y":-2.258509635925293,"z":-14.668167114257813},"rotation":{"x":-0.061473120003938678,"y":0.822873592376709,"z":-0.09072613716125488,"w":-0.5575562119483948},"size":38.76511001586914,"orthographic":false}
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":19.71026611328125,"y":10.405417442321778,"z":-12.561311721801758},"rotation":{"x":0.06407219171524048,"y":-0.9358463287353516,"z":-0.2391568273305893,"w":-0.2507798373699188},"size":19.962915420532228,"orthographic":false}
+>>>>>>> parent of ecfcaf8... 6.254

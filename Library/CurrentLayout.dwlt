@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 3}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 548}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -72,7 +72,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 998
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 548}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &4
 MonoBehaviour:
@@ -142,7 +142,11 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 498}
   m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
+<<<<<<< HEAD
   controlID: 92
+=======
+  controlID: 12
+>>>>>>> parent of ecfcaf8... 6.254
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -393,9 +397,15 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< HEAD
     m_Target: {x: -20.587646, y: -2.2585096, z: -14.668167}
     speed: 2
     m_Value: {x: -20.587646, y: -2.2585096, z: -14.668167}
+=======
+    m_Target: {x: 19.710266, y: 10.405417, z: -12.561312}
+    speed: 2
+    m_Value: {x: 19.710266, y: 10.405417, z: -12.561312}
+>>>>>>> parent of ecfcaf8... 6.254
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -423,6 +433,7 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
+<<<<<<< HEAD
     m_Target: {x: -0.06147312, y: 0.8228736, z: -0.09072614, w: -0.5575562}
     speed: 2
     m_Value: {x: -0.06147312, y: 0.8228736, z: -0.09072614, w: -0.5575562}
@@ -430,6 +441,15 @@ MonoBehaviour:
     m_Target: 38.76511
     speed: 2
     m_Value: 38.76511
+=======
+    m_Target: {x: 0.06407219, y: -0.9358463, z: -0.23915683, w: -0.25077984}
+    speed: 2
+    m_Value: {x: 0.06407219, y: -0.9358463, z: -0.23915683, w: -0.25077984}
+  m_Size:
+    m_Target: 19.962915
+    speed: 2
+    m_Value: 19.962915
+>>>>>>> parent of ecfcaf8... 6.254
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -470,9 +490,15 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
       m_SelectedIDs: 84220000
       m_LastClickedID: 0
       m_ExpandedIDs: c0fbffff
+=======
+      m_SelectedIDs: 10290000
+      m_LastClickedID: 0
+      m_ExpandedIDs: aa9afeff949cfeffe29dfeff52a0feff6aa2feff6ed1feff5ae3feff6615ffffaa16ffffec46ffff0057ffff5068ffffc0fbffffaa2c00008a2d00000e2f00009e340000a2b70000a6b70000dcb700008a530100749d010002b8010010d30100
+>>>>>>> parent of ecfcaf8... 6.254
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -534,7 +560,11 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
+<<<<<<< HEAD
     - Assets/Scripts
+=======
+    - Assets/Scenes
+>>>>>>> parent of ecfcaf8... 6.254
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -546,7 +576,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 00270000
     m_LastClickedID: 9984
+<<<<<<< HEAD
     m_ExpandedIDs: 000000007c260000b0260000c62600000a270000322700004a27000066270000a8270000aa270000002800000e28000082280000ae280000ea2800001e2900003e290000562a0000ea2a0000222b0000342b0000623c0000643c0000663c0000683c00006a3c00006c3c00006e3c0000703c0000723c0000743c0000763c0000783c00007a3c0000
+=======
+    m_ExpandedIDs: 000000007c260000b0260000c6260000322700004a270000a8270000aa270000002800000e28000082280000ae280000ea2800001e2900003e290000542a00008c2a0000e82a0000202b0000322b0000c43a0000c63a0000c83a0000ca3a0000cc3a0000ce3a0000d03a0000d23a0000d43a0000d63a0000d83a0000da3a0000dc3a0000
+>>>>>>> parent of ecfcaf8... 6.254
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -574,7 +608,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 329}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: ffffffff000000007c260000b0260000ba260000c62600000a270000322700004a27000066270000a8270000aa270000002800000e28000082280000ae280000ea2800001e2900003e290000562a0000ea2a0000222b0000342b0000623c0000643c0000663c0000683c00006a3c00006c3c00006e3c0000703c0000723c0000743c0000763c0000783c00007a3c0000
+=======
+    m_ExpandedIDs: ffffffff000000007c260000b0260000c6260000322700004a270000a8270000aa270000002800000e28000082280000ae280000ea2800001e2900003e290000542a00008c2a0000e82a0000202b0000322b0000c43a0000c63a0000c83a0000ca3a0000cc3a0000ce3a0000d03a0000d23a0000d43a0000d63a0000d83a0000da3a0000dc3a0000
+>>>>>>> parent of ecfcaf8... 6.254
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
