@@ -22364,12 +22364,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 926215081}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &926215083 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5618470355488287577, guid: 342eba385a7691f47b0d19d499434433,
-    type: 3}
-  m_PrefabInstance: {fileID: 926215081}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &931719778
 GameObject:
   m_ObjectHideFlags: 0
@@ -24506,7 +24500,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57904efc17f7c045af6ff9533d75be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  escUI: {fileID: 926215083}
   fp: {fileID: 534669906}
   crayonIcons: []
   itemIcons: []
@@ -48384,10 +48377,8 @@ MonoBehaviour:
   startRoom: {fileID: 127934966}
   currentRoom: {fileID: 0}
   lastRoom: {fileID: 0}
-  defaultGravityDirection: {x: 0, y: -1, z: 0}
-  setedGravityDirection: {x: 0, y: 0, z: 0}
   currentBlueArea: {fileID: 0}
-  crayonNumArray: 05000000010000000100000001000000
+  crayonNumArray: 05000000010000000100000002000000
   crayonColorArray: 00000000040000000500000006000000
   currentCrayon: 0
   whiteExist: 0
