@@ -15,11 +15,9 @@ public class FirstPerspective : MonoBehaviour
     public float maximumVert = 45.0f;//垂直旋转的最小角度
     private float _rotationX = 0;//为垂直角度声明一个私有变量
     private GameObject player;
-    public Slider slider;
     //private float camY;
     void Start()
     { //将光标锁定到游戏窗口的中心。
-        //slider = FindObjectOfType<Slider>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         player = GameObject.FindGameObjectWithTag("Player");

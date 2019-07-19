@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SensivitySilider : MonoBehaviour {
+public class Sliders : MonoBehaviour {
     public FirstPerspective fp;
     private Slider slider;
 	void Start () {
@@ -14,5 +14,9 @@ public class SensivitySilider : MonoBehaviour {
     {
         fp.sensitivityHor = slider.value;
         fp.sensitivityVert =  slider.value;
+    }
+    public void changeVolume()
+    {
+
     }
 }

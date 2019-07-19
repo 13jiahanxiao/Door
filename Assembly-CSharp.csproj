@@ -73,8 +73,8 @@
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Room.cs" />
      <Compile Include="Assets\Scripts\Rotation.cs" />
-     <Compile Include="Assets\Scripts\StartUi\SensivitySilider.cs" />
-     <Compile Include="Assets\Scripts\StartUi\StartUI.cs" />
+     <Compile Include="Assets\Scripts\Sliders.cs" />
+     <Compile Include="Assets\Scripts\StartUI.cs" />
      <Compile Include="Assets\Scripts\UIManager.cs" />
      <Compile Include="Assets\Shader\Brightness.cs" />
      <Compile Include="Assets\Shader\PostEffect.cs" />
