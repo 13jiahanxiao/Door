@@ -8,12 +8,25 @@ public class ItemCollider : MonoBehaviour
     int model;
     Vector3 setedGravityDirection;
     Transform currentBlue;
+    public int isCollider = 0;
+    void Start()
+    {
+        model = 0;
+        isCollider = 0;
+    }
     void Update()
     {
         if (model != 0)
         {
             GetComponent<Rigidbody>().useGravity = false;
-            this.transform.Translate(setedGravityDirection * 2.6f * Time.deltaTime, Space.World);
+            if (isCollider == 0)
+            {
+                this.transform.Translate(setedGravityDirection * 2.6f * Time.deltaTime, Space.World);
+            }
+            else
+            {
+                GetComponent<Rigidbody>().velocity = new Vector3();
+            }
         }
         else
         {
@@ -42,16 +55,17 @@ public class ItemCollider : MonoBehaviour
             GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             if (Mathf.Abs(setedGravityDirection.x) > 0.5f)
             {
-                transform.DOMove(new Vector3(this.transform.position.x, collider.transform.position.y+transform.right.y, collider.transform.position.z + transform.right.z), 0.5f);
+                transform.DOMove(new Vector3(this.transform.position.x, collider.transform.position.y + transform.right.y, collider.transform.position.z + transform.right.z) + setedGravityDirection*0.2f, 0.5f);
             }
             if (Mathf.Abs(setedGravityDirection.y) > 0.5f)
             {
-                transform.DOMove(new Vector3(collider.transform.position.x + transform.right.x , this.transform.position.y, collider.transform.position.z + transform.right.z ), 0.5f);
+                transform.DOMove(new Vector3(collider.transform.position.x + transform.right.x, this.transform.position.y, collider.transform.position.z + transform.right.z) + setedGravityDirection*0.2f, 0.5f);
             }
             if (Mathf.Abs(setedGravityDirection.z) > 0.5f)
             {
-                transform.DOMove(new Vector3(collider.transform.position.x + transform.right.x, collider.transform.position.y + transform.right.y , this.transform.position.z), 0.5f);
+                transform.DOMove(new Vector3(collider.transform.position.x + transform.right.x, collider.transform.position.y + transform.right.y, this.transform.position.z) + setedGravityDirection*0.2f, 0.5f);
             }
+            isCollider = 0;
         }
     }
     void OnTriggerExit(Collider collider)
@@ -62,6 +76,13 @@ public class ItemCollider : MonoBehaviour
             {
                 model = 0;
             }
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag != "Player")
+        {
+            isCollider = 1;
         }
     }
 }

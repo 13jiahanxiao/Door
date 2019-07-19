@@ -14,9 +14,8 @@ public class PlayerControl : MonoBehaviour
     public float jumpSpeed;
     public float rotateSpeed;
     public bool onGround;
-    public Vector3 defaultGravityDirection = new Vector3(0, -1, 0);
-    public Vector3 setedGravityDirection;
-    public Vector3 targetGravityDirection;
+    private Vector3 defaultGravityDirection = new Vector3(0, -1, 0);
+    private Vector3 setedGravityDirection;
     public float gravity = 1;
     private Transform t;
     public bool rotating;
@@ -53,6 +52,10 @@ public class PlayerControl : MonoBehaviour
             {
                 this.transform.Translate(setedGravityDirection * blueMoveSpeed * Time.deltaTime, Space.World);
             }
+            else
+            {
+                GetComponent<Rigidbody>().velocity = new Vector3();
+            }
             if (Input.GetKeyDown(KeyCode.F))
             {
                 model = 0;
@@ -76,7 +79,10 @@ public class PlayerControl : MonoBehaviour
                 }
             }
             camForward = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
-            playerRB.velocity = v * camForward * velocity + h * cam.right * velocity + new Vector3(0, playerRB.velocity.y, 0);
+            if (new Vector2(playerRB.velocity.x, playerRB.velocity.z).magnitude <= new Vector2(velocity, velocity).magnitude+0.1f)
+            {
+                playerRB.velocity = v * camForward * velocity + h * cam.right * velocity + new Vector3(0, playerRB.velocity.y, 0);
+            }
         }
         transform.rotation = rotation;
 
@@ -99,15 +105,15 @@ public class PlayerControl : MonoBehaviour
             GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             if (Mathf.Abs(setedGravityDirection.x) > 0.5f)
             {
-                transform.DOMove(new Vector3(this.transform.position.x, collider.transform.position.y, collider.transform.position.z), 0.5f);
+                transform.DOMove(new Vector3(this.transform.position.x, collider.transform.position.y, collider.transform.position.z) + setedGravityDirection*0.2f, 0.5f);
             }
             if (Mathf.Abs(setedGravityDirection.y) > 0.5f)
             {
-                transform.DOMove(new Vector3(collider.transform.position.x, this.transform.position.y, collider.transform.position.z), 0.5f);
+                transform.DOMove(new Vector3(collider.transform.position.x, this.transform.position.y, collider.transform.position.z) + setedGravityDirection*0.2f, 0.5f);
             }
             if (Mathf.Abs(setedGravityDirection.z) > 0.5f)
             {
-                transform.DOMove(new Vector3(collider.transform.position.x, collider.transform.position.y, this.transform.position.z), 0.5f);
+                transform.DOMove(new Vector3(collider.transform.position.x, collider.transform.position.y, this.transform.position.z) + setedGravityDirection*0.2f, 0.5f);
             }
             isCollider = 0;
         }
@@ -124,13 +130,9 @@ public class PlayerControl : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "DoorPosition")
+        if (collision.collider.tag !="Item")
         {
             isCollider = 1;
-        }
-        else
-        {
-            isCollider = 0;
         }
     }
 }
