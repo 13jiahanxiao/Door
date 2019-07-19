@@ -191,7 +191,8 @@ public class Draw : MonoBehaviour
         GameManager.Instance.targetHouseCalculate(GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color, newroom.GetComponent<Room>(), otherDoor.GetComponent<Door>());
         newroom.SetActive(false);//创建时隐藏
     }
-    void CreateBlueDoor(RaycastHit hit)
+    /*
+    void CreateBlueDoorold(RaycastHit hit)
     {
         Material wallMaterial = hit.transform.gameObject.GetComponent<MeshRenderer>().materials[0];
         GameObject go = GameManager.Instance.currentRoom.gameObject;
@@ -199,8 +200,25 @@ public class Draw : MonoBehaviour
         go.GetComponent<Room>().hideIndex.Add(hide);  //将消去方格的下标存于room中
         hit.transform.gameObject.SetActive(false);
         GameObject door = Instantiate<GameObject>(Resources.Load<GameObject>("BlueDoor"), hit.transform.position + hit.transform.right * GameManager.Instance.wallThickness / 2, hit.transform.rotation, go.transform);
+        Debug.Log(hit.transform.rotation, hit.transform.parent.parent);
         door.transform.Find("Wall").gameObject.GetComponent<MeshRenderer>().materials[0].CopyPropertiesFromMaterial(wallMaterial);
         door.GetComponent<Door>().color = GameManager.DoorColor.BLUE;
         door.transform.eulerAngles += new Vector3(0, 0, -90);
+    }
+    */
+    void CreateBlueDoor(RaycastHit hit)
+    {
+        Material wallMaterial = hit.transform.gameObject.GetComponent<MeshRenderer>().materials[0];
+        int[] hide = new int[2] { hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() };
+        GameObject go1 = GameManager.Instance.houseObject[0].transform.GetChild(hide[0]).GetChild(hide[1]).gameObject;
+        GameObject go2 = GameManager.Instance.houseObject[1].transform.GetChild(hide[0]).GetChild(hide[1]).gameObject;
+        GameObject door = Instantiate<GameObject>(Resources.Load<GameObject>("BlueDoor"), go1.transform.position+ go1.transform.right * (GameManager.Instance.wallThickness / 2+0.001f), hit.transform.rotation, GameManager.Instance.houseObject[0].transform);
+        door.transform.Find("Wall").gameObject.GetComponent<MeshRenderer>().materials[0].CopyPropertiesFromMaterial(wallMaterial);
+        door.GetComponent<Door>().color = GameManager.DoorColor.BLUE;
+        door.transform.eulerAngles += new Vector3(0, 0, -90);
+        GameObject door2 = Instantiate<GameObject>(Resources.Load<GameObject>("BlueDoor"), go2.transform.position + go2.transform.right * (GameManager.Instance.wallThickness / 2 + 0.001f), hit.transform.rotation, GameManager.Instance.houseObject[1].transform);
+        door2.transform.Find("Wall").gameObject.GetComponent<MeshRenderer>().materials[0].CopyPropertiesFromMaterial(wallMaterial);
+        door2.GetComponent<Door>().color = GameManager.DoorColor.BLUE;
+        door2.transform.eulerAngles += new Vector3(0, 0, -90);
     }
 }

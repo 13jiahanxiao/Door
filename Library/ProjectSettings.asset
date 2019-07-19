@@ -566,8 +566,8 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
-    Build: 1
-    Collab: 1
+    Build: 0
+    Collab: 0
     ErrorHub: 0
     Hub: 0
     UNet: 1
@@ -590,7 +590,7 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 77ec7581-6371-471c-b05f-41c1c56e6462
+  cloudProjectId: c7860f6a-b939-43d9-a476-0643817bc872
   framebufferDepthMemorylessMode: 0
   projectName: Door
   organizationId: thmokedfish

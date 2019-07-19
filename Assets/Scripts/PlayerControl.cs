@@ -21,8 +21,7 @@ public class PlayerControl : MonoBehaviour
     private Transform t;
     public bool rotating;
     public int model;
-    public float blueMoveSpeed = 0.03f;
-    Collider trigger;
+    public float blueMoveSpeed = 2.6f;
     private void Start()
     {
         if (Camera.main != null)
@@ -54,7 +53,6 @@ public class PlayerControl : MonoBehaviour
                // setedGravityDirection = new Vector3(0, -1, 0);
                 GameManager.Instance.currentBlueArea = null;
                 GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                Invoke("Active", 0.5f);
             }
         }
         else
@@ -84,11 +82,9 @@ public class PlayerControl : MonoBehaviour
             {
                 model = 2;
                 //trigger.gameObject.SetActive(false);
-                trigger = collider;
             }
             else
             {
-                trigger = collider;
                 model = 1;
             }
             GameManager.Instance.currentBlueArea = collider.transform;
@@ -117,9 +113,5 @@ public class PlayerControl : MonoBehaviour
                 model = 0;
             }
         }
-    }
-    void Active()
-    {
-        trigger.gameObject.SetActive(true);
     }
 }
