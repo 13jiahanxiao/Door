@@ -22,6 +22,8 @@ public class PlayerControl : MonoBehaviour
     public bool rotating;
     public int model;
     public float blueMoveSpeed = 2.6f;
+    private int isCollider = 0;
+
     private void Start()
     {
         if (Camera.main != null)
@@ -38,6 +40,7 @@ public class PlayerControl : MonoBehaviour
         playerRB = this.gameObject.GetComponent<Rigidbody>();
         rotating = false;
         model = 0;
+        isCollider = 0;
     }
 
     private void Update()
@@ -45,7 +48,11 @@ public class PlayerControl : MonoBehaviour
 
         if (model !=0)
         {
-            this.transform.Translate(setedGravityDirection*blueMoveSpeed*Time.deltaTime, Space.World);
+            Debug.Log(isCollider);
+            if (isCollider == 0)
+            {
+                this.transform.Translate(setedGravityDirection * blueMoveSpeed * Time.deltaTime, Space.World);
+            }
             if (Input.GetKeyDown(KeyCode.F))
             {
                 model = 0;
@@ -102,6 +109,7 @@ public class PlayerControl : MonoBehaviour
             {
                 transform.DOMove(new Vector3(collider.transform.position.x, collider.transform.position.y, this.transform.position.z), 0.5f);
             }
+            isCollider = 0;
         }
     }
     void OnTriggerExit(Collider collider)
@@ -112,6 +120,17 @@ public class PlayerControl : MonoBehaviour
             {
                 model = 0;
             }
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "DoorPosition")
+        {
+            isCollider = 1;
+        }
+        else
+        {
+            isCollider = 0;
         }
     }
 }
