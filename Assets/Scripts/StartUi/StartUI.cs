@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class StartUI : MonoBehaviour
 {
-    public GameObject illustration;
+   // public GameObject illustration;
     void Start()
     {
-        illustration.SetActive(false);
+       // illustration.SetActive(false);
     }
     public void startButton()
     {
@@ -16,6 +16,6 @@ public class StartUI : MonoBehaviour
     }
     public void illustrateButton()
     {
-        illustration.SetActive(true);
+       // illustration.SetActive(true);
     }
 }
