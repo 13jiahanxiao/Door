@@ -39,6 +39,8 @@ public class UIManager : MonoBehaviour
     public string startText;
     public float slowAppearSpeed;
 
+    private Slider volumeSlider;
+    private Slider sensitivitySlider;
     GameObject control;
     GameObject setting;
     GameObject introduceText;
@@ -46,6 +48,7 @@ public class UIManager : MonoBehaviour
     Slider brightness;
     Slider saturation;
     Slider contrast;
+    public GameObject OutBlueText;
     void Awake()
     {
         _Instance = this;
@@ -60,13 +63,29 @@ public class UIManager : MonoBehaviour
         crayonNum = GameObject.Find("crayonNum").GetComponent<Text>();
         uiActive = false;
         fp = GameObject.FindObjectOfType<Camera>().GetComponent<FirstPerspective>();
-        fp.slider = FindObjectOfType<Slider>();
-        fp.sensitivityHor = fp.slider.GetComponent<Slider>().value;
-        fp.sensitivityVert = fp.slider.GetComponent<Slider>().value;
-        escUI = GameObject.Find("Canvas/Esc");
-        setText(startText,slowAppearSpeed);
 
-        control=GameObject.Find("Canvas/Esc/Control");
+        escUI = GameObject.Find("Canvas/Esc");
+
+        Transform obt;
+        if (obt = canvas.transform.Find("OutBlueText"))
+        {
+            OutBlueText = obt.gameObject;
+        }
+        else
+        {
+            OutBlueText = new GameObject();
+            Debug.LogWarning("OutBlueText未赋值！");
+        }
+        OutBlueText.gameObject.SetActive(false);
+        setText(startText,slowAppearSpeed);
+        volumeSlider = escUI.transform.Find("Setting").Find("Volume").Find("VolumeSlider").GetComponent<Slider>();
+        sensitivitySlider = escUI.transform.Find("Setting").Find("Sensitivity").Find("SensitivitySlider").GetComponent<Slider>();
+        fp.sensitivityHor = sensitivitySlider.value;
+        fp.sensitivityVert = sensitivitySlider.value;
+        Camera.main.GetComponent<AudioSource>().loop = true;
+        Camera.main.GetComponent<AudioSource>().volume = volumeSlider.value;
+
+        control =GameObject.Find("Canvas/Esc/Control");
         control.GetComponent<Button>().onClick.AddListener(ControlIntroduce);
 
         isOn = false;
@@ -120,7 +139,16 @@ public class UIManager : MonoBehaviour
             restart.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
-    
+
+    public void changeSensitivity()
+    {
+        fp.sensitivityHor = sensitivitySlider.value;
+        fp.sensitivityVert = sensitivitySlider.value;
+    }
+    public void changeVolume()
+    {
+        Camera.main.GetComponent<AudioSource>().volume = volumeSlider.value;
+    }
     public void setText(string s)
     {
         text.text = s;
