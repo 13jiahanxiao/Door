@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class UIManager : MonoBehaviour
@@ -15,8 +16,8 @@ public class UIManager : MonoBehaviour
     #endregion
     private Text crayonNum;//文本显示蜡笔数量
 
-    private GameObject escUI;
-    private bool uiActive;
+    public GameObject escUI;
+    public bool uiActive;
     public FirstPerspective fp;
 
     public List<Image> crayonIcons;
@@ -48,6 +49,7 @@ public class UIManager : MonoBehaviour
     Slider brightness;
     Slider saturation;
     Slider contrast;
+    RectTransform handImage;
     public GameObject OutBlueText;
     void Awake()
     {
@@ -64,7 +66,8 @@ public class UIManager : MonoBehaviour
         uiActive = false;
         fp = GameObject.FindObjectOfType<Camera>().GetComponent<FirstPerspective>();
 
-        escUI = GameObject.Find("Canvas/Esc");
+        //escUI = GameObject.Find("Canvas/Esc");
+        escUI.SetActive(true);
 
         Transform obt;
         if (obt = canvas.transform.Find("OutBlueText"))
@@ -77,7 +80,8 @@ public class UIManager : MonoBehaviour
             Debug.LogWarning("OutBlueText未赋值！");
         }
         OutBlueText.gameObject.SetActive(false);
-        setText(startText,slowAppearSpeed);
+        // setText(startText,slowAppearSpeed);
+        handImage = escUI.transform.Find("Hand").GetComponent<RectTransform>();
         volumeSlider = escUI.transform.Find("Setting").Find("Volume").Find("VolumeSlider").GetComponent<Slider>();
         sensitivitySlider = escUI.transform.Find("Setting").Find("Sensitivity").Find("SensitivitySlider").GetComponent<Slider>();
         fp.sensitivityHor = sensitivitySlider.value;
@@ -130,13 +134,17 @@ public class UIManager : MonoBehaviour
             restart.transform.GetChild(0).gameObject.SetActive(true);
             if (restart.fillAmount > 0.999)
             {
-                LevelManager.Instance.ReloadScene();
+                ReloadScene();
             }
         }
         if (Input.GetKeyUp(KeyCode.R))
         {
             restart.fillAmount = 0;
             restart.transform.GetChild(0).gameObject.SetActive(false);
+        }
+        if(uiActive)
+        {
+            handPosChange(handImage);
         }
     }
 
@@ -196,6 +204,7 @@ public class UIManager : MonoBehaviour
     {
         if (name == "FC")
         {
+            clear.SetActive(true);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
@@ -264,25 +273,40 @@ public class UIManager : MonoBehaviour
                 setText("红门通向一个垂直翻转的房间", 0.5f);
                 break;
             case GameManager.DoorColor.WHITE:
-                setText("白门通向初始房间", 0.5f);
+                setText("白门通向初始房间的相同位置", 0.5f);
                 break;
             case GameManager.DoorColor.BLACK:
                 setText("黑门不可进入，但可以将白门出口的位置设为黑门所在位置", 0.5f);
                 break;
-            default:
+            case GameManager.DoorColor.BLUE:
+                setText("蓝门可以开启一个让人和物体缓慢传送的区域", 0.5f);
                 break;
         }
     }//门的功能介绍
+    private void handPosChange(RectTransform hand)
+    {
+        float interpolation = 5f * Time.deltaTime;
+        if (Input.mousePosition.y - Screen.height / 2 < 0)
+        {
+            hand.localPosition = new Vector3(hand.localPosition.x, Mathf.Lerp(hand.localPosition.y, Input.mousePosition.y - Screen.height / 2, interpolation), hand.localPosition.z);
+            //hand.localPosition = new Vector3(hand.localPosition.x, Input.mousePosition.y - Screen.height / 2, hand.localPosition.z);
+        }
+        else
+        {
+            hand.localPosition = new Vector3(hand.localPosition.x, Mathf.Lerp(hand.localPosition.y, 0, interpolation), hand.localPosition.z);
+        }
+    }
+    /*
     private void GameWin()
     {
         clear.SetActive(true);
-
         Invoke("NextLevel", 3);
     }
     private void NextLevel()
     {
         LevelManager.Instance.nextScene();
     }
+    */
     private void ControlIntroduce()
     {
         if (isOn)
@@ -311,5 +335,26 @@ public class UIManager : MonoBehaviour
     private void Contrast(float value)
     {
         Camera.main.GetComponent<Brightness>().contrast = value;
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void nextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    public void quitGame()
+    {
+#if UNITY_EDITOR
+
+        UnityEditor.EditorApplication.isPlaying = false;
+
+#else
+
+            Application.Quit();
+
+#endif
     }
 }

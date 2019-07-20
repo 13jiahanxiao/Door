@@ -29,6 +29,10 @@ public class Draw : MonoBehaviour
         }
         if (Physics.Raycast(ray, out hit, distance))
         {
+            if (UIManager.Instance.uiActive)
+            {
+                return;
+            }
             if (Input.GetMouseButtonDown(0))
             {
                 switch (hit.transform.gameObject.tag)

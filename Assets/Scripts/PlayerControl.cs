@@ -57,7 +57,7 @@ public class PlayerControl : MonoBehaviour
             {
                 GetComponent<Rigidbody>().velocity = new Vector3();
             }
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 model = 0;
                 UIManager.Instance.OutBlueText.SetActive(false);
