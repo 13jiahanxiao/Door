@@ -39,6 +39,13 @@ public class UIManager : MonoBehaviour
     public string startText;
     public float slowAppearSpeed;
 
+    GameObject control;
+    GameObject setting;
+    GameObject introduceText;
+    bool isOn = false;
+    Slider brightness;
+    Slider saturation;
+    Slider contrast;
     void Awake()
     {
         _Instance = this;
@@ -57,8 +64,24 @@ public class UIManager : MonoBehaviour
         fp.sensitivityHor = fp.slider.GetComponent<Slider>().value;
         fp.sensitivityVert = fp.slider.GetComponent<Slider>().value;
         escUI = GameObject.Find("Canvas/Esc");
-        escUI.SetActive(false);
         setText(startText,slowAppearSpeed);
+
+        control=GameObject.Find("Canvas/Esc/Control");
+        control.GetComponent<Button>().onClick.AddListener(ControlIntroduce);
+
+        isOn = false;
+        setting=GameObject.Find("Canvas/Esc/Setting");
+        introduceText = GameObject.Find("Canvas/Esc/Introduce");
+        introduceText.SetActive(false);
+
+        brightness = GameObject.Find("Canvas/Esc/Setting/Brightness").GetComponentInChildren<Slider>();
+        brightness.onValueChanged.AddListener((float value) => Bright(value));
+        saturation = GameObject.Find("Canvas/Esc/Setting/Saturation").GetComponentInChildren<Slider>();
+        saturation.onValueChanged.AddListener((float value) => Bright(value));
+        contrast = GameObject.Find("Canvas/Esc/Setting/Contrast").GetComponentInChildren<Slider>();
+        contrast.onValueChanged.AddListener((float value) => Bright(value));
+
+        escUI.SetActive(false);
     }
 
     void Update()
@@ -147,7 +170,6 @@ public class UIManager : MonoBehaviour
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            clear.SetActive(true);
         }
         else
         {
@@ -222,4 +244,43 @@ public class UIManager : MonoBehaviour
                 break;
         }
     }//门的功能介绍
+    private void GameWin()
+    {
+        clear.SetActive(true);
+
+        Invoke("NextLevel", 3);
+    }
+    private void NextLevel()
+    {
+        LevelManager.Instance.nextScene();
+    }
+    private void ControlIntroduce()
+    {
+        if (isOn)
+        {
+            setting.SetActive(true);
+            introduceText.SetActive(false);
+            isOn = false;
+            control.GetComponentInChildren<Text>().text = "操作说明";
+        }
+        else
+        {
+            setting.SetActive(false);
+            introduceText.SetActive(true);
+            isOn = true;
+            control.GetComponentInChildren<Text>().text = "设置";
+        }
+    }
+    private void Bright(float value)
+    {
+        Camera.main.GetComponent<Brightness>().brightness = value;
+    }
+    private void Saturation(float value)
+    {
+        Camera.main.GetComponent<Brightness>().saturation = value;
+    }
+    private void Contrast(float value)
+    {
+        Camera.main.GetComponent<Brightness>().contrast = value;
+    }
 }
