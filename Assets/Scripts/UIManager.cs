@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
     public float appearSpeed;
     public string startText;
     public float slowAppearSpeed;
-
+    public GameObject OutBlueText;
     void Awake()
     {
         _Instance = this;
@@ -55,6 +55,17 @@ public class UIManager : MonoBehaviour
         uiActive = false;
         fp = GameObject.FindObjectOfType<Camera>().GetComponent<FirstPerspective>();
         escUI = GameObject.Find("Canvas/Esc");
+        Transform obt;
+        if (obt=canvas.transform.Find("OutBlueText"))
+        {
+            OutBlueText = obt.gameObject;
+        }
+        else
+        {
+            OutBlueText = new GameObject();
+            Debug.LogWarning("OutBlueText未赋值！");
+        }
+        OutBlueText.gameObject.SetActive(false);
         volumeSlider = escUI.transform.Find("Volume").Find("VolumeSlider").GetComponent<Slider>();
         sensitivitySlider = escUI.transform.Find("Sensitivity").Find("SensitivitySlider").GetComponent<Slider>();
         fp.sensitivityHor = sensitivitySlider.value;

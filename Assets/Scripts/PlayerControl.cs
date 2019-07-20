@@ -51,14 +51,16 @@ public class PlayerControl : MonoBehaviour
             if (isCollider == 0)
             {
                 this.transform.Translate(setedGravityDirection * blueMoveSpeed * Time.deltaTime, Space.World);
+                
             }
             else
             {
                 GetComponent<Rigidbody>().velocity = new Vector3();
             }
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 model = 0;
+                UIManager.Instance.OutBlueText.SetActive(false);
                // trigger.gameObject.SetActive(false);
                // setedGravityDirection = new Vector3(0, -1, 0);
                 GameManager.Instance.currentBlueArea = null;
@@ -91,6 +93,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (collider.name == "BlueArea")
         {
+            UIManager.Instance.OutBlueText.SetActive(true);
             if (model >0)
             {
                 model = 2;
@@ -118,6 +121,7 @@ public class PlayerControl : MonoBehaviour
             isCollider = 0;
         }
     }
+    /*
     void OnTriggerExit(Collider collider)
     {
         if (collider.name == "BlueArea")
@@ -128,6 +132,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
     }
+    */
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.tag !="Item")

@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     #region 枚举类型
     public enum DoorColor
     {
-        RED = 0, GREEN, PURPLE, YELLOW, WHITE, BLACK,BLUE
+        RED = 0, WHITE, BLACK,BLUE
 
     }
     public enum houseNumber
