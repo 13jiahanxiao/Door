@@ -233,9 +233,10 @@ public class UIManager : MonoBehaviour
     
     public void iconInitiate()
     {
+        Transform iconParent = canvas.transform.Find("crayonIcons");
         for (int i = 0; i < GameManager.Instance.crayonList.Count; i++)
         {
-            Image icon = Instantiate(Resources.Load<Image>("CrayonIcon"), canvas.transform);
+            Image icon = Instantiate(Resources.Load<Image>("CrayonIcon"),iconParent);
             crayonIcons.Add(icon);
             icon.rectTransform.position = firstIconPos + new Vector3(i * iconGap, 0, 0);
             icon.rectTransform.sizeDelta = new Vector2(19.05f, 160.55f);
