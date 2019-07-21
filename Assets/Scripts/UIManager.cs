@@ -204,9 +204,9 @@ public class UIManager : MonoBehaviour
     {
         if (name == "FC")
         {
-            clear.SetActive(true);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            GameWin();
         }
         else
         {
@@ -296,17 +296,14 @@ public class UIManager : MonoBehaviour
             hand.localPosition = new Vector3(hand.localPosition.x, Mathf.Lerp(hand.localPosition.y, 0, interpolation), hand.localPosition.z);
         }
     }
-    /*
+    
     private void GameWin()
     {
+        
         clear.SetActive(true);
-        Invoke("NextLevel", 3);
+        clear.GetComponentInChildren<Text>().text = "第" + (SceneManager.GetActiveScene().buildIndex+1).ToString() + "关";
+        Invoke("NextScene", 5);
     }
-    private void NextLevel()
-    {
-        LevelManager.Instance.nextScene();
-    }
-    */
     private void ControlIntroduce()
     {
         if (isOn)
@@ -341,7 +338,7 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    public void nextScene()
+    public void NextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
