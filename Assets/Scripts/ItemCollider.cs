@@ -55,15 +55,15 @@ public class ItemCollider : MonoBehaviour
             GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             if (Mathf.Abs(setedGravityDirection.x) > 0.5f)
             {
-                transform.DOMove(new Vector3(this.transform.position.x, collider.transform.position.y + transform.right.y, collider.transform.position.z + transform.right.z) + setedGravityDirection*0.2f, 0.5f);
+                transform.parent.DOMove(new Vector3(this.transform.parent.position.x, collider.transform.position.y , collider.transform.position.z ) + setedGravityDirection*0.2f, 0.5f);
             }
             if (Mathf.Abs(setedGravityDirection.y) > 0.5f)
             {
-                transform.DOMove(new Vector3(collider.transform.position.x + transform.right.x, this.transform.position.y, collider.transform.position.z + transform.right.z) + setedGravityDirection*0.2f, 0.5f);
+                transform.parent.DOMove(new Vector3(collider.transform.position.x, this.transform.parent.position.y, collider.transform.position.z ) + setedGravityDirection*0.2f, 0.5f);
             }
             if (Mathf.Abs(setedGravityDirection.z) > 0.5f)
             {
-                transform.DOMove(new Vector3(collider.transform.position.x + transform.right.x, collider.transform.position.y + transform.right.y, this.transform.position.z) + setedGravityDirection*0.2f, 0.5f);
+                transform.parent.DOMove(new Vector3(collider.transform.position.x , collider.transform.position.y , this.transform.parent.position.z) + setedGravityDirection*0.2f, 0.5f);
             }
             isCollider = 0;
         }
