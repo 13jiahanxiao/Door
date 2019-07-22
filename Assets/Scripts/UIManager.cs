@@ -52,10 +52,12 @@ public class UIManager : MonoBehaviour
     RectTransform handImage;
     public GameObject OutBlueText;
     GameObject returnButton;
+    Transform iconParent;
 
     void Awake()
     {
         _Instance = this;
+        crayonNum = GameObject.Find("crayonNum").GetComponent<Text>();
     }
 
     void Start()
@@ -64,7 +66,6 @@ public class UIManager : MonoBehaviour
         text = canvas.transform.Find("Text").GetComponent<Text>();
         circle = canvas.transform.Find("Circle").GetComponent<Image>();
         restart = canvas.transform.Find("Restart").GetComponent<Image>();
-        crayonNum = GameObject.Find("crayonNum").GetComponent<Text>();
         uiActive = false;
         fp = GameObject.FindObjectOfType<Camera>().GetComponent<FirstPerspective>();
 
@@ -81,6 +82,7 @@ public class UIManager : MonoBehaviour
             OutBlueText = new GameObject();
             Debug.LogWarning("OutBlueText未赋值！");
         }
+        iconParent = canvas.transform.Find("crayonIcons");
         OutBlueText.gameObject.SetActive(false);
         // setText(startText,slowAppearSpeed);
         handImage = escUI.transform.Find("Hand").GetComponent<RectTransform>();
@@ -225,7 +227,8 @@ public class UIManager : MonoBehaviour
                     Destroy(g[i]);
                 }
             }
-            Image icon = Instantiate(Resources.Load<Image>("ItemIcon"), canvas.transform);
+            Transform iconParent = canvas.transform.Find("crayonIcons");
+            Image icon = Instantiate(Resources.Load<Image>("ItemIcon"), iconParent);
             icon.name = name;
             icon.rectTransform.position = firstItemPos + new Vector3(0, itemIcons.Count * iconGapy, 0);
             itemIcons.Add(icon);
@@ -248,7 +251,6 @@ public class UIManager : MonoBehaviour
     
     public void iconInitiate()
     {
-        Transform iconParent = canvas.transform.Find("crayonIcons");
         for (int i = 0; i < GameManager.Instance.crayonList.Count; i++)
         {
             Image icon = Instantiate(Resources.Load<Image>("CrayonIcon"),iconParent);
@@ -285,7 +287,7 @@ public class UIManager : MonoBehaviour
                 setText("黑门不可进入，但可以将白门出口的位置设为黑门所在位置", 0.5f);
                 break;
             case GameManager.DoorColor.BLUE:
-                setText("蓝门可以开启一个让人和物体缓慢传送的区域", 0.5f);
+                setText("蓝门可以开启一个让人和某些物体缓慢传送的区域", 0.5f);
                 break;
         }
     }//门的功能介绍
@@ -305,7 +307,6 @@ public class UIManager : MonoBehaviour
     
     private void GameWin()
     {
-        
         clear.SetActive(true);
         clear.GetComponentInChildren<Text>().text = "第" + (SceneManager.GetActiveScene().buildIndex+1).ToString() + "关";
         Invoke("NextScene", 5);

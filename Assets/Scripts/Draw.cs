@@ -44,8 +44,7 @@ public class Draw : MonoBehaviour
                     case "Lock":
                         if (UIManager.Instance.itemIcons.Count > 0)
                         {
-                            if (hit.transform.parent.eulerAngles.y > 45 || hit.transform.parent.eulerAngles.y < -45)
-                                UIManager.Instance.setText("开锁");
+                            UIManager.Instance.setText("开锁");
                             hit.transform.parent.parent.GetComponent<ChestDoor>().chestDoorOpen();
                             UIManager.Instance.useKey();
                         }
