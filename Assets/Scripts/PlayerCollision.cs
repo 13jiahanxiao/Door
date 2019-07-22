@@ -120,6 +120,7 @@ public class PlayerCollision : MonoBehaviour
         GameManager.Instance.canMove = false;
         yield return null;
         yield return null;
+        yield return null;
         GameManager.Instance.canMove = true;
     }
 }

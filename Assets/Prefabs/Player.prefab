@@ -429,6 +429,8 @@ MonoBehaviour:
   onGround: 0
   gravity: 32
   rotating: 0
+  model: 0
+  blueMoveSpeed: 2.6
 --- !u!114 &1882132872956523959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,7 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f08df598316f14c8f0d7b1ad3f1936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 3
+  distance: 2.8
   screenCenter: {x: 0, y: 0, z: 0}
   doorParent: {fileID: 0}
   door: {fileID: 2332593494889467627, guid: 99845e17eab66234daf7da9f4a533b01, type: 3}
