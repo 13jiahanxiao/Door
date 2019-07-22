@@ -38,7 +38,7 @@ public class Draw : MonoBehaviour
                 switch (hit.transform.gameObject.tag)
                 {
                     case "Item":
-                        UIManager.Instance.setText("拾取物品");
+                        //UIManager.Instance.setText("拾取物品");
                         UIManager.Instance.pickItem(hit.transform.name);
                         break;
                     case "Lock":
@@ -217,10 +217,12 @@ public class Draw : MonoBehaviour
         GameObject go1 = GameManager.Instance.houseObject[0].transform.GetChild(hide[0]).GetChild(hide[1]).gameObject;
         GameObject go2 = GameManager.Instance.houseObject[1].transform.GetChild(hide[0]).GetChild(hide[1]).gameObject;
         GameObject door = Instantiate<GameObject>(Resources.Load<GameObject>("BlueDoor"), go1.transform.position+ go1.transform.right * (GameManager.Instance.wallThickness / 2+0.001f), hit.transform.rotation, GameManager.Instance.houseObject[0].transform);
+        door.transform.rotation = go1.transform.rotation;
         door.transform.Find("Wall").gameObject.GetComponent<MeshRenderer>().materials[0].CopyPropertiesFromMaterial(wallMaterial);
         door.GetComponent<Door>().color = GameManager.DoorColor.BLUE;
         door.transform.eulerAngles += new Vector3(0, 0, -90);
         GameObject door2 = Instantiate<GameObject>(Resources.Load<GameObject>("BlueDoor"), go2.transform.position + go2.transform.right * (GameManager.Instance.wallThickness / 2 + 0.001f), hit.transform.rotation, GameManager.Instance.houseObject[1].transform);
+        door2.transform.rotation = go2.transform.rotation;
         door2.transform.Find("Wall").gameObject.GetComponent<MeshRenderer>().materials[0].CopyPropertiesFromMaterial(wallMaterial);
         door2.GetComponent<Door>().color = GameManager.DoorColor.BLUE;
         door2.transform.eulerAngles += new Vector3(0, 0, -90);

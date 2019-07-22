@@ -204,12 +204,13 @@ public class UIManager : MonoBehaviour
     {
         if (name == "FC")
         {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            ///Cursor.visible = true;
+            //Cursor.lockState = CursorLockMode.None;
             GameWin();
         }
         else
         {
+            UIManager.Instance.setText("拾取物品");
             GameObject[] g;
             g = GameObject.FindGameObjectsWithTag("Item");
             for (int i = 0; i < g.Length; i++)
