@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
     RectTransform handImage;
     public GameObject OutBlueText;
     GameObject returnButton;
-    Transform iconParent;
+    public Transform iconParent;
 
     void Awake()
     {
@@ -253,7 +253,7 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < GameManager.Instance.crayonList.Count; i++)
         {
-            Image icon = Instantiate(Resources.Load<Image>("CrayonIcon"), iconParent);
+            Image icon = Instantiate(Resources.Load<Image>("CrayonIcon"), FindObjectOfType<Canvas>().transform.Find("crayonIcons"));
             crayonIcons.Add(icon);
             icon.rectTransform.position = firstIconPos + new Vector3(i * iconGap, 0, 0);
             icon.rectTransform.sizeDelta = new Vector2(19.05f, 160.55f);

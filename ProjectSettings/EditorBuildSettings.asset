@@ -35,7 +35,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/S88.unity
     guid: aef865bffc371434fa8d5d97887d0b93
-  - enabled: 1
-    path: Assets/Scenes/thanks.unity
-    guid: d19f4482795ebef459fb8f8dfdd36bb8
   m_configObjects: {}

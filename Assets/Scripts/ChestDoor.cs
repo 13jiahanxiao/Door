@@ -17,7 +17,7 @@ public class ChestDoor : MonoBehaviour
     }
     IEnumerator open()
     {
-        while (door1.eulerAngles.y < 90)
+        while (door1.localEulerAngles.y < 90)
         {
             door1.Rotate(Vector3.up, Time.deltaTime * speed, Space.Self);
             door2.Rotate(Vector3.up, -Time.deltaTime * speed, Space.Self);

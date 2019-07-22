@@ -32,6 +32,8 @@ public class LastDraw : MonoBehaviour
     }
     public void End()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(0);
     }
     

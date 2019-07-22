@@ -12,6 +12,7 @@ public class PlayerControl : MonoBehaviour
     public float velocity;
     private float h, v;
     public float jumpSpeed;
+    public float jumpForce;
     public float rotateSpeed;
     public bool onGround;
     private Vector3 defaultGravityDirection = new Vector3(0, -1, 0);
@@ -47,7 +48,7 @@ public class PlayerControl : MonoBehaviour
 
         if (model !=0)
         {
-            Debug.Log(isCollider);
+            //Debug.Log(isCollider);
             if (isCollider == 0)
             {
                 this.transform.Translate(setedGravityDirection * blueMoveSpeed * Time.deltaTime, Space.World);
@@ -76,6 +77,7 @@ public class PlayerControl : MonoBehaviour
             {
                 if (onGround && playerRB.velocity.y >= -0.1)
                 {
+                   // playerRB.AddForce(new Vector3(0, 1, 0) * jumpForce,ForceMode.Impulse);
                     playerRB.velocity = new Vector3(playerRB.velocity.x, jumpSpeed, playerRB.velocity.z);
                     onGround = false;
                 }

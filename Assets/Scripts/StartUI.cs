@@ -16,7 +16,7 @@ public class StartUI : MonoBehaviour
     public Text controlText;
     public GameObject LevelPanel;
     public Button returnButton;
-    public GameObject[] levelButton=new GameObject[7];
+    public GameObject[] levelButton=new GameObject[8];
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class StartUI : MonoBehaviour
         controlInterduce.onClick.AddListener(ControlInterduce);
         select.onClick.AddListener(SelectLevel);
         returnButton.onClick.AddListener(Return);
-        for(int i = 0; i < 7; i++)
+        for(int i = 0; i < 8; i++)
         {
             int level = int.Parse(levelButton[i].GetComponent<Text>().text);
             levelButton[i].GetComponent<Button>().onClick.AddListener(delegate() { LevelSelect(level); });
