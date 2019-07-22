@@ -51,6 +51,8 @@ public class UIManager : MonoBehaviour
     Slider contrast;
     RectTransform handImage;
     public GameObject OutBlueText;
+    GameObject returnButton;
+
     void Awake()
     {
         _Instance = this;
@@ -91,6 +93,9 @@ public class UIManager : MonoBehaviour
 
         control =GameObject.Find("Canvas/Esc/Control");
         control.GetComponent<Button>().onClick.AddListener(ControlIntroduce);
+
+        returnButton = GameObject.Find("Canvas/Esc/BackMain");
+        returnButton.GetComponent<Button>().onClick.AddListener(BackMain);
 
         isOn = false;
         setting=GameObject.Find("Canvas/Esc/Setting");
@@ -354,5 +359,10 @@ public class UIManager : MonoBehaviour
             Application.Quit();
 
 #endif
+    }
+
+    public void BackMain()
+    {
+        SceneManager.LoadScene(0);
     }
 }
