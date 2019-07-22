@@ -9,6 +9,7 @@ public class LastDraw : MonoBehaviour
     private RaycastHit hit;
     public float distance = 4.5f;
     public Vector3 screenCenter;
+    public GameObject panel;
     void Start()
     {
         screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
@@ -23,10 +24,15 @@ public class LastDraw : MonoBehaviour
             {
                 if(hit.transform.name=="FC")
                 {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    panel.SetActive(true);
+                    Invoke("End", 26);
                 }
             }
         }
+    }
+    public void End()
+    {
+        SceneManager.LoadScene(0);
     }
     
 }

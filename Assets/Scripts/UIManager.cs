@@ -93,14 +93,14 @@ public class UIManager : MonoBehaviour
         Camera.main.GetComponent<AudioSource>().loop = true;
         Camera.main.GetComponent<AudioSource>().volume = volumeSlider.value;
 
-        control =GameObject.Find("Canvas/Esc/Control");
+        control = GameObject.Find("Canvas/Esc/Control");
         control.GetComponent<Button>().onClick.AddListener(ControlIntroduce);
 
         returnButton = GameObject.Find("Canvas/Esc/BackMain");
         returnButton.GetComponent<Button>().onClick.AddListener(BackMain);
 
         isOn = false;
-        setting=GameObject.Find("Canvas/Esc/Setting");
+        setting = GameObject.Find("Canvas/Esc/Setting");
         introduceText = GameObject.Find("Canvas/Esc/Introduce");
         introduceText.SetActive(false);
 
@@ -149,7 +149,7 @@ public class UIManager : MonoBehaviour
             restart.fillAmount = 0;
             restart.transform.GetChild(0).gameObject.SetActive(false);
         }
-        if(uiActive)
+        if (uiActive)
         {
             handPosChange(handImage);
         }
@@ -170,28 +170,28 @@ public class UIManager : MonoBehaviour
         StopCoroutine("textAppear");
         StartCoroutine(textAppear(text));
     }
-    public void setText(string s,float speed)
+    public void setText(string s, float speed)
     {
         text.text = s;
         StopCoroutine("textAppear");
-        StartCoroutine(textAppear(text,speed));
+        StartCoroutine(textAppear(text, speed));
     }
     IEnumerator textAppear(Text t)
     {
-        for (t.color = new Color(1,1,1,0); t.color.a<=0.9 ; )
+        for (t.color = new Color(1, 1, 1, 0); t.color.a <= 0.9;)
         {
             //Debug.Log(t.color);
-            t.color += new Color(0, 0, 0,appearSpeed*Time.deltaTime );
+            t.color += new Color(0, 0, 0, appearSpeed * Time.deltaTime);
             yield return null;
         }
-        for (t.color = new Color(1,1,1,1); t.color.a >=0.1;)
+        for (t.color = new Color(1, 1, 1, 1); t.color.a >= 0.1;)
         {
             t.color -= new Color(0, 0, 0, appearSpeed * Time.deltaTime);
             yield return null;
         }
-        t.color = new Color(1,1,1,0);
+        t.color = new Color(1, 1, 1, 0);
     }
-    IEnumerator textAppear(Text t,float speed)
+    IEnumerator textAppear(Text t, float speed)
     {
         for (t.color = new Color(1, 1, 1, 0); t.color.a <= 0.9;)
         {
@@ -206,7 +206,7 @@ public class UIManager : MonoBehaviour
         }
         t.color = new Color(1, 1, 1, 0);
     }
-    
+
     public void pickItem(string name)
     {
         if (name == "FC")
@@ -248,12 +248,12 @@ public class UIManager : MonoBehaviour
         Destroy(t);
         itemIcons.Remove(t);
     }
-    
+
     public void iconInitiate()
     {
         for (int i = 0; i < GameManager.Instance.crayonList.Count; i++)
         {
-            Image icon = Instantiate(Resources.Load<Image>("CrayonIcon"),iconParent);
+            Image icon = Instantiate(Resources.Load<Image>("CrayonIcon"), iconParent);
             crayonIcons.Add(icon);
             icon.rectTransform.position = firstIconPos + new Vector3(i * iconGap, 0, 0);
             icon.rectTransform.sizeDelta = new Vector2(19.05f, 160.55f);
@@ -304,12 +304,13 @@ public class UIManager : MonoBehaviour
             hand.localPosition = new Vector3(hand.localPosition.x, Mathf.Lerp(hand.localPosition.y, 0, interpolation), hand.localPosition.z);
         }
     }
-    
+
     private void GameWin()
     {
         clear.SetActive(true);
-        clear.GetComponentInChildren<Text>().text = "第" + (SceneManager.GetActiveScene().buildIndex+1).ToString() + "关";
+        clear.GetComponentInChildren<Text>().text = "第" + (SceneManager.GetActiveScene().buildIndex + 1).ToString() + "关";
         Invoke("NextScene", 5);
+
     }
     private void ControlIntroduce()
     {
