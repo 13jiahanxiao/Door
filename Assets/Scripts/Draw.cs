@@ -35,6 +35,7 @@ public class Draw : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0))
             {
+                Debug.Log(hit.transform.tag);
                 switch (hit.transform.gameObject.tag)
                 {
                     case "Item":
@@ -159,6 +160,10 @@ public class Draw : MonoBehaviour
         door.transform.eulerAngles += new Vector3(0, 0, -90);
         door.GetComponent<Door>().toStartRoom = (GameManager.Instance.currentCrayon == (int)GameManager.DoorColor.WHITE);
         door.GetComponent<Renderer>().material = color;
+        if(color.name== "WHITE")
+        {
+            door.transform.Find("Middle").gameObject.SetActive(false);
+        }
         if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.WHITE)
         {
             GameManager.Instance.whiteDoorCalculate(door.GetComponent<Door>(), color, hit);
