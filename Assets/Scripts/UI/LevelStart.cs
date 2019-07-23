@@ -6,7 +6,7 @@ public class LevelStart : MonoBehaviour
 {
     private void Start()
     {
-        Invoke("Hide", 4);
+        Invoke("Hide", 7);
     }
 
     private void Hide()
