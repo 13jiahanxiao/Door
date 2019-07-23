@@ -64,7 +64,7 @@ public class PlayerCollision : MonoBehaviour
             }
             //角色坐标转换 并且为了避免bug 所以要传送到偏前的位置
             //GameManager.Instance.player.GetComponent<Rigidbody>().velocity = GameManager.Instance.player.GetComponent<Rigidbody>().velocity.sqrMagnitude * collider.GetComponent<Door>().targetDoor.transform.up;
-            GameManager.Instance.player.transform.position = collider.GetComponent<Door>().targetDoor.transform.position + collider.GetComponent<Door>().targetDoor.transform.up;
+            GameManager.Instance.player.transform.position = collider.GetComponent<Door>().targetDoor.transform.position + collider.GetComponent<Door>().targetDoor.transform.up ;
             Vector3 currentVelocity = GameManager.Instance.player.GetComponent<Rigidbody>().velocity;
             Vector3 newVelocity = currentVelocity.magnitude * collider.GetComponent<Door>().targetDoor.transform.up.normalized;
             GameManager.Instance.player.GetComponent<Rigidbody>().AddForce(newVelocity - currentVelocity, ForceMode.VelocityChange);
@@ -110,7 +110,7 @@ public class PlayerCollision : MonoBehaviour
     }
     void OnTriggerExit(Collider collider)
     {
-        if (collider.tag == "Middle")
+        if(collider.tag=="Middle")
         {
             GameManager.Instance.onMiddle = false;
         }
