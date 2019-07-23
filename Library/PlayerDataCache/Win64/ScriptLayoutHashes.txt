@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-F:/games/door/复赛1/Door.exe
+F:/games/door/复赛final/Door.exe
 SceneListBegin?
 Assets/Scenes/StartScene.unity
 Assets/Scenes/S0.unity
