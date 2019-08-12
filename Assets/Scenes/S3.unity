@@ -679,16 +679,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1882132872563327919, guid: 7bffdd0230d118c4787b2fecb1743581,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b9f60b6bd1a074d4b91f313eba0e9a3e, type: 3}
     - target: {fileID: 1882132872956523953, guid: 7bffdd0230d118c4787b2fecb1743581,
         type: 3}
       propertyPath: jumpForce
       value: 30
       objectReference: {fileID: 0}
-    - target: {fileID: 1882132872563327919, guid: 7bffdd0230d118c4787b2fecb1743581,
-        type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 82485d10821d1b54bb9d4e30c1210ba9, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bffdd0230d118c4787b2fecb1743581, type: 3}
 --- !u!1001 &732368447

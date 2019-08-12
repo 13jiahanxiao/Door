@@ -161,6 +161,7 @@ public class Draw : MonoBehaviour
         door.GetComponent<Renderer>().material = color;
         if (GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color == GameManager.DoorColor.WHITE)
         {
+            Destroy(door.transform.Find("Middle").gameObject);
             GameManager.Instance.whiteDoorCalculate(door.GetComponent<Door>(), color, hit);
             GameManager.Instance.whiteExist = true;
         }

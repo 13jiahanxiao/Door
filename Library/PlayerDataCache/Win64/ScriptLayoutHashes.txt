@@ -1,16 +1,16 @@
 Win64
 PlayerPath?
-F:/games/door/复赛final/Door.exe
+F:/games/door/tx4/Door.exe
 SceneListBegin?
-Assets/Scenes/StartScene.unity
+Assets/Scenes/0StartScene.unity
 Assets/Scenes/S0.unity
 Assets/Scenes/S1.unity
-Assets/Scenes/S22.unity
-Assets/Scenes/S33.unity
-Assets/Scenes/S44.unity
-Assets/Scenes/S55.unity
-Assets/Scenes/S66.unity
-Assets/Scenes/S77.unity
+Assets/Scenes/S2.unity
+Assets/Scenes/S3.unity
+Assets/Scenes/S4.unity
+Assets/Scenes/S5.unity
+Assets/Scenes/S6.unity
+Assets/Scenes/S7.unity
 Assets/Scenes/S88.unity
 SceneListEnd?
 984dcc0ba3707b7691fbdca8ff508d28 Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
@@ -111,6 +111,7 @@ e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.G
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 201e3fde670b00545944bb3db215c80a UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 00274a21279f5cb831ce20f895049e38 Unity.TextMeshPro.dll:TMPro.TMP_SubMeshUI
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Restart
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LevelStart
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour

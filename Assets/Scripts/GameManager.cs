@@ -173,6 +173,7 @@ public class GameManager : MonoBehaviour
         }
         GameManager.Instance.startRoom.hideIndex.Add(new int[2] { hit.transform.parent.GetSiblingIndex(), hit.transform.GetSiblingIndex() });
         GameObject otherDoor = Instantiate<GameObject>(Resources.Load<GameObject>("Door"), GameManager.Instance.startRoom.transform);
+        Destroy(otherDoor.transform.Find("Middle").gameObject);
         otherDoor.GetComponent<Collider>().isTrigger = false;
         otherDoor.tag = "Untagged";
         otherDoor.GetComponent<Door>().color = GameManager.Instance.crayonList[GameManager.Instance.currentCrayon].color;
